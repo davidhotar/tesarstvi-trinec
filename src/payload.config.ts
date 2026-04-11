@@ -5,15 +5,15 @@ import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 
-import { Categories } from './collections/Categories'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Portfolio } from './collections/Portfolio'
-import { Users } from './collections/Users'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
+import { Categories } from './payload/collections/Categories'
+import { Media } from './payload/collections/Media'
+import { Pages } from './payload/collections/Pages'
+import { Portfolio } from './payload/collections/Portfolio'
+import { Users } from './payload/collections/Users'
+import { Footer } from './payload/globals/Footer/config'
+import { Header } from './payload/globals/Header/config'
+import { plugins } from './payload/plugins'
+import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
@@ -24,10 +24,10 @@ export default buildConfig({
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      beforeLogin: ['@/components/BeforeLogin'],
+      beforeLogin: ['@/components/admin/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
-      beforeDashboard: ['@/components/BeforeDashboard'],
+      beforeDashboard: ['@/components/admin/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),

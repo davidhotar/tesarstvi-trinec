@@ -10,7 +10,7 @@ import RichText from '@/components/RichText'
 import type { Portfolio } from '@/payload-types'
 
 import { Media } from '@/components/Media'
-import { PortfolioHero } from '@/heros/PortfolioHero'
+import { PortfolioHero } from '@/components/heros/PortfolioHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
