@@ -12,20 +12,34 @@ export const CollectionArchive: React.FC<Props> = (props) => {
 
   return (
     <div className={cn('container')}>
-      <div>
-        <div className="grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-12 gap-y-4 gap-x-4 lg:gap-y-8 lg:gap-x-8 xl:gap-x-8">
-          {posts?.map((result, index) => {
-            if (typeof result === 'object' && result !== null) {
-              return (
-                <div className="col-span-4" key={index}>
-                  <Card className="h-full" doc={result} relationTo="portfolio" showCategories />
-                </div>
-              )
-            }
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        {posts?.map((result, index) => {
+          if (typeof result === 'object' && result !== null) {
+            // First item and every 7th item after that are featured (large)
+            const isFeatured = index % 7 === 0
 
-            return null
-          })}
-        </div>
+            return (
+              <div
+                className={cn(
+                  'portfolio-scale-in',
+                  isFeatured && 'sm:col-span-2 lg:col-span-2',
+                )}
+                key={index}
+                style={{ animationDelay: `${index * 80}ms` }}
+              >
+                <Card
+                  className="h-full"
+                  doc={result}
+                  relationTo="portfolio"
+                  showCategories
+                  featured={isFeatured}
+                />
+              </div>
+            )
+          }
+
+          return null
+        })}
       </div>
     </div>
   )

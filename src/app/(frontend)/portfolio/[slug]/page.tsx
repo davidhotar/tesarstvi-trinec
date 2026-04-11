@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 
-import { RelatedPortfolio } from '@/blocks/RelatedPortfolio/Component'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -10,6 +9,7 @@ import RichText from '@/components/RichText'
 
 import type { Portfolio } from '@/payload-types'
 
+import { Media } from '@/components/Media'
 import { PortfolioHero } from '@/heros/PortfolioHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -65,11 +65,41 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
           <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPortfolio && post.relatedPortfolio.length > 0 && (
-            <RelatedPortfolio
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPortfolio.filter((post) => typeof post === 'object')}
-            />
+
+          {post.gallery && post.gallery.length > 0 && (
+            <div className="max-w-[64rem] mx-auto mt-16 md:mt-24">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="inline-block w-8 h-[1px] bg-portfolio-accent" />
+                <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">
+                  Galerie
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                {post.gallery.map((item, index) => (
+                  <figure
+                    key={item.id || index}
+                    className={`group relative overflow-hidden ${
+                      index === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
+                    }`}
+                  >
+                    {item.image && typeof item.image !== 'string' && (
+                      <div className={`relative ${index === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
+                        <Media
+                          fill
+                          imgClassName="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+                          resource={item.image}
+                        />
+                      </div>
+                    )}
+                    {item.caption && (
+                      <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white text-sm opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+                        {item.caption}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </div>

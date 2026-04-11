@@ -42,6 +42,7 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
     title: true,
     slug: true,
     categories: true,
+    heroImage: true,
     meta: {
       image: true,
       description: true,
@@ -70,6 +71,29 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'location',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'year',
+      type: 'number',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'categories',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+      },
+      hasMany: true,
+      relationTo: 'categories',
     },
     {
       type: 'tabs',
@@ -105,32 +129,28 @@ export const Portfolio: CollectionConfig<'portfolio'> = {
         {
           fields: [
             {
-              name: 'relatedPortfolio',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
+              name: 'gallery',
+              type: 'array',
+              label: 'Photo Gallery',
+              labels: {
+                singular: 'Photo',
+                plural: 'Photos',
               },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'portfolio',
-            },
-            {
-              name: 'categories',
-              type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
-              hasMany: true,
-              relationTo: 'categories',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                },
+              ],
             },
           ],
-          label: 'Meta',
+          label: 'Gallery',
         },
         {
           name: 'meta',

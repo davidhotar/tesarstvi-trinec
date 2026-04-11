@@ -9,64 +9,95 @@ import { formatAuthors } from '@/utilities/formatAuthors'
 export const PortfolioHero: React.FC<{
   post: Portfolio
 }> = ({ post }) => {
-  const { categories, heroImage, populatedAuthors, publishedAt, title } = post
+  const { categories, heroImage, location, populatedAuthors, publishedAt, title, year } = post
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
 
+  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
+
   return (
-    <div className="relative -mt-[10.4rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
-        <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
-          <div className="uppercase text-sm mb-6">
-            {categories?.map((category, index) => {
-              if (typeof category === 'object' && category !== null) {
-                const { title: categoryTitle } = category
+    <div className="relative -mt-[10.4rem] flex items-end min-h-[85vh]">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        {heroImage && typeof heroImage !== 'string' && (
+          <Media fill priority imgClassName="object-cover" resource={heroImage} />
+        )}
+        {/* Layered gradient for depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white/20 dark:from-black dark:via-black/40 dark:to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent dark:from-black/30" />
+      </div>
 
-                const titleToUse = categoryTitle || 'Untitled category'
+      {/* Content */}
+      <div className="container relative z-10 pb-12 md:pb-16 text-foreground dark:text-white">
+        <div className="max-w-4xl">
+          {/* Categories */}
+          {hasCategories && (
+            <div className="portfolio-fade-up text-[0.65rem] uppercase tracking-[0.25em] text-portfolio-accent font-medium mb-5 flex items-center gap-3">
+              <span className="inline-block w-8 h-[1px] bg-portfolio-accent" />
+              {categories?.map((category, index) => {
+                if (typeof category === 'object' && category !== null) {
+                  const { title: categoryTitle } = category
+                  const isLast = index === categories.length - 1
+                  return (
+                    <React.Fragment key={index}>
+                      {categoryTitle || 'Bez kategorie'}
+                      {!isLast && <React.Fragment> · </React.Fragment>}
+                    </React.Fragment>
+                  )
+                }
+                return null
+              })}
+            </div>
+          )}
 
-                const isLast = index === categories.length - 1
+          {/* Title */}
+          <h1
+            className="portfolio-fade-up text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.95] mb-8"
+            style={{ animationDelay: '100ms' }}
+          >
+            {title}
+          </h1>
 
-                return (
-                  <React.Fragment key={index}>
-                    {titleToUse}
-                    {!isLast && <React.Fragment>, &nbsp;</React.Fragment>}
-                  </React.Fragment>
-                )
-              }
-              return null
-            })}
-          </div>
+          {/* Accent line */}
+          <div
+            className="portfolio-line-reveal h-[2px] bg-portfolio-accent w-20 mb-8"
+            style={{ animationDelay: '300ms' }}
+          />
 
-          <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4 md:gap-16">
+          {/* Meta info */}
+          <div
+            className="portfolio-fade-up flex flex-wrap gap-x-10 gap-y-4 text-sm"
+            style={{ animationDelay: '400ms' }}
+          >
             {hasAuthors && (
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
-
-                  <p>{formatAuthors(populatedAuthors)}</p>
-                </div>
+              <div>
+                <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Autor</p>
+                <p className="text-foreground/90 dark:text-white/90">{formatAuthors(populatedAuthors)}</p>
+              </div>
+            )}
+            {location && (
+              <div>
+                <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Lokace</p>
+                <p className="text-foreground/90 dark:text-white/90">{location}</p>
+              </div>
+            )}
+            {year && (
+              <div>
+                <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Rok</p>
+                <p className="text-foreground/90 dark:text-white/90">{year}</p>
               </div>
             )}
             {publishedAt && (
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
-
-                <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
+              <div>
+                <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Publikováno</p>
+                <time className="text-foreground/90 dark:text-white/90" dateTime={publishedAt}>
+                  {formatDateTime(publishedAt)}
+                </time>
               </div>
             )}
           </div>
         </div>
-      </div>
-      <div className="min-h-[80vh] select-none">
-        {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
-        )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-linear-to-t from-black to-transparent" />
       </div>
     </div>
   )
