@@ -1,12 +1,15 @@
-import { Button, type ButtonProps } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/utilities/ui'
 import Link from 'next/link'
 import React from 'react'
+import type { VariantProps } from 'class-variance-authority'
 
 import type { Page, Portfolio } from '@/payload-types'
 
+type ButtonVariants = VariantProps<typeof buttonVariants>
+
 type CMSLinkType = {
-  appearance?: 'inline' | ButtonProps['variant']
+  appearance?: 'inline' | ButtonVariants['variant']
   children?: React.ReactNode
   className?: string
   label?: string | null
@@ -15,7 +18,7 @@ type CMSLinkType = {
     relationTo: 'pages' | 'portfolio'
     value: Page | Portfolio | string | number
   } | null
-  size?: ButtonProps['size'] | null
+  size?: ButtonVariants['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
 }
@@ -42,7 +45,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   if (!href) return null
 
-  const size = appearance === 'link' ? 'clear' : sizeFromProps
+  const size = appearance === 'link' ? ('default' as const) : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
   /* Ensure we don't break any styles set by richText */

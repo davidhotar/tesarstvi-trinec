@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { cn } from "@/components/lib/utils"
+import { cn } from "@/utilities/ui"
 import { Button } from "@/components/ui/button"
 import { IconChevronLeft, IconChevronRight, IconDots } from "@tabler/icons-react"
 
