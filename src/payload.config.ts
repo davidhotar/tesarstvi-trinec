@@ -59,6 +59,7 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
+    push: process.env.NODE_ENV !== 'production',
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
@@ -71,6 +72,15 @@ export default buildConfig({
     mcpPlugin({
       collections: {
         portfolio: {
+          enabled: true,
+        },
+        pages: {
+          enabled: true,
+        },
+        categories: {
+          enabled: true,
+        },
+        media: {
           enabled: true,
         },
       },
