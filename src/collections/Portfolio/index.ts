@@ -16,7 +16,7 @@ import { Code } from '../../blocks/Code/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
-import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
+import { revalidatePortfolio, revalidateDelete } from './hooks/revalidatePortfolio'
 
 import {
   MetaDescriptionField,
@@ -27,17 +27,17 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
 
-export const Posts: CollectionConfig<'posts'> = {
-  slug: 'posts',
+export const Portfolio: CollectionConfig<'portfolio'> = {
+  slug: 'portfolio',
   access: {
     create: authenticated,
     delete: authenticated,
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a post is referenced
+  // This config controls what's populated by default when a portfolio item is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
+  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'portfolio'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -53,14 +53,14 @@ export const Posts: CollectionConfig<'posts'> = {
       url: ({ data, req }) =>
         generatePreviewPath({
           slug: data?.slug,
-          collection: 'posts',
+          collection: 'portfolio',
           req,
         }),
     },
     preview: (data, { req }) =>
       generatePreviewPath({
         slug: data?.slug as string,
-        collection: 'posts',
+        collection: 'portfolio',
         req,
       }),
     useAsTitle: 'title',
@@ -105,7 +105,7 @@ export const Posts: CollectionConfig<'posts'> = {
         {
           fields: [
             {
-              name: 'relatedPosts',
+              name: 'relatedPortfolio',
               type: 'relationship',
               admin: {
                 position: 'sidebar',
@@ -118,7 +118,7 @@ export const Posts: CollectionConfig<'posts'> = {
                 }
               },
               hasMany: true,
-              relationTo: 'posts',
+              relationTo: 'portfolio',
             },
             {
               name: 'categories',
@@ -217,7 +217,7 @@ export const Posts: CollectionConfig<'posts'> = {
     slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
+    afterChange: [revalidatePortfolio],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
   },
