@@ -6,14 +6,15 @@ import { ArchiveBlock } from '@/components/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/components/blocks/CallToAction/Component'
 import { ContentBlock } from '@/components/blocks/Content/Component'
 import { FormBlock } from '@/components/blocks/Form/Component'
+import { HeroSectionBlock } from '@/components/blocks/HeroSection/Component'
 import { MediaBlock } from '@/components/blocks/MediaBlock/Component'
 
-const blockComponents: Record<string, React.FC<any> | null> = {
+const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
   formBlock: FormBlock,
-  heroSection: null, // TODO: replace with HeroSectionBlock component
+  heroSection: HeroSectionBlock,
   mediaBlock: MediaBlock,
 }
 
@@ -34,8 +35,20 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
+              const isFullBleed = blockType === 'heroSection'
+
+              if (isFullBleed) {
+                return (
+                  <Fragment key={index}>
+                    {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                    <Block {...block} />
+                  </Fragment>
+                )
+              }
+
               return (
                 <div className="my-16" key={index}>
+                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>
               )
