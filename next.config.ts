@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
       {
         pathname: '/api/media/file/**',
       },
+      {
+        pathname: '/images/**',
+      },
     ],
     qualities: [100],
     remotePatterns: [
@@ -43,6 +46,7 @@ const nextConfig: NextConfig = {
 
     return webpackConfig
   },
+  allowedDevOrigins: ['tesarstvi-trinec.localhost', '*.tesarstvi-trinec.localhost'],
   reactStrictMode: true,
   redirects,
   turbopack: {

@@ -1,0 +1,84 @@
+<h2>Homepage Component Architecture</h2>
+<p class="subtitle">How V1 wireframe sections map to blocks and components</p>
+
+<div class="section">
+  <h3>Page Structure</h3>
+  <p>The homepage is a <strong>Page</strong> composed of 8 <strong>Blocks</strong>. Each block is a self-contained section component that uses existing shadcn components internally.</p>
+</div>
+
+<div class="mockup">
+  <div class="mockup-header">src/app/(frontend)/page.tsx → Homepage</div>
+  <div class="mockup-body" style="font-family: monospace; font-size: 13px; line-height: 1.8; padding: 20px;">
+    <div style="color: #666;">// Page (single-route view of blocks)</div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #4a9eff; border-radius: 8px; background: #f0f7ff;">
+      <strong style="color: #4a9eff;">HeroSection</strong> — featured project, headline, CTAs, social proof<br>
+      <span style="color: #888; font-size: 11px;">Uses: Button, Badge</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #10b981; border-radius: 8px; background: #f0fdf4;">
+      <strong style="color: #10b981;">TrustStrip</strong> — 5 stat counters (10 years, 142+ projects, etc.)<br>
+      <span style="color: #888; font-size: 11px;">Uses: Separator</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #8b5cf6; border-radius: 8px; background: #f5f3ff;">
+      <strong style="color: #8b5cf6;">PortfolioSection</strong> — filterable project grid with category pills<br>
+      <span style="color: #888; font-size: 11px;">Uses: Button, Badge</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #f59e0b; border-radius: 8px; background: #fffbeb;">
+      <strong style="color: #f59e0b;">ServicesSection</strong> — 3 service cards (Pergolas, Carports, Timber)<br>
+      <span style="color: #888; font-size: 11px;">Uses: Card</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #ec4899; border-radius: 8px; background: #fdf2f8;">
+      <strong style="color: #ec4899;">ProcessSection</strong> — 4-step process (Call → Visit → Quote → Build)<br>
+      <span style="color: #888; font-size: 11px;">Uses: Card</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #14b8a6; border-radius: 8px; background: #f0fdfa;">
+      <strong style="color: #14b8a6;">TestimonialsSection</strong> — 3 Google review cards<br>
+      <span style="color: #888; font-size: 11px;">Uses: Card</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #f97316; border-radius: 8px; background: #fff7ed;">
+      <strong style="color: #f97316;">ContactSection</strong> — quote form + map side by side<br>
+      <span style="color: #888; font-size: 11px;">Uses: Card, Input, Label, Textarea, Button, Checkbox</span>
+    </div>
+    <div style="margin: 12px 0; padding: 12px; border: 2px solid #6366f1; border-radius: 8px; background: #eef2ff;">
+      <strong style="color: #6366f1;">FAQSection</strong> — 6-item accordion with sidebar text<br>
+      <span style="color: #888; font-size: 11px;">Uses: Accordion</span>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>File Structure</h3>
+  <div style="font-family: monospace; font-size: 13px; line-height: 2; padding: 16px; background: #1a1a2e; color: #e0e0e0; border-radius: 8px;">
+    <div>src/components/homepage/</div>
+    <div style="padding-left: 20px; color: #4a9eff;">HeroSection.tsx</div>
+    <div style="padding-left: 20px; color: #10b981;">TrustStrip.tsx</div>
+    <div style="padding-left: 20px; color: #8b5cf6;">PortfolioSection.tsx</div>
+    <div style="padding-left: 20px; color: #f59e0b;">ServicesSection.tsx</div>
+    <div style="padding-left: 20px; color: #ec4899;">ProcessSection.tsx</div>
+    <div style="padding-left: 20px; color: #14b8a6;">TestimonialsSection.tsx</div>
+    <div style="padding-left: 20px; color: #f97316;">ContactSection.tsx</div>
+    <div style="padding-left: 20px; color: #6366f1;">FAQSection.tsx</div>
+    <div style="padding-left: 20px; color: #aaa;">index.ts <span style="color: #666;">— re-exports all blocks</span></div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 24px;">
+  <h3>Key Decisions</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="padding: 16px; border: 1px solid #ddd; border-radius: 8px;">
+      <strong>Static content (hardcoded Czech copy)</strong><br>
+      <span style="color: #666; font-size: 13px;">All text from wireframe baked in. No props, no data fetching. Payload integration comes later.</span>
+    </div>
+    <div style="padding: 16px; border: 1px solid #ddd; border-radius: 8px;">
+      <strong>Plain shadcn styles only</strong><br>
+      <span style="color: #666; font-size: 13px;">Use Card, Button, Badge, Input, Accordion as-is. Tailwind for layout (grid, flex, padding). No custom CSS.</span>
+    </div>
+    <div style="padding: 16px; border: 1px solid #ddd; border-radius: 8px;">
+      <strong>Image placeholders</strong><br>
+      <span style="color: #666; font-size: 13px;">Gray boxes with labels (like the wireframe) instead of real images. Easy to swap later.</span>
+    </div>
+    <div style="padding: 16px; border: 1px solid #ddd; border-radius: 8px;">
+      <strong>Server Components</strong><br>
+      <span style="color: #666; font-size: 13px;">All blocks are RSC by default. No client-side interactivity needed for wireframe stage.</span>
+    </div>
+  </div>
+</div>

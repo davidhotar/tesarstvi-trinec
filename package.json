@@ -7,7 +7,8 @@
   "scripts": {
     "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev": "portless run cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "dev:next": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "dev:prod": "cross-env NODE_OPTIONS=--no-deprecation rm -rf .next && pnpm build && pnpm start",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@payloadcms/admin-bar": "3.82.1",
     "@payloadcms/db-postgres": "3.82.1",
+    "@payloadcms/email-resend": "^3.84.1",
     "@payloadcms/live-preview-react": "3.82.1",
     "@payloadcms/next": "3.82.1",
     "@payloadcms/plugin-form-builder": "3.82.1",
@@ -55,7 +57,9 @@
     "radix-ui": "^1.4.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "react-grab": "^0.1.32",
     "react-hook-form": "7.71.1",
+    "resend": "^6.12.2",
     "shadcn": "^4.2.0",
     "sharp": "0.34.2",
     "tailwind-merge": "^3.4.0"

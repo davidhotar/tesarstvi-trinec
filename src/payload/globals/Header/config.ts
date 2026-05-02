@@ -10,6 +10,14 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: 'phone',
+      type: 'text',
+      label: 'Telefonní číslo',
+      admin: {
+        description: 'Telefonní číslo zobrazené v hlavičce (např. +420 605 000 000)',
+      },
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [

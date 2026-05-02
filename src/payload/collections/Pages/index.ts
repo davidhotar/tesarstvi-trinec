@@ -8,7 +8,7 @@ import { Content } from '@/payload/blocks/Content/config'
 import { FormBlock } from '@/payload/blocks/Form/config'
 import { HeroSection } from '@/payload/blocks/HeroSection/config'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/config'
-import { hero } from '@/payload/heros/config'
+
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
@@ -64,10 +64,6 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       type: 'tabs',
       tabs: [
-        {
-          fields: [hero],
-          label: 'Hero',
-        },
         {
           fields: [
             {

@@ -3,7 +3,7 @@ import type { Metadata } from 'next/types'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React from 'react'
+import React, { Suspense } from 'react'
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
@@ -24,6 +24,8 @@ export default async function Page() {
         categories: true,
         heroImage: true,
         meta: true,
+        location: true,
+        year: true,
       },
     }),
     payload.find({
@@ -33,6 +35,7 @@ export default async function Page() {
       overrideAccess: false,
       select: {
         title: true,
+        slug: true,
       },
     }),
   ])
@@ -40,6 +43,7 @@ export default async function Page() {
   const categories = categoriesResult.docs.map((cat) => ({
     id: cat.id,
     title: cat.title,
+    slug: cat.slug,
   }))
 
   return (
@@ -75,7 +79,9 @@ export default async function Page() {
         </div>
       </div>
 
-      <PortfolioGrid posts={posts.docs} categories={categories} />
+      <Suspense>
+        <PortfolioGrid posts={posts.docs} categories={categories} />
+      </Suspense>
 
     </div>
   )

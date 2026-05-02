@@ -1,3 +1,4 @@
+import { resendAdapter } from '@payloadcms/email-resend'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import sharp from 'sharp'
@@ -87,6 +88,11 @@ export default buildConfig({
       },
     }),
   ],
+  email: resendAdapter({
+    defaultFromAddress: 'noreply@gramino.dev',
+    defaultFromName: 'Tesařství Třinec',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

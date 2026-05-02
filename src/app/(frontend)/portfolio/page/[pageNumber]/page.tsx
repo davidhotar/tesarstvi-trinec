@@ -5,7 +5,7 @@ import { Pagination } from '@/components/Pagination'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import React from 'react'
+import React, { Suspense } from 'react'
 import PageClient from './page.client'
 import { notFound } from 'next/navigation'
 
@@ -38,6 +38,8 @@ export default async function Page({ params: paramsPromise }: Args) {
         categories: true,
         heroImage: true,
         meta: true,
+        location: true,
+        year: true,
       },
     }),
     payload.find({
@@ -47,6 +49,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       overrideAccess: false,
       select: {
         title: true,
+        slug: true,
       },
     }),
   ])
@@ -54,6 +57,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   const categories = categoriesResult.docs.map((cat) => ({
     id: cat.id,
     title: cat.title,
+    slug: cat.slug,
   }))
 
   return (
@@ -92,7 +96,9 @@ export default async function Page({ params: paramsPromise }: Args) {
         </div>
       </div>
 
-      <PortfolioGrid posts={posts.docs} categories={categories} />
+      <Suspense>
+        <PortfolioGrid posts={posts.docs} categories={categories} />
+      </Suspense>
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (

@@ -1,24 +1,34 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { cn } from '@/utilities/ui'
 import { Card, CardPortfolioData } from '@/components/Card'
 import type { Category } from '@/payload-types'
 
 export type PortfolioGridProps = {
   posts: CardPortfolioData[]
-  categories: Pick<Category, 'id' | 'title'>[]
+  categories: Pick<Category, 'id' | 'title' | 'slug'>[]
 }
 
 export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ posts, categories }) => {
+  const searchParams = useSearchParams()
+  const categorySlug = searchParams.get('category')
+
   const sortedCategories = useMemo(
     () => [...categories].sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '', 'cs')),
     [categories],
   )
 
-  const [activeCategory, setActiveCategory] = useState<number>(
-    () => sortedCategories[0]?.id ?? 0,
-  )
+  const initialCategory = useMemo(() => {
+    if (categorySlug) {
+      const match = sortedCategories.find((c) => c.slug === categorySlug)
+      if (match) return match.id
+    }
+    return sortedCategories[0]?.id ?? 0
+  }, [categorySlug, sortedCategories])
+
+  const [activeCategory, setActiveCategory] = useState<number>(initialCategory)
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
