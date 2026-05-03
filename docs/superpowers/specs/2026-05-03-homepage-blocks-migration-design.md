@@ -109,7 +109,7 @@ Uses the existing `formBlock` — no new block needed. The seed data creates a c
 - Remove hardcoded `processSteps` data and Tabler icon imports
 - Remove static section rendering — all content now comes from `RenderBlocks(page.layout)`
 - Keep `PortfolioSection` with `<Suspense>` (dynamic fetch, not a block)
-- Keep conditional hero logic (layout exists → RenderBlocks, else → static HeroSection fallback)
+- The page renders: `RenderBlocks(page.layout)` → `PortfolioSection` → done. The old conditional hero fallback (`hasPayloadHero ? RenderBlocks : HeroSection`) is no longer needed since the hero is already a block in the layout. If `page.layout` is empty/missing, the page simply renders nothing before PortfolioSection (seed data ensures this doesn't happen in practice).
 
 ### Registration
 - Add 4 new block configs to `Pages` collection `layout.blocks` array in `src/payload/collections/Pages/index.ts`
