@@ -1,5 +1,6 @@
 import type { Metadata } from 'next/types'
 
+import { CtaBanner } from '@/components/about'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -90,6 +91,8 @@ export default async function Page({ searchParams }: Args) {
           initialCategorySlug={category}
         />
       </Suspense>
+
+      <CtaBanner />
     </div>
   )
 }
