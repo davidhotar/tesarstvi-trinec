@@ -1,0 +1,6 @@
+export { ProfileHeroSection } from './ProfileHeroSection'
+export { TimelineSection } from './TimelineSection'
+export { ValuesSection } from './ValuesSection'
+export { TeamSection } from './TeamSection'
+export { RegionSection } from './RegionSection'
+export { CtaBanner } from './CtaBanner'
