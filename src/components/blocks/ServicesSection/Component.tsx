@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card'
 import { IconArrowRight, IconCheck } from '@tabler/icons-react'
 import { iconMap } from '@/components/blocks/shared/iconMap'
+import Link from 'next/link'
 
 export const ServicesSectionBlock: React.FC<ServicesSectionBlockProps> = ({
   title,
@@ -27,42 +28,43 @@ export const ServicesSectionBlock: React.FC<ServicesSectionBlockProps> = ({
           {services?.map((service, index) => {
             const Icon = iconMap[service.icon]
             const number = String(index + 1).padStart(2, '0')
+            const Wrapper = service.linkUrl ? Link : 'div'
+            const wrapperProps = service.linkUrl ? { href: service.linkUrl } : {}
             return (
-              <Card
-                key={index}
-                className="group relative transition-colors duration-200 hover:ring-primary/30"
-              >
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      {Icon && <Icon className="size-5" />}
+              <Wrapper key={index} {...(wrapperProps as any)}>
+                <Card className="group relative h-full transition-colors duration-200 hover:ring-primary/30">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                        {Icon && <Icon className="size-5" />}
+                      </div>
+                      <span className="font-heading text-3xl font-bold text-border/60">
+                        {number}
+                      </span>
                     </div>
-                    <span className="font-heading text-3xl font-bold text-border/60">
-                      {number}
+                    <CardTitle className="mt-4 font-heading text-xl font-bold">
+                      {service.title}
+                    </CardTitle>
+                    <CardDescription>{service.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
+                      {service.items?.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <IconCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+                          {item.text}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <div className="mt-auto px-6 pb-6">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-200 group-hover:translate-x-1">
+                      {service.linkLabel || 'Více o službě'}
+                      <IconArrowRight className="size-4" />
                     </span>
                   </div>
-                  <CardTitle className="font-heading text-xl font-bold">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription>{service.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
-                    {service.items?.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <IconCheck className="mt-0.5 size-4 shrink-0 text-primary" />
-                        {item.text}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <div className="mt-auto px-6 pb-6">
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-200 group-hover:translate-x-1">
-                    {service.linkLabel || 'Více o službě'}
-                    <IconArrowRight className="size-4" />
-                  </span>
-                </div>
-              </Card>
+                </Card>
+              </Wrapper>
             )
           })}
         </div>

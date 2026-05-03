@@ -3,6 +3,8 @@ import type { Block } from 'payload'
 export const FAQSection: Block = {
   slug: 'faqSection',
   interfaceName: 'FAQSectionBlock',
+  imageURL: '/images/blocks/faq-section.svg',
+  imageAltText: 'FAQ with sidebar and accordion',
   labels: {
     singular: 'FAQ Section',
     plural: 'FAQ Sections',
@@ -17,15 +19,7 @@ export const FAQSection: Block = {
       name: 'description',
       type: 'text',
     },
-    {
-      name: 'ctaLabel',
-      type: 'text',
-    },
-    {
-      name: 'ctaLink',
-      type: 'text',
-    },
-    {
+{
       name: 'faqs',
       type: 'array',
       minRows: 1,

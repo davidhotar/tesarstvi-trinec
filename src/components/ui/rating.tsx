@@ -361,4 +361,4 @@ function Rating({
   )
 }
 
-export { Rating, ratingVariants, type RatingProps }
+export { Rating }

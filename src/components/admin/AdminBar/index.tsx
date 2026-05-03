@@ -3,26 +3,19 @@
 import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 
 import { cn } from '@/utilities/ui'
-import { useSelectedLayoutSegments } from 'next/navigation'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useEffect, useRef, useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 
 import { getClientSideURL } from '@/utilities/getURL'
 
-const collectionLabels = {
-  pages: {
-    plural: 'Pages',
-    singular: 'Page',
-  },
-  portfolio: {
-    plural: 'Portfolio',
-    singular: 'Portfolio',
-  },
-  projects: {
-    plural: 'Projects',
-    singular: 'Project',
-  },
+function resolveRoute(pathname: string): { collection: string; slug: string; label: string } {
+  if (pathname.startsWith('/portfolio/') && pathname !== '/portfolio/') {
+    const slug = decodeURIComponent(pathname.replace('/portfolio/', '').replace(/\/$/, ''))
+    return { collection: 'portfolio', slug, label: 'Portfolio' }
+  }
+  const slug = pathname === '/' ? 'home' : decodeURIComponent(pathname.replace(/^\/|\/$/g, ''))
+  return { collection: 'pages', slug, label: 'Page' }
 }
 
 const Title: React.FC = () => <span>Dashboard</span>
@@ -31,38 +24,66 @@ export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
 }> = (props) => {
   const { adminBarProps } = props || {}
-  const segments = useSelectedLayoutSegments()
   const [show, setShow] = useState(false)
-  const collection = (
-    collectionLabels[segments?.[1] as keyof typeof collectionLabels] ? segments[1] : 'pages'
-  ) as keyof typeof collectionLabels
+  const [docId, setDocId] = useState<string | undefined>()
   const router = useRouter()
+  const pathname = usePathname()
+  const barRef = useRef<HTMLDivElement>(null)
+
+  const { collection, slug, label } = resolveRoute(pathname)
 
   const onAuthChange = React.useCallback((user: PayloadMeUser) => {
     setShow(Boolean(user?.id))
   }, [])
 
+  useEffect(() => {
+    if (!show) return
+    setDocId(undefined)
+    const url = `${getClientSideURL()}/api/${collection}?where[slug][equals]=${encodeURIComponent(slug)}&limit=1&depth=0`
+    fetch(url, { credentials: 'include' })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.docs?.[0]?.id) setDocId(String(data.docs[0].id))
+      })
+      .catch(() => {})
+  }, [show, pathname, collection, slug])
+
+  useEffect(() => {
+    if (show && barRef.current) {
+      const height = barRef.current.clientHeight
+      document.documentElement.style.setProperty('--admin-bar-height', `${height}px`)
+    } else {
+      document.documentElement.style.setProperty('--admin-bar-height', '0px')
+    }
+  }, [show])
+
   return (
     <div
-      className={cn('py-2 bg-black text-white', {
-        'sm:block': show,
+      ref={barRef}
+      className={cn('fixed inset-x-0 top-0 z-30 bg-black text-white', {
+        block: show,
         hidden: !show,
       })}
     >
-      <div className="container">
+      <div className="container flex items-center justify-between py-1.5 text-sm">
         <PayloadAdminBar
           {...adminBarProps}
-          className="py-2 text-white"
+          unstyled
+          id={docId}
+          className="flex w-full items-center gap-3 text-white"
           classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
+            controls: 'flex items-center gap-3 font-medium [&>a+a]:border-l [&>a+a]:border-white/30 [&>a+a]:pl-3',
+            logo: 'shrink-0 no-underline text-white after:content-["|"] after:ml-3 after:text-white/30',
+            user: 'mr-auto truncate no-underline text-white',
+            edit: 'no-underline text-white',
+            create: 'no-underline text-white',
+            logout: 'shrink-0 border-l border-white/30 pl-3 no-underline text-white',
           }}
           cmsURL={getClientSideURL()}
           collectionSlug={collection}
           collectionLabels={{
-            plural: collectionLabels[collection]?.plural || 'Pages',
-            singular: collectionLabels[collection]?.singular || 'Page',
+            plural: `${label}s`,
+            singular: label,
           }}
           logo={<Title />}
           onAuthChange={onAuthChange}
@@ -71,12 +92,6 @@ export const AdminBar: React.FC<{
               router.push('/')
               router.refresh()
             })
-          }}
-          style={{
-            backgroundColor: 'transparent',
-            padding: 0,
-            position: 'relative',
-            zIndex: 'unset',
           }}
         />
       </div>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Title row -->
+  <rect x="16" y="14" width="80" height="6" rx="1" fill="#55557a"/>
+  <rect x="16" y="24" width="140" height="10" rx="2" fill="#6c6c8a"/>
+  <!-- Connector line -->
+  <line x1="16" y1="52" x2="304" y2="52" stroke="#44445a" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Card 1 -->
+  <rect x="10" y="60" width="68" height="120" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="56" y="88" text-anchor="end" fill="#2a2a3e" font-family="system-ui,sans-serif" font-size="28" font-weight="800" opacity="0.5">01</text>
+  <rect x="20" y="76" width="14" height="14" rx="3" fill="#6366f1" opacity="0.5"/>
+  <rect x="20" y="100" width="48" height="6" rx="1" fill="#6c6c8a"/>
+  <rect x="20" y="112" width="50" height="4" rx="1" fill="#44445a"/>
+  <rect x="20" y="120" width="44" height="4" rx="1" fill="#44445a"/>
+  <!-- Card 2 -->
+  <rect x="86" y="60" width="68" height="120" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="132" y="88" text-anchor="end" fill="#2a2a3e" font-family="system-ui,sans-serif" font-size="28" font-weight="800" opacity="0.5">02</text>
+  <rect x="96" y="76" width="14" height="14" rx="3" fill="#6366f1" opacity="0.5"/>
+  <rect x="96" y="100" width="48" height="6" rx="1" fill="#6c6c8a"/>
+  <rect x="96" y="112" width="50" height="4" rx="1" fill="#44445a"/>
+  <rect x="96" y="120" width="44" height="4" rx="1" fill="#44445a"/>
+  <!-- Card 3 -->
+  <rect x="162" y="60" width="68" height="120" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="208" y="88" text-anchor="end" fill="#2a2a3e" font-family="system-ui,sans-serif" font-size="28" font-weight="800" opacity="0.5">03</text>
+  <rect x="172" y="76" width="14" height="14" rx="3" fill="#6366f1" opacity="0.5"/>
+  <rect x="172" y="100" width="48" height="6" rx="1" fill="#6c6c8a"/>
+  <rect x="172" y="112" width="50" height="4" rx="1" fill="#44445a"/>
+  <rect x="172" y="120" width="44" height="4" rx="1" fill="#44445a"/>
+  <!-- Card 4 -->
+  <rect x="238" y="60" width="68" height="120" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="284" y="88" text-anchor="end" fill="#2a2a3e" font-family="system-ui,sans-serif" font-size="28" font-weight="800" opacity="0.5">04</text>
+  <rect x="248" y="76" width="14" height="14" rx="3" fill="#6366f1" opacity="0.5"/>
+  <rect x="248" y="100" width="48" height="6" rx="1" fill="#6c6c8a"/>
+  <rect x="248" y="112" width="50" height="4" rx="1" fill="#44445a"/>
+  <rect x="248" y="120" width="44" height="4" rx="1" fill="#44445a"/>
+</svg>

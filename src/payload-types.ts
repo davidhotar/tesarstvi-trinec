@@ -196,6 +196,7 @@ export interface Page {
     | ContactHeroSectionBlock
     | ServiceHeroBlock
     | ServiceDeepDiveBlock
+    | ContactFormSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -880,6 +881,10 @@ export interface ServicesSectionBlock {
       id?: string | null;
     }[];
     linkLabel?: string | null;
+    /**
+     * URL for the service card link (e.g. /sluzby#pergoly)
+     */
+    linkUrl?: string | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -895,6 +900,7 @@ export interface NumberedCardGridBlock {
   subtitle?: string | null;
   sideDescription?: string | null;
   showConnector?: boolean | null;
+  glowEffect?: ('none' | 'top' | 'bottom') | null;
   items: {
     icon?:
       | (
@@ -963,8 +969,6 @@ export interface TestimonialsSectionBlock {
 export interface FAQSectionBlock {
   title: string;
   description?: string | null;
-  ctaLabel?: string | null;
-  ctaLink?: string | null;
   faqs: {
     question: string;
     answer: string;
@@ -998,12 +1002,24 @@ export interface PortfolioSectionBlock {
  */
 export interface ProfileHeroSectionBlock {
   tagline: string;
-  heading: string;
   /**
-   * Word or phrase highlighted in primary color at the end of the heading.
+   * Use H1 for the heading (bold text = primary color highlight). Paragraph text becomes the description.
    */
-  headingHighlight?: string | null;
-  description: string;
+  richText: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   personName: string;
   personTitle: string;
   personImage?: (number | null) | Media;
@@ -1212,6 +1228,35 @@ export interface ServiceDeepDiveBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'serviceDeepDive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormSectionBlock".
+ */
+export interface ContactFormSectionBlock {
+  heading: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  mapImage?: (number | null) | Media;
+  phoneLabel?: string | null;
+  phoneNumber?: string | null;
+  form: number | Form;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactFormSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1590,6 +1635,7 @@ export interface PagesSelect<T extends boolean = true> {
         contactHeroSection?: T | ContactHeroSectionBlockSelect<T>;
         serviceHero?: T | ServiceHeroBlockSelect<T>;
         serviceDeepDive?: T | ServiceDeepDiveBlockSelect<T>;
+        contactFormSection?: T | ContactFormSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1740,6 +1786,7 @@ export interface ServicesSectionBlockSelect<T extends boolean = true> {
               id?: T;
             };
         linkLabel?: T;
+        linkUrl?: T;
         id?: T;
       };
   id?: T;
@@ -1754,6 +1801,7 @@ export interface NumberedCardGridBlockSelect<T extends boolean = true> {
   subtitle?: T;
   sideDescription?: T;
   showConnector?: T;
+  glowEffect?: T;
   items?:
     | T
     | {
@@ -1793,8 +1841,6 @@ export interface TestimonialsSectionBlockSelect<T extends boolean = true> {
 export interface FAQSectionBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  ctaLabel?: T;
-  ctaLink?: T;
   faqs?:
     | T
     | {
@@ -1822,9 +1868,7 @@ export interface PortfolioSectionBlockSelect<T extends boolean = true> {
  */
 export interface ProfileHeroSectionBlockSelect<T extends boolean = true> {
   tagline?: T;
-  heading?: T;
-  headingHighlight?: T;
-  description?: T;
+  richText?: T;
   personName?: T;
   personTitle?: T;
   personImage?: T;
@@ -1995,6 +2039,20 @@ export interface ServiceDeepDiveBlockSelect<T extends boolean = true> {
   ctaLabel?: T;
   ctaLink?: T;
   background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormSectionBlock_select".
+ */
+export interface ContactFormSectionBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  mapImage?: T;
+  phoneLabel?: T;
+  phoneNumber?: T;
+  form?: T;
   id?: T;
   blockName?: T;
 }

@@ -16,17 +16,14 @@ export const Text: React.FC<
 > = ({ name, defaultValue, errors, label, register, required, width }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>
-        {label}
-
-        {required && (
-          <span className="required">
-            * <span className="sr-only">(required)</span>
-          </span>
-        )}
-      </Label>
-      <Input defaultValue={defaultValue} id={name} type="text" {...register(name, { required })} />
-      {errors[name] && <Error name={name} />}
+      <div className="space-y-2">
+        <Label htmlFor={name}>
+          {label}
+          {required && <span className="text-muted-foreground/60"> *</span>}
+        </Label>
+        <Input defaultValue={defaultValue} id={name} type="text" aria-invalid={!!errors[name]} {...register(name, { required })} />
+        {errors[name] && <Error name={name} />}
+      </div>
     </Width>
   )
 }

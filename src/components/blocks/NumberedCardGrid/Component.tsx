@@ -1,20 +1,26 @@
 import React from 'react'
 import type { NumberedCardGridBlock as NumberedCardGridBlockProps } from '@/payload-types'
 import { cn } from '@/utilities/ui'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { iconMap } from '@/components/blocks/shared/iconMap'
+
+const glowClasses: Record<string, string> = {
+  top: 'hero-glow',
+  bottom: 'hero-glow-bottom',
+}
 
 export const NumberedCardGridBlock: React.FC<NumberedCardGridBlockProps> = ({
   title,
   subtitle,
   sideDescription,
   showConnector,
+  glowEffect,
   items,
 }) => {
   const hasRichHeader = subtitle || sideDescription
 
   return (
-    <section className="py-24">
+    <section className={cn('py-24', glowEffect && glowClasses[glowEffect])}>
       <div className="container">
         {hasRichHeader ? (
           <div className="mb-16 flex flex-wrap items-end justify-between gap-4">
@@ -54,20 +60,20 @@ export const NumberedCardGridBlock: React.FC<NumberedCardGridBlockProps> = ({
             const number = String(index + 1).padStart(2, '0')
             return (
               <Card key={index}>
-                <CardContent className="flex flex-col gap-3">
-                  {Icon && (
-                    <div className="flex size-11 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                      <Icon className="size-5" />
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      {Icon && <Icon className="size-5" />}
                     </div>
-                  )}
-                  <span className="font-heading text-5xl font-bold text-primary/20">
-                    {number}
-                  </span>
-                  <h3 className="font-heading text-lg font-bold">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </CardContent>
+                    <span className="font-heading text-3xl font-bold text-border/60">
+                      {number}
+                    </span>
+                  </div>
+                  <CardTitle className="mt-4 font-heading text-xl font-bold">
+                    {item.title}
+                  </CardTitle>
+                  <CardDescription>{item.description}</CardDescription>
+                </CardHeader>
               </Card>
             )
           })}

@@ -9,10 +9,34 @@ export const about: () => RequiredDataFromCollectionSlug<'pages'> = () => {
         blockName: 'Profile Hero',
         blockType: 'profileHeroSection',
         tagline: 'O nás · od roku 2014',
-        heading: 'Dřevo, tradice, a chlap, co se za to',
-        headingHighlight: 'podepíše.',
-        description:
-          'Jsem Petr a tesařině se věnuju přes 25 let. Učil jsem se u starých mistrů v Beskydech, dnes vedu malou rodinnou dílnu v Třinci. Stavím tak, jak bych chtěl, aby někdo postavil mně doma.',
+        richText: {
+          root: {
+            type: 'root',
+            children: [
+              {
+                type: 'heading',
+                tag: 'h1',
+                children: [
+                  { type: 'text', text: 'Dřevo, tradice, a chlap, co se za to ' },
+                  { type: 'text', text: 'podepíše.', format: 1 },
+                ],
+              },
+              {
+                type: 'paragraph',
+                children: [
+                  {
+                    type: 'text',
+                    text: 'Jsem Petr a tesařině se věnuju přes 25 let. Učil jsem se u starých mistrů v Beskydech, dnes vedu malou rodinnou dílnu v Třinci. Stavím tak, jak bych chtěl, aby někdo postavil mně doma.',
+                  },
+                ],
+              },
+            ],
+            direction: 'ltr',
+            format: '',
+            indent: 0,
+            version: 1,
+          },
+        },
         personName: 'Petr Czempka',
         personTitle: 'Tesař & majitel · Třinec',
         quote: '„Dělám dřevo, protože mě to baví. Kdyby mě to přestalo bavit, dělám něco jiného." — P.',

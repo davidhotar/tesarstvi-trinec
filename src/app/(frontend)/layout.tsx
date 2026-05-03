@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin', 'latin-ext'], variable: '--font-inter' })
 import React from 'react'
 
+import { AdminBar } from '@/components/admin/AdminBar'
 import { Footer } from '@/components/Footer/Component'
 import { Header } from '@/components/Header/Component'
 import { Providers } from '@/providers'
@@ -33,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         )}
         <Providers>
+          <AdminBar />
           <Header />
           {children}
           <Footer />

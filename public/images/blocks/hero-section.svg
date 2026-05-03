@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Background image area with gradient overlay -->
+  <rect x="0" y="0" width="320" height="200" rx="4" fill="#1a1a28"/>
+  <!-- Faux mountain background -->
+  <polygon points="0,200 80,80 160,140 240,60 320,120 320,200" fill="#22223a"/>
+  <polygon points="0,200 60,120 140,160 220,100 320,150 320,200" fill="#28284a"/>
+  <!-- Dark gradient overlay -->
+  <rect x="0" y="0" width="320" height="200" rx="4" fill="url(#heroGrad)"/>
+  <defs>
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1a1a2e" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <!-- Title text -->
+  <rect x="20" y="30" width="160" height="14" rx="2" fill="#c8c8e0"/>
+  <rect x="20" y="50" width="130" height="14" rx="2" fill="#c8c8e0"/>
+  <!-- Description -->
+  <rect x="20" y="76" width="140" height="5" rx="1" fill="#8888a8"/>
+  <rect x="20" y="85" width="120" height="5" rx="1" fill="#8888a8"/>
+  <!-- CTA buttons -->
+  <rect x="20" y="104" width="60" height="18" rx="4" fill="#6366f1"/>
+  <rect x="88" y="104" width="60" height="18" rx="4" fill="none" stroke="#6c6c8a" stroke-width="1"/>
+  <!-- Stats bar at bottom -->
+  <rect x="0" y="155" width="320" height="45" fill="#1a1a2e" opacity="0.8"/>
+  <line x1="0" y1="155" x2="320" y2="155" stroke="#44445a" stroke-width="1"/>
+  <rect x="24" y="166" width="30" height="10" rx="1" fill="#c8c8e0"/>
+  <rect x="24" y="180" width="50" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="104" y="166" width="30" height="10" rx="1" fill="#c8c8e0"/>
+  <rect x="104" y="180" width="50" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="184" y="166" width="30" height="10" rx="1" fill="#c8c8e0"/>
+  <rect x="184" y="180" width="50" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="264" y="166" width="30" height="10" rx="1" fill="#c8c8e0"/>
+  <rect x="264" y="180" width="50" height="5" rx="1" fill="#6c6c8a"/>
+</svg>

@@ -7,7 +7,7 @@ import { Card, CardPortfolioData } from '@/components/Card'
 import Link from 'next/link'
 import type { Category } from '@/payload-types'
 
-export type PortfolioGridProps = {
+type PortfolioGridProps = {
   posts: CardPortfolioData[]
   categories: Pick<Category, 'id' | 'title' | 'slug'>[]
   limit?: number

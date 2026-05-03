@@ -26,7 +26,7 @@ export const HeroSectionBlock: React.FC<HeroSectionBlockProps> = ({
         <div className="flex max-w-2xl flex-col gap-6">
           {richText && (
             <RichText
-              className="mb-0 [&_h1]:font-display [&_h1]:text-5xl [&_h1]:font-bold [&_h1]:leading-[1.05] [&_h1]:tracking-[-0.03em] [&_h1]:text-white [&_h1]:sm:text-6xl [&_h1]:lg:text-7xl [&_p]:max-w-lg [&_p]:text-lg [&_p]:leading-[1.6] [&_p]:text-white/80 [&_p]:sm:text-xl"
+              className="mb-0 [&_h1]:mb-6 [&_h1]:font-display [&_h1]:text-5xl [&_h1]:font-bold [&_h1]:leading-[1.05] [&_h1]:tracking-[-0.03em] [&_h1]:text-white [&_h1]:sm:text-6xl [&_h1]:lg:text-7xl [&_p]:max-w-lg [&_p]:text-lg [&_p]:leading-[1.6] [&_p]:text-white/80 [&_p]:sm:text-xl"
               data={richText}
               enableGutter={false}
               enableProse={false}

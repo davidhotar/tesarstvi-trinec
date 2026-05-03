@@ -20,6 +20,7 @@ import { CtaBannerBlock } from '@/components/blocks/CtaBanner/Component'
 import { ContactHeroSectionBlock } from '@/components/blocks/ContactHeroSection/Component'
 import { ServiceHeroBlock } from '@/components/blocks/ServiceHero/Component'
 import { ServiceDeepDiveBlock } from '@/components/blocks/ServiceDeepDive/Component'
+import { ContactFormSectionBlock } from '@/components/blocks/ContactFormSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -40,6 +41,7 @@ const blockComponents = {
   contactHeroSection: ContactHeroSectionBlock,
   serviceHero: ServiceHeroBlock,
   serviceDeepDive: ServiceDeepDiveBlock,
+  contactFormSection: ContactFormSectionBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -59,7 +61,7 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection', 'portfolioSection', 'profileHeroSection', 'timelineSection', 'regionSection', 'ctaBanner', 'contactHeroSection', 'serviceHero', 'serviceDeepDive'].includes(blockType)
+              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection', 'portfolioSection', 'profileHeroSection', 'timelineSection', 'regionSection', 'ctaBanner', 'contactHeroSection', 'serviceHero', 'serviceDeepDive', 'contactFormSection', 'formBlock'].includes(blockType)
 
               if (isFullBleed) {
                 return (

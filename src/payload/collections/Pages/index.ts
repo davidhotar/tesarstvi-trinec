@@ -20,6 +20,7 @@ import { CtaBanner } from '@/payload/blocks/CtaBanner/config'
 import { ContactHeroSection } from '@/payload/blocks/ContactHeroSection/config'
 import { ServiceHero } from '@/payload/blocks/ServiceHero/config'
 import { ServiceDeepDive } from '@/payload/blocks/ServiceDeepDive/config'
+import { ContactFormSection } from '@/payload/blocks/ContactFormSection/config'
 
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -81,7 +82,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection, ServicesSection, NumberedCardGrid, TestimonialsSection, FAQSection, PortfolioSection, ProfileHeroSection, TimelineSection, RegionSection, CtaBanner, ContactHeroSection, ServiceHero, ServiceDeepDive],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection, ServicesSection, NumberedCardGrid, TestimonialsSection, FAQSection, PortfolioSection, ProfileHeroSection, TimelineSection, RegionSection, CtaBanner, ContactHeroSection, ServiceHero, ServiceDeepDive, ContactFormSection],
               required: true,
               admin: {
                 initCollapsed: true,

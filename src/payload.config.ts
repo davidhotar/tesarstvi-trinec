@@ -67,6 +67,7 @@ export default buildConfig({
     vercelBlobStorage({
       enabled: true,
       token: process.env.BLOB_READ_WRITE_TOKEN,
+      addRandomSuffix: true,
       collections: {
         media: true,
       },

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/payload/migrations/index.ts", "src/payload/endpoints/**/index.ts", "src/app/(payload)/admin/importMap.js"],
+  "project": ["src/**/*.{ts,tsx}"],
+  "paths": {
+    "@/*": ["./src/*"]
+  },
+  "ignore": ["src/payload/migrations/*.ts"],
+  "ignoreDependencies": ["@tailwindcss/typography", "autoprefixer", "tw-animate-css", "@vercel/blob", "react-grab", "resend", "shadcn", "eslint-config-next", "prettier"],
+  "ignoreBinaries": ["portless", "knip"],
+  "next": true,
+  "postcss": true,
+  "eslint": true,
+  "vitest": true,
+  "playwright": true,
+  "typescript": true
+}

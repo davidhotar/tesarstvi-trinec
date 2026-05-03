@@ -1,8 +1,18 @@
 import type { Block } from 'payload'
 
+import {
+  BoldFeature,
+  ItalicFeature,
+  lexicalEditor,
+  ParagraphFeature,
+  HeadingFeature,
+} from '@payloadcms/richtext-lexical'
+
 export const ProfileHeroSection: Block = {
   slug: 'profileHeroSection',
   interfaceName: 'ProfileHeroSectionBlock',
+  imageURL: '/images/blocks/profile-hero-section.svg',
+  imageAltText: 'Profile hero with image and stats',
   labels: {
     singular: 'Profile Hero Section',
     plural: 'Profile Hero Sections',
@@ -15,21 +25,22 @@ export const ProfileHeroSection: Block = {
       defaultValue: 'O nás · od roku 2014',
     },
     {
-      name: 'heading',
-      type: 'text',
+      name: 'richText',
+      type: 'richText',
       required: true,
-    },
-    {
-      name: 'headingHighlight',
-      type: 'text',
+      label: 'Heading & Description',
       admin: {
-        description: 'Word or phrase highlighted in primary color at the end of the heading.',
+        description:
+          'Use H1 for the heading (bold text = primary color highlight). Paragraph text becomes the description.',
       },
-    },
-    {
-      name: 'description',
-      type: 'textarea',
-      required: true,
+      editor: lexicalEditor({
+        features: () => [
+          ParagraphFeature(),
+          HeadingFeature({ enabledHeadingSizes: ['h1'] }),
+          BoldFeature(),
+          ItalicFeature(),
+        ],
+      }),
     },
     {
       name: 'personName',

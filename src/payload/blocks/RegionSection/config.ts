@@ -3,6 +3,8 @@ import type { Block } from 'payload'
 export const RegionSection: Block = {
   slug: 'regionSection',
   interfaceName: 'RegionSectionBlock',
+  imageURL: '/images/blocks/region-section.svg',
+  imageAltText: 'Region info with map and locations',
   labels: {
     singular: 'Region Section',
     plural: 'Region Sections',

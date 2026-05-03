@@ -4,6 +4,8 @@ export const ContactHeroSection: Block = {
   slug: 'contactHeroSection',
   dbName: 'contact_hero',
   interfaceName: 'ContactHeroSectionBlock',
+  imageURL: '/images/blocks/contact-hero-section.svg',
+  imageAltText: 'Contact hero with cards grid',
   labels: {
     singular: 'Contact Hero Section',
     plural: 'Contact Hero Sections',

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Image placeholder -->
+  <rect x="40" y="16" width="240" height="140" rx="8" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <!-- Mountain icon -->
+  <polygon points="120,120 160,70 200,120" fill="#3a3a52"/>
+  <polygon points="155,120 180,90 210,120" fill="#44445a"/>
+  <circle cx="130" cy="60" r="12" fill="#44445a"/>
+  <!-- Caption lines -->
+  <rect x="80" y="168" width="160" height="5" rx="1" fill="#44445a"/>
+  <rect x="100" y="179" width="120" height="5" rx="1" fill="#3a3a52"/>
+</svg>

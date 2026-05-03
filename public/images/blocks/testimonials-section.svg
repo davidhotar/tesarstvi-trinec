@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Title centered -->
+  <rect x="120" y="10" width="80" height="6" rx="1" fill="#55557a"/>
+  <rect x="80" y="22" width="160" height="10" rx="2" fill="#6c6c8a"/>
+  <!-- Testimonial cards row (marquee) -->
+  <!-- Card 1 -->
+  <rect x="-10" y="46" width="100" height="100" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="2" y="62" fill="#44445a" font-family="serif" font-size="16">"</text>
+  <rect x="4" y="66" width="72" height="4" rx="1" fill="#44445a"/>
+  <rect x="4" y="74" width="68" height="4" rx="1" fill="#44445a"/>
+  <rect x="4" y="82" width="60" height="4" rx="1" fill="#44445a"/>
+  <circle cx="14" cy="110" r="8" fill="#3a3a52"/>
+  <rect x="26" y="106" width="40" height="5" rx="1" fill="#55557a"/>
+  <rect x="26" y="114" width="30" height="4" rx="1" fill="#3a3a52"/>
+  <!-- Stars -->
+  <text x="4" y="134" fill="#c4a03c" font-family="system-ui" font-size="8">★★★★★</text>
+  <!-- Card 2 -->
+  <rect x="100" y="46" width="100" height="100" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="112" y="62" fill="#44445a" font-family="serif" font-size="16">"</text>
+  <rect x="114" y="66" width="72" height="4" rx="1" fill="#44445a"/>
+  <rect x="114" y="74" width="68" height="4" rx="1" fill="#44445a"/>
+  <rect x="114" y="82" width="60" height="4" rx="1" fill="#44445a"/>
+  <circle cx="124" cy="110" r="8" fill="#3a3a52"/>
+  <rect x="136" y="106" width="40" height="5" rx="1" fill="#55557a"/>
+  <rect x="136" y="114" width="30" height="4" rx="1" fill="#3a3a52"/>
+  <text x="114" y="134" fill="#c4a03c" font-family="system-ui" font-size="8">★★★★★</text>
+  <!-- Card 3 -->
+  <rect x="210" y="46" width="100" height="100" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <text x="222" y="62" fill="#44445a" font-family="serif" font-size="16">"</text>
+  <rect x="224" y="66" width="72" height="4" rx="1" fill="#44445a"/>
+  <rect x="224" y="74" width="68" height="4" rx="1" fill="#44445a"/>
+  <rect x="224" y="82" width="60" height="4" rx="1" fill="#44445a"/>
+  <circle cx="234" cy="110" r="8" fill="#3a3a52"/>
+  <rect x="246" y="106" width="40" height="5" rx="1" fill="#55557a"/>
+  <rect x="246" y="114" width="30" height="4" rx="1" fill="#3a3a52"/>
+  <text x="224" y="134" fill="#c4a03c" font-family="system-ui" font-size="8">★★★★★</text>
+  <!-- Stats bar bottom -->
+  <line x1="16" y1="162" x2="304" y2="162" stroke="#44445a" stroke-width="1"/>
+  <text x="40" y="180" text-anchor="middle" fill="#c4a03c" font-family="system-ui,sans-serif" font-size="14" font-weight="700">4.9</text>
+  <text x="40" y="192" text-anchor="middle" fill="#55557a" font-family="system-ui,sans-serif" font-size="7">rating</text>
+  <text x="120" y="180" text-anchor="middle" fill="#c8c8e0" font-family="system-ui,sans-serif" font-size="14" font-weight="700">120+</text>
+  <text x="120" y="192" text-anchor="middle" fill="#55557a" font-family="system-ui,sans-serif" font-size="7">reviews</text>
+  <rect x="200" y="170" width="80" height="20" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <rect x="212" y="178" width="56" height="5" rx="1" fill="#55557a"/>
+</svg>

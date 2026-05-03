@@ -42,7 +42,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-20 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-(--admin-bar-height,0px) z-20 transition-all duration-300 ${
         scrolled
           ? 'bg-background/80 backdrop-blur-lg border-b border-border/50 shadow-sm'
           : 'bg-transparent'

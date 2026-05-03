@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Title -->
+  <rect x="16" y="12" width="120" height="10" rx="2" fill="#6c6c8a"/>
+  <!-- Filter tabs -->
+  <rect x="16" y="30" width="40" height="14" rx="7" fill="#6366f1"/>
+  <rect x="62" y="30" width="50" height="14" rx="7" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <rect x="118" y="30" width="44" height="14" rx="7" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <rect x="168" y="30" width="48" height="14" rx="7" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <!-- Portfolio grid -->
+  <!-- Row 1 -->
+  <rect x="16" y="54" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="36,94 62,72 88,94" fill="#3a3a52"/>
+  <circle cx="42" cy="68" r="6" fill="#3a3a52"/>
+  <rect x="22" y="100" width="60" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="114" y="54" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="134,94 160,72 186,94" fill="#3a3a52"/>
+  <circle cx="140" cy="68" r="6" fill="#3a3a52"/>
+  <rect x="120" y="100" width="60" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="212" y="54" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="232,94 258,72 284,94" fill="#3a3a52"/>
+  <circle cx="238" cy="68" r="6" fill="#3a3a52"/>
+  <rect x="218" y="100" width="60" height="5" rx="1" fill="#6c6c8a"/>
+  <!-- Row 2 -->
+  <rect x="16" y="118" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="36,158 62,136 88,158" fill="#3a3a52"/>
+  <circle cx="42" cy="132" r="6" fill="#3a3a52"/>
+  <rect x="22" y="164" width="60" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="114" y="118" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="134,158 160,136 186,158" fill="#3a3a52"/>
+  <circle cx="140" cy="132" r="6" fill="#3a3a52"/>
+  <rect x="120" y="164" width="60" height="5" rx="1" fill="#6c6c8a"/>
+  <rect x="212" y="118" width="92" height="60" rx="4" fill="#2a2a3e" stroke="#44445a" stroke-width="1"/>
+  <polygon points="232,158 258,136 284,158" fill="#3a3a52"/>
+  <circle cx="238" cy="132" r="6" fill="#3a3a52"/>
+  <rect x="218" y="164" width="60" height="5" rx="1" fill="#6c6c8a"/>
+</svg>

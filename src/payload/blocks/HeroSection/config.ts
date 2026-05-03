@@ -12,6 +12,8 @@ import { linkGroup } from '@/payload/fields/linkGroup'
 export const HeroSection: Block = {
   slug: 'heroSection',
   interfaceName: 'HeroSectionBlock',
+  imageURL: '/images/blocks/hero-section.svg',
+  imageAltText: 'Full-width hero with background image and stats',
   fields: [
     {
       name: 'richText',

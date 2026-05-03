@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import { Media } from '@/components/Media'
 import { IconPhone, IconMedal2, IconHeart } from '@tabler/icons-react'
 import Link from 'next/link'
+import RichText from '@/components/RichText'
 
 const badgePositionClasses: Record<string, string> = {
   'top-left': 'absolute top-4 left-[-12px]',
@@ -21,9 +22,7 @@ const badgeIcons: Record<number, React.ComponentType<{ className?: string }>> = 
 
 export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = ({
   tagline,
-  heading,
-  headingHighlight,
-  description,
+  richText,
   personName,
   personTitle,
   personImage,
@@ -35,7 +34,7 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
   stats,
 }) => {
   return (
-    <section className="flex min-h-[100svh] flex-col pt-[88px]">
+    <section className="hero-glow flex min-h-[100svh] flex-col pt-[88px]">
       <div className="container flex flex-1 items-center py-16">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-6 lg:pt-8">
@@ -48,15 +47,13 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
               </div>
             )}
 
-            <h1 className="font-heading text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              {heading}{' '}
-              {headingHighlight && <span className="text-primary">{headingHighlight}</span>}
-            </h1>
-
-            {description && (
-              <p className="max-w-lg text-lg leading-relaxed text-muted-foreground">
-                {description}
-              </p>
+            {richText && (
+              <RichText
+                className="mb-0 [&_h1]:mb-4 [&_h1]:font-heading [&_h1]:text-4xl [&_h1]:font-bold [&_h1]:leading-[1.05] [&_h1]:tracking-tight [&_h1]:sm:text-5xl [&_h1]:lg:text-6xl [&_h1_strong]:font-bold [&_h1_strong]:text-primary [&_p]:max-w-lg [&_p]:text-lg [&_p]:leading-relaxed [&_p]:text-muted-foreground"
+                data={richText}
+                enableGutter={false}
+                enableProse={false}
+              />
             )}
 
             <div className="flex items-center gap-4 border-t border-dashed pt-6">

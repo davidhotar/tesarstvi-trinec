@@ -4,6 +4,8 @@ import { iconOptions } from '../shared/iconOptions'
 export const NumberedCardGrid: Block = {
   slug: 'numberedCardGrid',
   interfaceName: 'NumberedCardGridBlock',
+  imageURL: '/images/blocks/numbered-card-grid.svg',
+  imageAltText: 'Four numbered cards in a row',
   labels: {
     singular: 'Numbered Card Grid',
     plural: 'Numbered Card Grids',
@@ -26,6 +28,16 @@ export const NumberedCardGrid: Block = {
       name: 'showConnector',
       type: 'checkbox',
       defaultValue: false,
+    },
+    {
+      name: 'glowEffect',
+      type: 'select',
+      options: [
+        { label: 'None', value: 'none' },
+        { label: 'Top', value: 'top' },
+        { label: 'Bottom', value: 'bottom' },
+      ],
+      defaultValue: 'none',
     },
     {
       name: 'items',

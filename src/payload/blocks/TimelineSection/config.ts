@@ -3,6 +3,8 @@ import type { Block } from 'payload'
 export const TimelineSection: Block = {
   slug: 'timelineSection',
   interfaceName: 'TimelineSectionBlock',
+  imageURL: '/images/blocks/timeline-section.svg',
+  imageAltText: 'Vertical timeline with alternating cards',
   labels: {
     singular: 'Timeline Section',
     plural: 'Timeline Sections',

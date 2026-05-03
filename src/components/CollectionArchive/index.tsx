@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Card, CardPortfolioData } from '@/components/Card'
 
-export type Props = {
+type Props = {
   posts: CardPortfolioData[]
 }
 

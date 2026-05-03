@@ -10,6 +10,8 @@ import {
 export const FormBlock: Block = {
   slug: 'formBlock',
   interfaceName: 'FormBlock',
+  imageURL: '/images/blocks/form-block.svg',
+  imageAltText: 'Form with input fields',
   fields: [
     {
       name: 'form',

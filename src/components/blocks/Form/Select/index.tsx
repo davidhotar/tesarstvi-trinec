@@ -23,15 +23,12 @@ export const Select: React.FC<
 > = ({ name, control, errors, label, options, required, width, defaultValue }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>
-        {label}
-        {required && (
-          <span className="required">
-            * <span className="sr-only">(required)</span>
-          </span>
-        )}
-      </Label>
-      <Controller
+      <div className="space-y-2">
+        <Label htmlFor={name}>
+          {label}
+          {required && <span className="text-muted-foreground/60"> *</span>}
+        </Label>
+        <Controller
         control={control}
         defaultValue={defaultValue}
         name={name}
@@ -40,7 +37,7 @@ export const Select: React.FC<
 
           return (
             <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full" id={name}>
+              <SelectTrigger className="w-full" id={name} aria-invalid={!!errors[name]}>
                 <SelectValue placeholder={label} />
               </SelectTrigger>
               <SelectContent>
@@ -57,7 +54,8 @@ export const Select: React.FC<
         }}
         rules={{ required }}
       />
-      {errors[name] && <Error name={name} />}
+        {errors[name] && <Error name={name} />}
+      </div>
     </Width>
   )
 }

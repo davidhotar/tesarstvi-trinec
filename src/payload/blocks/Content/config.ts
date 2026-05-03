@@ -66,6 +66,8 @@ const columnFields: Field[] = [
 export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
+  imageURL: '/images/blocks/content.svg',
+  imageAltText: 'Multi-column text layout',
   fields: [
     {
       name: 'columns',

@@ -3,6 +3,8 @@ import type { Block } from 'payload'
 export const PortfolioSection: Block = {
   slug: 'portfolioSection',
   interfaceName: 'PortfolioSectionBlock',
+  imageURL: '/images/blocks/portfolio-section.svg',
+  imageAltText: 'Filterable portfolio grid',
   labels: {
     singular: 'Portfolio Section',
     plural: 'Portfolio Sections',

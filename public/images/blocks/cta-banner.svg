@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#1e1e2e" rx="4"/>
+  <!-- Banner background -->
+  <rect x="12" y="50" width="296" height="100" rx="8" fill="#6366f1"/>
+  <!-- Left text -->
+  <rect x="28" y="70" width="140" height="12" rx="2" fill="#e8e8f0"/>
+  <rect x="28" y="90" width="120" height="5" rx="1" fill="#c8c8f0" opacity="0.7"/>
+  <rect x="28" y="100" width="100" height="5" rx="1" fill="#c8c8f0" opacity="0.7"/>
+  <!-- Right button -->
+  <rect x="210" y="76" width="80" height="28" rx="6" fill="#1e1e2e"/>
+  <rect x="224" y="86" width="52" height="6" rx="1" fill="#e8e8f0"/>
+  <!-- Rating below button -->
+  <text x="232" y="122" fill="#e8e8f0" font-family="system-ui" font-size="8" opacity="0.8">★★★★★</text>
+  <rect x="230" y="126" width="60" height="4" rx="1" fill="#c8c8f0" opacity="0.5"/>
+</svg>

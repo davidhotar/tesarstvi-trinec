@@ -14,27 +14,24 @@ export const Textarea: React.FC<
     register: UseFormRegister<FieldValues>
     rows?: number
   }
-> = ({ name, defaultValue, errors, label, register, required, rows = 3, width }) => {
+> = ({ name, defaultValue, errors, label, register, required, rows = 6, width }) => {
   return (
     <Width width={width}>
-      <Label htmlFor={name}>
-        {label}
-
-        {required && (
-          <span className="required">
-            * <span className="sr-only">(required)</span>
-          </span>
-        )}
-      </Label>
-
-      <TextAreaComponent
-        defaultValue={defaultValue}
-        id={name}
-        rows={rows}
-        {...register(name, { required: required })}
-      />
-
-      {errors[name] && <Error name={name} />}
+      <div className="space-y-2">
+        <Label htmlFor={name}>
+          {label}
+          {required && <span className="text-muted-foreground/60"> *</span>}
+        </Label>
+        <TextAreaComponent
+          className="min-h-36"
+          defaultValue={defaultValue}
+          id={name}
+          rows={rows}
+          aria-invalid={!!errors[name]}
+          {...register(name, { required: required })}
+        />
+        {errors[name] && <Error name={name} />}
+      </div>
     </Width>
   )
 }

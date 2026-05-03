@@ -12,16 +12,11 @@ export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
   ctaLink,
 }) => {
   return (
-    <section className="bg-background py-16 lg:py-20">
+    <section className="hero-glow bg-background pt-40 pb-16 lg:pt-48 lg:pb-20">
       <div className="container">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            {eyebrow && (
-              <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                {eyebrow}
-              </span>
-            )}
-            <h1 className="mt-2 font-heading text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="max-w-3xl font-heading text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
               {heading}
             </h1>
           </div>

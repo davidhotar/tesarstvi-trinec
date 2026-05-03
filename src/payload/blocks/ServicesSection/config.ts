@@ -4,6 +4,8 @@ import { iconOptions } from '../shared/iconOptions'
 export const ServicesSection: Block = {
   slug: 'servicesSection',
   interfaceName: 'ServicesSectionBlock',
+  imageURL: '/images/blocks/services-section.svg',
+  imageAltText: 'Three-column service cards with icons',
   labels: {
     singular: 'Services Section',
     plural: 'Services Sections',
@@ -54,6 +56,13 @@ export const ServicesSection: Block = {
         {
           name: 'linkLabel',
           type: 'text',
+        },
+        {
+          name: 'linkUrl',
+          type: 'text',
+          admin: {
+            description: 'URL for the service card link (e.g. /sluzby#pergoly)',
+          },
         },
       ],
     },

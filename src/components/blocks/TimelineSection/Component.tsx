@@ -6,7 +6,7 @@ export const TimelineSectionBlock: React.FC<TimelineSectionBlockProps> = ({
   milestones,
 }) => {
   return (
-    <section className="py-24">
+    <section className="hero-glow py-24">
       <div className="container">
         <div className="mb-16 flex flex-col items-center gap-2 text-center">
           <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">

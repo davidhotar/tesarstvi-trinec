@@ -42,7 +42,7 @@ export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = (
   contactCards,
 }) => {
   return (
-    <section className="flex min-h-[100svh] flex-col pt-[88px]">
+    <section className="flex min-h-[100svh] flex-col hero-glow pb-16 pt-[88px] lg:pb-24">
       {/* Hero area */}
       <div className="container flex flex-1 items-center py-16">
         <div className="grid w-full grid-cols-1 items-start gap-12 lg:grid-cols-2">

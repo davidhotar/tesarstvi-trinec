@@ -3,6 +3,8 @@ import type { Block } from 'payload'
 export const TestimonialsSection: Block = {
   slug: 'testimonialsSection',
   interfaceName: 'TestimonialsSectionBlock',
+  imageURL: '/images/blocks/testimonials-section.svg',
+  imageAltText: 'Scrolling testimonial cards with ratings',
   labels: {
     singular: 'Testimonials Section',
     plural: 'Testimonials Sections',
