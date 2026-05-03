@@ -8,6 +8,10 @@ import { ContentBlock } from '@/components/blocks/Content/Component'
 import { FormBlock } from '@/components/blocks/Form/Component'
 import { HeroSectionBlock } from '@/components/blocks/HeroSection/Component'
 import { MediaBlock } from '@/components/blocks/MediaBlock/Component'
+import { ServicesSectionBlock } from '@/components/blocks/ServicesSection/Component'
+import { NumberedCardGridBlock } from '@/components/blocks/NumberedCardGrid/Component'
+import { TestimonialsSectionBlock } from '@/components/blocks/TestimonialsSection/Component'
+import { FAQSectionBlock } from '@/components/blocks/FAQSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -16,6 +20,10 @@ const blockComponents = {
   formBlock: FormBlock,
   heroSection: HeroSectionBlock,
   mediaBlock: MediaBlock,
+  servicesSection: ServicesSectionBlock,
+  numberedCardGrid: NumberedCardGridBlock,
+  testimonialsSection: TestimonialsSectionBlock,
+  faqSection: FAQSectionBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -35,7 +43,7 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              const isFullBleed = blockType === 'heroSection'
+              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection'].includes(blockType)
 
               if (isFullBleed) {
                 return (
