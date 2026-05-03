@@ -194,6 +194,8 @@ export interface Page {
     | RegionSectionBlock
     | CtaBannerBlock
     | ContactHeroSectionBlock
+    | ServiceHeroBlock
+    | ServiceDeepDiveBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1131,6 +1133,88 @@ export interface ContactHeroSectionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceHeroBlock".
+ */
+export interface ServiceHeroBlock {
+  /**
+   * Small uppercase label above the heading
+   */
+  eyebrow?: string | null;
+  heading: string;
+  /**
+   * Stats or trust line displayed on the right (e.g. "10 let · 142 realizací")
+   */
+  note?: string | null;
+  ctaLabel?: string | null;
+  ctaLink?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceDeepDiveBlock".
+ */
+export interface ServiceDeepDiveBlock {
+  /**
+   * Display number (e.g. "01", "02", "03")
+   */
+  number: string;
+  /**
+   * Label pill (e.g. "Bestseller · 60 % naší práce")
+   */
+  badge?: string | null;
+  badgeVariant?: ('default' | 'accent') | null;
+  title: string;
+  description?: string | null;
+  variant: 'showcase' | 'gallery';
+  /**
+   * Sub-service cards (showcase variant)
+   */
+  subServices?:
+    | {
+        title: string;
+        description: string;
+        tags?:
+          | {
+              tag: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  images?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  checklist?: {
+    heading?: string | null;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional tip callout (gallery variant)
+   */
+  tip?: {
+    text?: string | null;
+  };
+  ctaLabel?: string | null;
+  ctaLink?: string | null;
+  background?: ('default' | 'muted') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceDeepDive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1504,6 +1588,8 @@ export interface PagesSelect<T extends boolean = true> {
         regionSection?: T | RegionSectionBlockSelect<T>;
         ctaBanner?: T | CtaBannerBlockSelect<T>;
         contactHeroSection?: T | ContactHeroSectionBlockSelect<T>;
+        serviceHero?: T | ServiceHeroBlockSelect<T>;
+        serviceDeepDive?: T | ServiceDeepDiveBlockSelect<T>;
       };
   meta?:
     | T
@@ -1843,6 +1929,72 @@ export interface ContactHeroSectionBlockSelect<T extends boolean = true> {
         ctaVariant?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceHeroBlock_select".
+ */
+export interface ServiceHeroBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  heading?: T;
+  note?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceDeepDiveBlock_select".
+ */
+export interface ServiceDeepDiveBlockSelect<T extends boolean = true> {
+  number?: T;
+  badge?: T;
+  badgeVariant?: T;
+  title?: T;
+  description?: T;
+  variant?: T;
+  subServices?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        tags?:
+          | T
+          | {
+              tag?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  images?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  checklist?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  tip?:
+    | T
+    | {
+        text?: T;
+      };
+  ctaLabel?: T;
+  ctaLink?: T;
+  background?: T;
   id?: T;
   blockName?: T;
 }
