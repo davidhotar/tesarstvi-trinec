@@ -177,7 +177,18 @@ export interface PayloadMcpApiKeyAuthOperations {
 export interface Page {
   id: number;
   title: string;
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | HeroSectionBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | HeroSectionBlock
+    | ServicesSectionBlock
+    | NumberedCardGridBlock
+    | TestimonialsSectionBlock
+    | FAQSectionBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -823,6 +834,135 @@ export interface HeroSectionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesSectionBlock".
+ */
+export interface ServicesSectionBlock {
+  title: string;
+  services: {
+    icon:
+      | 'fence'
+      | 'car-garage'
+      | 'home-plus'
+      | 'hammer'
+      | 'tool'
+      | 'brush'
+      | 'ruler'
+      | 'wood'
+      | 'tree'
+      | 'building'
+      | 'door'
+      | 'window'
+      | 'stairs'
+      | 'bolt'
+      | 'paint'
+      | 'crane'
+      | 'shovel'
+      | 'axe'
+      | 'saw'
+      | 'drill'
+      | 'home'
+      | 'phone'
+      | 'map-pin'
+      | 'file-description'
+      | 'garden-cart';
+    title: string;
+    description: string;
+    items: {
+      text: string;
+      id?: string | null;
+    }[];
+    linkLabel?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'servicesSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberedCardGridBlock".
+ */
+export interface NumberedCardGridBlock {
+  title: string;
+  subtitle?: string | null;
+  sideDescription?: string | null;
+  showConnector?: boolean | null;
+  items: {
+    icon?:
+      | (
+          | 'fence'
+          | 'car-garage'
+          | 'home-plus'
+          | 'hammer'
+          | 'tool'
+          | 'brush'
+          | 'ruler'
+          | 'wood'
+          | 'tree'
+          | 'building'
+          | 'door'
+          | 'window'
+          | 'stairs'
+          | 'bolt'
+          | 'paint'
+          | 'crane'
+          | 'shovel'
+          | 'axe'
+          | 'saw'
+          | 'drill'
+          | 'home'
+          | 'phone'
+          | 'map-pin'
+          | 'file-description'
+          | 'garden-cart'
+        )
+      | null;
+    title: string;
+    description: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'numberedCardGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsSectionBlock".
+ */
+export interface TestimonialsSectionBlock {
+  title: string;
+  sourceLabel?: string | null;
+  testimonials: {
+    name: string;
+    location?: string | null;
+    text: string;
+    rating?: number | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonialsSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQSectionBlock".
+ */
+export interface FAQSectionBlock {
+  title: string;
+  description?: string | null;
+  ctaLabel?: string | null;
+  ctaLink?: string | null;
+  faqs: {
+    question: string;
+    answer: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faqSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1186,6 +1326,10 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         heroSection?: T | HeroSectionBlockSelect<T>;
+        servicesSection?: T | ServicesSectionBlockSelect<T>;
+        numberedCardGrid?: T | NumberedCardGridBlockSelect<T>;
+        testimonialsSection?: T | TestimonialsSectionBlockSelect<T>;
+        faqSection?: T | FAQSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1312,6 +1456,88 @@ export interface HeroSectionBlockSelect<T extends boolean = true> {
     | {
         value?: T;
         label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesSectionBlock_select".
+ */
+export interface ServicesSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  services?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        linkLabel?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberedCardGridBlock_select".
+ */
+export interface NumberedCardGridBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  sideDescription?: T;
+  showConnector?: T;
+  items?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsSectionBlock_select".
+ */
+export interface TestimonialsSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  sourceLabel?: T;
+  testimonials?:
+    | T
+    | {
+        name?: T;
+        location?: T;
+        text?: T;
+        rating?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQSectionBlock_select".
+ */
+export interface FAQSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   id?: T;

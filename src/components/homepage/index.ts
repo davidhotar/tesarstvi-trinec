@@ -1,6 +1,2 @@
 export { HeroSection } from './HeroSection'
 export { PortfolioSection } from './PortfolioSection'
-export { ServicesSection } from './ServicesSection'
-export { TestimonialsSection } from './TestimonialsSection'
-export { ContactSection } from './ContactSection'
-export { FAQSection } from './FAQSection'
