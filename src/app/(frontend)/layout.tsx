@@ -34,6 +34,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
         )}
         <Providers>
+          <div className="noise-overlay z-[1]" />
           <AdminBar />
           <Header />
           {children}

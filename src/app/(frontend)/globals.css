@@ -382,6 +382,15 @@
   .hero-glow-bottom {
     background-image: radial-gradient(ellipse 120% 80% at 50% 120%, rgba(247, 204, 99, 0.12), transparent);
   }
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 512px 512px;
+    background-repeat: repeat;
+  }
   .portfolio-fade-up {
     animation: portfolio-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
   }

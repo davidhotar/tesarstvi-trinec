@@ -53,17 +53,12 @@ export default async function Page({ searchParams }: Args) {
   }))
 
   return (
-    <div>
+    <div className="relative bg-black text-white dark:bg-background dark:text-foreground">
       <PageClient />
 
       {/* Hero header */}
-      <div className="relative overflow-hidden bg-black text-white dark:bg-background dark:text-foreground pt-40 pb-20 md:pt-48 md:pb-24 mb-12 md:mb-16">
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+      <div className="relative overflow-hidden pt-40 pb-20 md:pt-48 md:pb-24">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-40 bg-portfolio-accent/10 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="container relative">
           <div className="portfolio-fade-up">
