@@ -100,11 +100,12 @@ When an icon is present, it renders in a `size-11 rounded-lg bg-primary text-pri
 ## File Structure
 
 - **New**: `src/components/NumberedCardGrid/index.tsx`
-- **Delete**: `src/components/about/ValuesSection.tsx` (no longer needed)
-- **Update**: `src/components/homepage/ProcessSection.tsx` — replace implementation with `NumberedCardGrid` usage, or inline directly in `page.tsx` and delete
-- **Update**: `src/app/(frontend)/page.tsx` — use `NumberedCardGrid` directly or keep thin ProcessSection wrapper
-- **Update**: `src/app/(frontend)/o-nas/page.tsx` — use `NumberedCardGrid` directly instead of ValuesSection
+- **Delete**: `src/components/homepage/ProcessSection.tsx` — no wrapper, inline data in page.tsx
+- **Delete**: `src/components/about/ValuesSection.tsx` — no wrapper, inline data in o-nas/page.tsx
+- **Update**: `src/components/homepage/index.ts` — remove ProcessSection export
 - **Update**: `src/components/about/index.ts` — remove ValuesSection export
+- **Update**: `src/app/(frontend)/page.tsx` — replace `<ProcessSection />` with `<NumberedCardGrid>` and inline step data
+- **Update**: `src/app/(frontend)/o-nas/page.tsx` — replace `<ValuesSection />` with `<NumberedCardGrid>` and inline values data
 
 ## Dependencies
 
