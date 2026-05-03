@@ -16,6 +16,7 @@ export const about: () => RequiredDataFromCollectionSlug<'pages'> = () => {
               {
                 type: 'heading',
                 tag: 'h1',
+                version: 1,
                 children: [
                   { type: 'text', text: 'Dřevo, tradice, a chlap, co se za to ' },
                   { type: 'text', text: 'podepíše.', format: 1 },
@@ -23,6 +24,7 @@ export const about: () => RequiredDataFromCollectionSlug<'pages'> = () => {
               },
               {
                 type: 'paragraph',
+                version: 1,
                 children: [
                   {
                     type: 'text',
