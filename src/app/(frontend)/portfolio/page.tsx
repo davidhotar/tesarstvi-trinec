@@ -9,7 +9,12 @@ import PageClient from './page.client'
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
+type Args = {
+  searchParams: Promise<{ category?: string }>
+}
+
+export default async function Page({ searchParams }: Args) {
+  const { category } = await searchParams
   const payload = await getPayload({ config: configPromise })
 
   const [posts, categoriesResult] = await Promise.all([
@@ -52,7 +57,6 @@ export default async function Page() {
 
       {/* Hero header */}
       <div className="relative overflow-hidden bg-black text-white dark:bg-background dark:text-foreground pt-40 pb-20 md:pt-48 md:pb-24 mb-12 md:mb-16">
-        {/* Subtle grain texture */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -80,9 +84,12 @@ export default async function Page() {
       </div>
 
       <Suspense>
-        <PortfolioGrid posts={posts.docs} categories={categories} />
+        <PortfolioGrid
+          posts={posts.docs}
+          categories={categories}
+          initialCategorySlug={category}
+        />
       </Suspense>
-
     </div>
   )
 }

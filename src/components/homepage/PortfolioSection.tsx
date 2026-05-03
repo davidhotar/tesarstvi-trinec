@@ -1,6 +1,6 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import { PortfolioSectionClient } from './PortfolioSectionClient'
+import { PortfolioGrid } from '@/components/PortfolioGrid'
 
 export async function PortfolioSection() {
   const payload = await getPayload({ config: configPromise })
@@ -41,9 +41,13 @@ export async function PortfolioSection() {
 
   return (
     <section className="py-24">
-      <div className="container">
-        <PortfolioSectionClient posts={postsResult.docs} categories={categories} />
-      </div>
+      <PortfolioGrid
+        posts={postsResult.docs}
+        categories={categories}
+        limit={5}
+        heading="Každý projekt je jiný."
+        showAllTab
+      />
     </section>
   )
 }
