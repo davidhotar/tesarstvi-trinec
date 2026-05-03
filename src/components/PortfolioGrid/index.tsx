@@ -1,93 +1,149 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { useSearchParams } from 'next/navigation'
 import { cn } from '@/utilities/ui'
+import { Button } from '@/components/ui/button'
 import { Card, CardPortfolioData } from '@/components/Card'
+import Link from 'next/link'
 import type { Category } from '@/payload-types'
 
 export type PortfolioGridProps = {
   posts: CardPortfolioData[]
   categories: Pick<Category, 'id' | 'title' | 'slug'>[]
+  limit?: number
+  heading?: string
+  showAllTab?: boolean
+  initialCategorySlug?: string
 }
 
-export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ posts, categories }) => {
-  const searchParams = useSearchParams()
-  const categorySlug = searchParams.get('category')
+export function PortfolioGrid({
+  posts,
+  categories,
+  limit,
+  heading,
+  showAllTab = false,
+  initialCategorySlug,
+}: PortfolioGridProps) {
+  const categoriesWithCounts = useMemo(() => {
+    return categories
+      .map((cat) => {
+        const count = posts.filter((post) =>
+          post.categories?.some((c) => (typeof c === 'object' ? c.id : c) === cat.id),
+        ).length
+        return { ...cat, count }
+      })
+      .filter((cat) => cat.count > 0)
+      .sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '', 'cs'))
+  }, [categories, posts])
 
-  const sortedCategories = useMemo(
-    () => [...categories].sort((a, b) => (a.title ?? '').localeCompare(b.title ?? '', 'cs')),
-    [categories],
-  )
-
-  const initialCategory = useMemo(() => {
-    if (categorySlug) {
-      const match = sortedCategories.find((c) => c.slug === categorySlug)
+  const initialCategoryId = useMemo(() => {
+    if (showAllTab) return null
+    if (initialCategorySlug) {
+      const match = categoriesWithCounts.find((c) => c.slug === initialCategorySlug)
       if (match) return match.id
     }
-    return sortedCategories[0]?.id ?? 0
-  }, [categorySlug, sortedCategories])
+    return categoriesWithCounts[0]?.id ?? null
+  }, [showAllTab, initialCategorySlug, categoriesWithCounts])
 
-  const [activeCategory, setActiveCategory] = useState<number>(initialCategory)
+  const [activeCategoryId, setActiveCategoryId] = useState<number | null>(initialCategoryId)
 
   const filteredPosts = useMemo(() => {
-    return posts.filter((post) => {
-      if (!post.categories || !Array.isArray(post.categories)) return false
-      return post.categories.some((cat) => {
-        const catId = typeof cat === 'object' ? cat.id : cat
-        return catId === activeCategory
-      })
-    })
-  }, [posts, activeCategory])
+    let filtered = posts
+    if (activeCategoryId !== null) {
+      filtered = posts.filter((post) =>
+        post.categories?.some(
+          (c) => (typeof c === 'object' ? c.id : c) === activeCategoryId,
+        ),
+      )
+    }
+    return limit ? filtered.slice(0, limit) : filtered
+  }, [posts, activeCategoryId, limit])
+
+  const activeCategory = categoriesWithCounts.find((c) => c.id === activeCategoryId)
+  const totalForActive = activeCategoryId === null
+    ? posts.length
+    : activeCategory?.count ?? 0
+  const showMoreHref = activeCategoryId === null
+    ? '/portfolio'
+    : `/portfolio?category=${activeCategory?.slug ?? ''}`
+  const isLimited = !!limit
 
   return (
     <div>
-      {/* Category tabs */}
-      <div className="container mb-10 md:mb-14">
-        <div className="flex flex-wrap gap-2">
-          {sortedCategories.map((cat) => {
-            const count = posts.filter((post) =>
-              post.categories?.some((c) => (typeof c === 'object' ? c.id : c) === cat.id),
-            ).length
-            if (count === 0) return null
-            return (
-              <button
+      <div className="container">
+        <div className="mb-10 md:mb-14 flex flex-wrap items-end justify-between gap-4">
+          {heading && (
+            <div>
+              <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+                {heading}
+              </h2>
+            </div>
+          )}
+          <div
+            className="flex flex-wrap gap-1.5"
+            role="tablist"
+            aria-label="Filtrovat kategorie"
+          >
+            {showAllTab && (
+              <Button
+                variant={activeCategoryId === null ? 'default' : 'ghost'}
+                size="sm"
+                className="rounded-full"
+                role="tab"
+                aria-selected={activeCategoryId === null}
+                onClick={() => setActiveCategoryId(null)}
+              >
+                Vše
+              </Button>
+            )}
+            {categoriesWithCounts.map((cat) => (
+              <Button
                 key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={cn(
-                  'relative px-4 py-2 text-xs uppercase tracking-[0.15em] font-medium rounded-full transition-all duration-300',
-                  activeCategory === cat.id
-                    ? 'bg-portfolio-accent text-white'
-                    : 'bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80',
-                )}
+                variant={activeCategoryId === cat.id ? 'default' : 'ghost'}
+                size="sm"
+                className="rounded-full"
+                role="tab"
+                aria-selected={activeCategoryId === cat.id}
+                onClick={() => setActiveCategoryId(cat.id)}
               >
                 {cat.title}
-                <span className="ml-1.5 text-[0.6rem] opacity-60">{count}</span>
-              </button>
-            )
-          })}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grid */}
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-          {filteredPosts.map((result, index) => {
-            if (typeof result !== 'object' || result === null) return null
-            const isFeatured = index % 7 === 0
-
+        <div
+          className={cn(
+            'grid grid-cols-1 gap-3',
+            isLimited
+              ? filteredPosts.length >= 3
+                ? 'md:grid-cols-3 md:grid-rows-2'
+                : 'md:grid-cols-2'
+              : 'sm:grid-cols-2 lg:grid-cols-3 md:gap-4',
+          )}
+        >
+          {filteredPosts.map((post, index) => {
+            const isFeatured = isLimited
+              ? index === 0 && filteredPosts.length >= 3
+              : index % 7 === 0
             return (
               <div
+                key={post.slug}
                 className={cn(
                   'portfolio-scale-in',
-                  isFeatured && 'sm:col-span-2 lg:col-span-2',
+                  isFeatured && (isLimited ? 'md:row-span-2' : 'sm:col-span-2 lg:col-span-2'),
                 )}
-                key={result.slug}
                 style={{ animationDelay: `${index * 60}ms` }}
               >
                 <Card
-                  className="h-full"
-                  doc={result}
+                  className={cn(
+                    'h-full',
+                    isLimited && 'rounded-xl',
+                    isLimited && (isFeatured ? 'aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]'),
+                  )}
+                  doc={post}
                   relationTo="portfolio"
                   showCategories
                   featured={isFeatured}
@@ -103,6 +159,18 @@ export const PortfolioGrid: React.FC<PortfolioGridProps> = ({ posts, categories 
           </div>
         )}
       </div>
+
+      {isLimited && (
+        <div className="container mt-6 flex justify-center">
+          <Button variant="ghost" className="rounded-lg" asChild>
+            <Link href={showMoreHref}>
+              {totalForActive > limit
+                ? `Zobrazit všech ${totalForActive} realizací →`
+                : `Zobrazit portfolio →`}
+            </Link>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
