@@ -21,13 +21,12 @@ const nextConfig: NextConfig = {
         pathname: '/images/**',
       },
     ],
-    qualities: [100],
     remotePatterns: [
       {
-        hostname: '5ub4wlle43xfns5o.public.blob.vercel-storage.com',
+        hostname: '*.public.blob.vercel-storage.com',
         protocol: 'https',
       },
-      ...[NEXT_PUBLIC_SERVER_URL /* 'https://example.com' */].map((item) => {
+      ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
         const url = new URL(item)
 
         return {
