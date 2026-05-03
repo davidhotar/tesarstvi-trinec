@@ -2,12 +2,37 @@ import type { Metadata } from 'next'
 import {
   ProfileHeroSection,
   TimelineSection,
-  ValuesSection,
-  TeamSection,
   RegionSection,
   CtaBanner,
 } from '@/components/about'
-import { TrustStrip } from '@/components/homepage/TrustStrip'
+import { NumberedCardGrid } from '@/components/NumberedCardGrid'
+
+const values = [
+  {
+    number: '01',
+    title: 'Poctivý materiál',
+    description:
+      'Modřín, dub, smrk z Beskyd. Žádný brak, žádný eko-import. Vidíte fakturu z pily, kdykoli chcete.',
+  },
+  {
+    number: '02',
+    title: 'Tesařské spoje',
+    description:
+      'Tradiční vazby — čep, kampovka, rybinový spoj. Šroub až tam, kde má smysl. Konstrukce drží 80 let.',
+  },
+  {
+    number: '03',
+    title: 'Dimenze, ne zubní párátka',
+    description:
+      'Sloupy 14×14 cm minimum, krokve 8×16 cm. Pergola není tyčový plot — postavíme tak, aby unesla sníh.',
+  },
+  {
+    number: '04',
+    title: 'Základ jako u baráku',
+    description:
+      'Šroubovací piloty nebo betonové patky pod hladinu mrazu. Bez ulehčování. Bez „však ono to udrží".',
+  },
+]
 
 export const metadata: Metadata = {
   title: 'O nás',
@@ -15,22 +40,25 @@ export const metadata: Metadata = {
     'Rodinná tesařská firma z Třince s více než 25 lety zkušeností. Pergoly, přístřešky a dřevostavby na míru.',
 }
 
-const aboutStats = [
-  { value: '25+', label: 'let s dřevem v ruce' },
-  { value: '180', label: 'hotových realizací' },
-  { value: '4.9★', label: 'průměr Google recenzí' },
-  { value: '0', label: 'reklamací za 3 roky' },
-  { value: '40 km', label: 'okruh Třince' },
-]
-
 export default function ONasPage() {
   return (
     <>
       <ProfileHeroSection />
-      <TrustStrip items={aboutStats} />
       <TimelineSection />
-      <ValuesSection />
-      <TeamSection />
+      <NumberedCardGrid
+        title={
+          <>
+            Čtyři věci, na kterých
+            <br />
+            nehnu ani o píď.
+          </>
+        }
+        subtitle="Naše hodnoty"
+        sideDescription="Nejsou to slogany na zeď. Je to to, podle čeho denně rozhodujeme."
+        items={values}
+        className="bg-muted/50"
+      />
+
       <RegionSection />
       <CtaBanner />
     </>
