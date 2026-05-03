@@ -1826,26 +1826,34 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  navItems?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: number | Page;
-              } | null)
-            | ({
-                relationTo: 'portfolio';
-                value: number | Portfolio;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  /**
+   * Krátký slogan pod logem (např. "Rádi se ozveme.")
+   */
+  tagline?: string | null;
+  /**
+   * Telefonní číslo
+   */
+  phone?: string | null;
+  /**
+   * E-mailová adresa
+   */
+  email?: string | null;
+  /**
+   * Adresa (každý řádek = nový řádek ve footeru)
+   */
+  address?: string | null;
+  /**
+   * Odkaz na Google Maps
+   */
+  addressLink?: string | null;
+  /**
+   * Obchodní informace (spodní lišta vlevo)
+   */
+  businessInfo?: string | null;
+  /**
+   * Název pro copyright (spodní lišta vpravo)
+   */
+  copyright?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1878,20 +1886,13 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
-    | T
-    | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
-      };
+  tagline?: T;
+  phone?: T;
+  email?: T;
+  address?: T;
+  addressLink?: T;
+  businessInfo?: T;
+  copyright?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

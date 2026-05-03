@@ -1,12 +1,21 @@
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 import { ImagePlaceholder } from '@/components/homepage/ImagePlaceholder'
 import { IconPhone, IconMedal2, IconHeart } from '@tabler/icons-react'
 
+const stats = [
+  { value: '25+', label: 'let s dřevem v ruce' },
+  { value: '180', label: 'hotových realizací' },
+  { value: '4.9★', label: 'průměr Google recenzí' },
+  { value: '0', label: 'reklamací za 3 roky' },
+  { value: '40 km', label: 'okruh Třince' },
+]
+
 export function ProfileHeroSection() {
   return (
-    <section className="py-24">
-      <div className="container">
+    <section className="flex min-h-[100svh] flex-col pt-[88px]">
+      <div className="container flex flex-1 items-center py-16">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-6 lg:pt-8">
             <div className="flex items-center gap-2">
@@ -68,6 +77,17 @@ export function ProfileHeroSection() {
           </div>
         </div>
       </div>
+
+      <Separator />
+      <div className="container flex flex-wrap items-center justify-around gap-x-8 gap-y-5 py-10 lg:py-12">
+        {stats.map((stat) => (
+          <div key={stat.label} className="flex flex-col items-center gap-1 text-center">
+            <span className="text-3xl font-bold">{stat.value}</span>
+            <span className="text-sm text-muted-foreground">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+      <Separator />
     </section>
   )
 }

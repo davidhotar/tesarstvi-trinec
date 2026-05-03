@@ -80,7 +80,6 @@ export default async function HomePage() {
       <NumberedCardGrid
         title="Bez stresu, bez překvapení."
         items={processSteps}
-        showConnector
       />
       <TestimonialsSection />
       <ContactSection />

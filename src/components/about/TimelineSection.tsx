@@ -36,22 +36,19 @@ export function TimelineSection() {
     <section className="py-24">
       <div className="container">
         <div className="mb-16 flex flex-col items-center gap-2 text-center">
-          <span className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
-            Milníky
-          </span>
-          <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+<h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
             Cesta od učedníka k vlastní dílně.
           </h2>
         </div>
 
         <div className="relative mx-auto max-w-4xl">
-          {/* Vertical dashed line */}
+          {/* Vertical dashed line — stops at the last item */}
           <div
             aria-hidden
-            className="absolute top-0 bottom-0 left-4 w-px border-l border-dashed border-border lg:left-1/2 lg:-translate-x-px"
+            className="absolute top-0 bottom-12 left-4 w-px border-l border-dashed border-border lg:left-1/2 lg:-translate-x-px lg:bottom-16"
           />
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-12 lg:gap-16">
             {milestones.map((m, i) => {
               const isRight = i % 2 === 1
               return (
@@ -64,7 +61,7 @@ export function TimelineSection() {
                     className={`ml-12 flex-1 lg:ml-0 ${isRight ? 'lg:text-left' : 'lg:text-right'}`}
                   >
                     <div
-                      className={`inline-block rounded-lg border bg-card p-4 text-left shadow-sm`}
+                      className={`inline-block rounded-xl border bg-card p-5 text-left shadow-sm`}
                     >
                       <p className="font-heading text-lg font-bold">{m.title}</p>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground">

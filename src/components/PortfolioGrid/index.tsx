@@ -121,7 +121,7 @@ export function PortfolioGrid({
               ? filteredPosts.length >= 3
                 ? 'md:grid-cols-3 md:grid-rows-2'
                 : 'md:grid-cols-2'
-              : 'sm:grid-cols-2 lg:grid-cols-3 md:gap-4',
+              : 'sm:grid-cols-2 lg:grid-cols-3 md:gap-4 grid-flow-dense',
           )}
         >
           {filteredPosts.map((post, index) => {
@@ -139,9 +139,8 @@ export function PortfolioGrid({
               >
                 <Card
                   className={cn(
-                    'h-full',
-                    isLimited && 'rounded-xl',
-                    isLimited && (isFeatured ? 'aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]'),
+                    'h-full rounded-xl',
+                    isFeatured ? 'aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]',
                   )}
                   doc={post}
                   relationTo="portfolio"
@@ -153,11 +152,6 @@ export function PortfolioGrid({
           })}
         </div>
 
-        {filteredPosts.length === 0 && (
-          <div className="text-center py-20 text-muted-foreground">
-            <p className="text-sm uppercase tracking-widest">Žádné realizace v této kategorii</p>
-          </div>
-        )}
       </div>
 
       {isLimited && (

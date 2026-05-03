@@ -1,6 +1,5 @@
 import type { GlobalConfig } from 'payload'
 
-import { link } from '@/payload/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
 
 export const Footer: GlobalConfig = {
@@ -10,19 +9,67 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'navItems',
-      type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
-      ],
-      maxRows: 6,
+      name: 'tagline',
+      type: 'text',
+      defaultValue: 'Rádi se ozveme.',
       admin: {
-        initCollapsed: true,
-        components: {
-          RowLabel: '@/payload/globals/Footer/RowLabel#RowLabel',
+        description: 'Krátký slogan pod logem (např. "Rádi se ozveme.")',
+      },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'phone',
+          type: 'text',
+          defaultValue: '+420 737 136 848',
+          admin: {
+            description: 'Telefonní číslo',
+            width: '50%',
+          },
         },
+        {
+          name: 'email',
+          type: 'email',
+          defaultValue: 'info@tesarstvi-trinec.cz',
+          admin: {
+            description: 'E-mailová adresa',
+            width: '50%',
+          },
+        },
+      ],
+    },
+    {
+      name: 'address',
+      type: 'textarea',
+      defaultValue: 'Přátelství 959\n739 61 Třinec',
+      admin: {
+        description: 'Adresa (každý řádek = nový řádek ve footeru)',
+        rows: 3,
+      },
+    },
+    {
+      name: 'addressLink',
+      type: 'text',
+      defaultValue: 'https://maps.app.goo.gl/XGrhpUEEtSBhm175A',
+      admin: {
+        description: 'Odkaz na Google Maps',
+      },
+    },
+    {
+      name: 'businessInfo',
+      type: 'text',
+      defaultValue: 'Petr Czempka · IČO 06977138 · Po-Pá 7:00-17:00',
+      admin: {
+        description: 'Obchodní informace (spodní lišta vlevo)',
+      },
+    },
+    {
+      name: 'copyright',
+      type: 'text',
+      defaultValue: 'Tesařství Třinec',
+      admin: {
+        description: 'Název pro copyright (spodní lišta vpravo)',
       },
     },
   ],

@@ -175,8 +175,8 @@
   --radius-default: 8px;
 
   /* Semantic shadcn tokens (light) */
-  --portfolio-accent: var(--color-ideation-blue);
-  --portfolio-accent-dark: var(--color-blueprint-navy);
+  --portfolio-accent: var(--color-clay-orange);
+  --portfolio-accent-dark: var(--color-clay-orange);
   --background: var(--color-canvas-white);
   --foreground: var(--color-ink-black);
   --card: var(--color-paper-grey);
@@ -216,8 +216,8 @@
 }
 
 [data-theme='dark'] {
-  --portfolio-accent: var(--color-ideation-blue);
-  --portfolio-accent-dark: var(--color-blueprint-navy);
+  --portfolio-accent: var(--color-clay-orange);
+  --portfolio-accent-dark: var(--color-clay-orange);
   --background: var(--color-ink-black);
   --foreground: var(--color-canvas-white);
   --card: var(--color-dots-black);
@@ -315,6 +315,24 @@
   --radius-2xl: 16px;
   --radius-3xl: 24px;
   --radius-4xl: 32px;
+  --animate-marquee-horizontal: marquee-horizontal var(--marquee-duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--marquee-duration) infinite linear;
+  @keyframes marquee-horizontal {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--marquee-gap)));
+    }
+  }
 }
 
 @layer base {

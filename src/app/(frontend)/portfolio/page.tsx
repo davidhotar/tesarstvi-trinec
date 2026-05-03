@@ -53,7 +53,7 @@ export default async function Page({ searchParams }: Args) {
   }))
 
   return (
-    <div className="pb-24">
+    <div>
       <PageClient />
 
       {/* Hero header */}
@@ -84,13 +84,15 @@ export default async function Page({ searchParams }: Args) {
         </div>
       </div>
 
-      <Suspense>
-        <PortfolioGrid
-          posts={posts.docs}
-          categories={categories}
-          initialCategorySlug={category}
-        />
-      </Suspense>
+      <div className="pb-24">
+        <Suspense>
+          <PortfolioGrid
+            posts={posts.docs}
+            categories={categories}
+            initialCategorySlug={category}
+          />
+        </Suspense>
+      </div>
 
       <CtaBanner />
     </div>
