@@ -8,6 +8,10 @@ import { Content } from '@/payload/blocks/Content/config'
 import { FormBlock } from '@/payload/blocks/Form/config'
 import { HeroSection } from '@/payload/blocks/HeroSection/config'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/config'
+import { ServicesSection } from '@/payload/blocks/ServicesSection/config'
+import { NumberedCardGrid } from '@/payload/blocks/NumberedCardGrid/config'
+import { TestimonialsSection } from '@/payload/blocks/TestimonialsSection/config'
+import { FAQSection } from '@/payload/blocks/FAQSection/config'
 
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -69,7 +73,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection, ServicesSection, NumberedCardGrid, TestimonialsSection, FAQSection],
               required: true,
               admin: {
                 initCollapsed: true,
