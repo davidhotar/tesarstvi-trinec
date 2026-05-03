@@ -1,14 +1,16 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
-import type { Media } from '@/payload-types'
+import type { Media, Form } from '@/payload-types'
 
 type HomeArgs = {
   heroImage: Media
   metaImage: Media
+  contactForm: Form
 }
 
 export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
   heroImage,
   metaImage,
+  contactForm,
 }) => {
   return {
     slug: 'home',
@@ -94,382 +96,100 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         ],
       },
       {
-        blockName: 'Content Block',
-        blockType: 'content',
-        columns: [
+        blockName: 'Services',
+        blockType: 'servicesSection',
+        title: 'Tři věci, které děláme nejlépe',
+        services: [
           {
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Core features',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h2',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'full',
+            icon: 'fence',
+            title: 'Pergoly & terasy',
+            description: 'Klasické i posuvné. Modřín, dub, smrk — podle vašeho vkusu i rozpočtu.',
+            items: [
+              { text: 'Návrh a vizualizace zdarma' },
+              { text: 'Modřín / dub / smrk' },
+              { text: 'Včetně základů a montáže' },
+            ],
           },
           {
-            enableLink: false,
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Admin Dashboard',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h3',
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: "Manage this site's pages and posts from the ",
-                        version: 1,
-                      },
-                      {
-                        type: 'link',
-                        children: [
-                          {
-                            type: 'text',
-                            detail: 0,
-                            format: 0,
-                            mode: 'normal',
-                            style: '',
-                            text: 'admin dashboard',
-                            version: 1,
-                          },
-                        ],
-                        direction: 'ltr',
-                        fields: {
-                          linkType: 'custom',
-                          newTab: false,
-                          url: '/admin',
-                        },
-                        format: '',
-                        indent: 0,
-                        version: 2,
-                      },
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: '.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'oneThird',
+            icon: 'car-garage',
+            title: 'Přístřešky & garáže',
+            description: 'Auta, dřevo, technika. Funkční stavby s charakterem, ne plechové škatule.',
+            items: [
+              { text: 'Pro 1–4 auta' },
+              { text: 'Plechová nebo šindelová střecha' },
+              { text: 'Záruka 5 let' },
+            ],
           },
           {
-            enableLink: false,
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Preview',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h3',
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Using versions, drafts, and preview, editors can review and share their changes before publishing them.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'oneThird',
-          },
-          {
-            enableLink: false,
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Page Builder',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h3',
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Custom page builder allows you to create unique page, post, and project layouts for any type of content.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'oneThird',
-          },
-          {
-            enableLink: false,
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'SEO',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h3',
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Editors have complete control over SEO data and site content directly from the ',
-                        version: 1,
-                      },
-                      {
-                        type: 'link',
-                        children: [
-                          {
-                            type: 'text',
-                            detail: 0,
-                            format: 0,
-                            mode: 'normal',
-                            style: '',
-                            text: 'admin dashboard',
-                            version: 1,
-                          },
-                        ],
-                        direction: 'ltr',
-                        fields: {
-                          linkType: 'custom',
-                          newTab: false,
-                          url: '/admin',
-                        },
-                        format: '',
-                        indent: 0,
-                        version: 2,
-                      },
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: '.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'oneThird',
-          },
-          {
-            enableLink: false,
-            richText: {
-              root: {
-                type: 'root',
-                children: [
-                  {
-                    type: 'heading',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Dark Mode',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    tag: 'h3',
-                    version: 1,
-                  },
-                  {
-                    type: 'paragraph',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'Users will experience this site in their preferred color scheme and each block can be inverted.',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    format: '',
-                    indent: 0,
-                    textFormat: 0,
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                version: 1,
-              },
-            },
-            size: 'oneThird',
+            icon: 'home-plus',
+            title: 'Dřevostavby',
+            description: 'Zahradní domky, sklady, drobné stavby. Od skici po klíč v ruce.',
+            items: [
+              { text: 'Klasický roubený styl i moderna' },
+              { text: 'Bez ohlášky do 25 m²' },
+              { text: 'Hotovo za 4–8 týdnů' },
+            ],
           },
         ],
       },
       {
-        blockName: 'Media Block',
-        blockType: 'mediaBlock',
-        media: metaImage.id,
+        blockName: 'Process',
+        blockType: 'numberedCardGrid',
+        title: 'Bez stresu, bez překvapení.',
+        items: [
+          {
+            icon: 'phone',
+            title: 'Zavoláte / napíšete',
+            description: 'Krátký telefonát, zjistíme co potřebujete.',
+          },
+          {
+            icon: 'map-pin',
+            title: 'Přijedeme se podívat',
+            description: 'Zaměření a poradenství u vás zdarma.',
+          },
+          {
+            icon: 'file-description',
+            title: 'Návrh + cenová nabídka',
+            description: 'Do 5 dnů. Bez závazku, bez skrytých nákladů.',
+          },
+          {
+            icon: 'hammer',
+            title: 'Postavíme',
+            description: 'Termín dodržíme. Vždy.',
+          },
+        ],
       },
       {
-        blockName: 'Archive Block',
-        blockType: 'archive',
-        categories: [],
+        blockName: 'Testimonials',
+        blockType: 'testimonialsSection',
+        title: '87 lidí v okolí už nám věří.',
+        sourceLabel: 'napřímo z Google reviews',
+        testimonials: [
+          {
+            name: 'Petr Krzystek',
+            location: 'Bystřice n. Olší',
+            text: 'Pergola jako z časopisu. Klucí byli skvělí — slušní, čistí, dochvilní. Termín do dne.',
+            rating: 5,
+          },
+          {
+            name: 'Anna Sikorová',
+            location: 'Třinec, Konská',
+            text: 'Měli jsme strach, že to bude drahé. Cena fér, řemeslo perfektní. Doporučuji všem v okolí.',
+            rating: 5,
+          },
+          {
+            name: 'Jakub Heczko',
+            location: 'Návsí',
+            text: 'Postavili nám zahradní domek. 6 týdnů, žádné zdržení, žádné navyšování. Tohle dnes neumí každý.',
+            rating: 5,
+          },
+        ],
+      },
+      {
+        blockName: 'Contact Form',
+        blockType: 'formBlock',
+        form: contactForm.id,
+        enableIntro: true,
         introContent: {
           root: {
             type: 'root',
@@ -483,14 +203,14 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                     format: 0,
                     mode: 'normal',
                     style: '',
-                    text: 'Recent posts',
+                    text: 'Řekněte, co plánujete.',
                     version: 1,
                   },
                 ],
                 direction: 'ltr',
                 format: '',
                 indent: 0,
-                tag: 'h3',
+                tag: 'h2',
                 version: 1,
               },
               {
@@ -502,7 +222,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                     format: 0,
                     mode: 'normal',
                     style: '',
-                    text: 'The posts below are displayed in an "Archive" layout building block which is an extremely powerful way to display documents on a page. It can be auto-populated by collection or by category, or posts can be individually selected. Pagination controls will automatically appear if the number of results exceeds the number of items per page.',
+                    text: 'Stavíme v okruhu 40 km od Třince — Bystřice, Návsí, Mosty, Jablunkov a okolí.',
                     version: 1,
                   },
                 ],
@@ -519,109 +239,46 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
             version: 1,
           },
         },
-        populateBy: 'collection',
-        relationTo: 'portfolio',
       },
       {
-        blockName: 'CTA',
-        blockType: 'cta',
-        links: [
+        blockName: 'FAQ',
+        blockType: 'faqSection',
+        title: 'Než se zeptáte.',
+        description: 'Nenašli jste odpověď? Zavolejte — rádi poradíme i bez závazku.',
+        ctaLabel: 'Zavolat',
+        ctaLink: 'tel:+420737136848',
+        faqs: [
           {
-            link: {
-              type: 'custom',
-              appearance: 'default',
-              label: 'All portfolio',
-              url: '/portfolio',
-            },
+            question: 'Kolik stojí pergola?',
+            answer: 'Cena závisí na velikosti, materiálu a typu střechy. Klasická pergola 4×4 m z modřínu vychází orientačně na 80–120 tisíc. Přesnou nabídku zdarma do 5 dnů od zaměření.',
+          },
+          {
+            question: 'Postavíte i v zimě?',
+            answer: 'Ano, pracujeme celoročně. V zimě se zaměřujeme na konstrukce, které lze stavět i v mrazu.',
+          },
+          {
+            question: 'Jaké dřevo doporučujete?',
+            answer: 'Pro venkovní konstrukce doporučujeme modřín nebo dub. Pro zastřešené stavby je vhodný i smrk.',
+          },
+          {
+            question: 'Potřebuji ohlášku nebo stavební povolení?',
+            answer: 'Stavby do 25 m² a 5 m výšky zpravidla nevyžadují ohlášku. Poradíme vám s konkrétním případem.',
+          },
+          {
+            question: 'Jak dlouho trvá realizace?',
+            answer: 'Pergola typicky 5–10 dní, přístřešek 2–3 týdny, dřevostavba 4–8 týdnů. Závisí na rozsahu a počasí.',
+          },
+          {
+            question: 'Děláte i ve svahu?',
+            answer: 'Ano, máme zkušenosti se stavbami v náročném terénu. Svah vyžaduje speciální základy, které řešíme.',
           },
         ],
-        richText: {
-          root: {
-            type: 'root',
-            children: [
-              {
-                type: 'heading',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'This is a call to action',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                tag: 'h3',
-                version: 1,
-              },
-              {
-                type: 'paragraph',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'This is a custom layout building block ',
-                    version: 1,
-                  },
-                  {
-                    type: 'link',
-                    children: [
-                      {
-                        type: 'text',
-                        detail: 0,
-                        format: 0,
-                        mode: 'normal',
-                        style: '',
-                        text: 'configured in the admin dashboard',
-                        version: 1,
-                      },
-                    ],
-                    direction: 'ltr',
-                    fields: {
-                      linkType: 'custom',
-                      newTab: false,
-                      url: '/admin',
-                    },
-                    format: '',
-                    indent: 0,
-                    version: 2,
-                  },
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: '.',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                format: '',
-                indent: 0,
-                textFormat: 0,
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            version: 1,
-          },
-        },
       },
     ],
     meta: {
-      description: 'An open-source website built with Payload and Next.js.',
+      description: 'Rodinné tesařství v Třinci. Stavíme pergoly, přístřešky a dřevostavby z kvalitního dřeva.',
       image: heroImage.id,
-      title: 'Payload Website Template',
+      title: 'Tesařství Třinec — pergoly, přístřešky, dřevostavby',
     },
     title: 'Home',
   }
