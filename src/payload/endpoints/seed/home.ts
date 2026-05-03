@@ -241,6 +241,12 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
         },
       },
       {
+        blockName: 'Portfolio',
+        blockType: 'portfolioSection',
+        title: 'Každý projekt je jiný.',
+        limit: 5,
+      },
+      {
         blockName: 'FAQ',
         blockType: 'faqSection',
         title: 'Než se zeptáte.',

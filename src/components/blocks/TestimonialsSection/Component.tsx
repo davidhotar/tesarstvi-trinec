@@ -1,7 +1,13 @@
 import React from 'react'
 import type { TestimonialsSectionBlock as TestimonialsSectionBlockProps } from '@/payload-types'
-import { Card, CardContent } from '@/components/ui/card'
-import { IconStarFilled, IconBrandGoogle } from '@tabler/icons-react'
+import { ExternalLinkIcon } from 'lucide-react'
+import { IconBrandGoogle } from '@tabler/icons-react'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { Rating } from '@/components/ui/rating'
+import { Marquee } from '@/components/ui/marquee'
 
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/)
@@ -14,43 +20,49 @@ function getInitials(name: string): string {
 export const TestimonialsSectionBlock: React.FC<TestimonialsSectionBlockProps> = ({
   title,
   sourceLabel,
+  reviewsUrl,
+  reviewsButtonLabel,
   testimonials,
 }) => {
-  return (
-    <section className="bg-muted/50 py-24">
-      <div className="container">
-        <div className="mb-20 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
-              {title}
-            </h2>
-          </div>
-          {sourceLabel && (
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <IconBrandGoogle className="size-4" />
-              {sourceLabel}
-            </div>
-          )}
-        </div>
+  const avgRating =
+    testimonials && testimonials.length > 0
+      ? testimonials.reduce((sum, t) => sum + (t.rating ?? 5), 0) / testimonials.length
+      : 5
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+  return (
+    <section className="bg-muted/50 space-y-12 py-24 sm:space-y-16">
+      <div className="mx-auto max-w-7xl space-y-4 px-4 text-center sm:px-6 lg:px-8">
+        {sourceLabel && (
+          <Badge variant="outline" className="text-sm font-normal">
+            <IconBrandGoogle className="mr-1.5 size-3.5" />
+            {sourceLabel}
+          </Badge>
+        )}
+        <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+          {title}
+        </h2>
+      </div>
+
+      <div className="w-full">
+        <Marquee pauseOnHover duration={40} gap={1.5} className="*:items-end">
           {testimonials?.map((review, index) => (
-            <Card key={index}>
-              <CardContent className="flex flex-col gap-4">
-                <div className="flex gap-0.5 text-primary">
-                  {Array.from({ length: review.rating ?? 5 }).map((_, i) => (
-                    <IconStarFilled key={i} className="size-4" />
-                  ))}
-                </div>
+            <Card key={index} className="h-fit max-w-sm border-none">
+              <CardContent className="pb-4">
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   &bdquo;{review.text}&ldquo;
                 </p>
-                <div className="mt-auto flex items-center gap-3 border-t border-border/50 pt-4">
-                  <div className="flex size-9 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
-                    {getInitials(review.name)}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{review.name}</p>
+              </CardContent>
+              <CardFooter className="justify-between gap-4 pt-4 max-sm:flex-col max-sm:items-stretch">
+                <div className="flex items-center gap-3">
+                  <Avatar>
+                    <AvatarFallback className="text-xs">
+                      {getInitials(review.name)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col gap-0.5">
+                    <p className="text-sm font-medium">
+                      {review.name}
+                    </p>
                     {review.location && (
                       <p className="text-xs text-muted-foreground">
                         {review.location}
@@ -58,9 +70,45 @@ export const TestimonialsSectionBlock: React.FC<TestimonialsSectionBlockProps> =
                     )}
                   </div>
                 </div>
-              </CardContent>
+                <div className="flex items-center gap-1">
+                  <Rating
+                    readOnly
+                    variant="yellow"
+                    size={18}
+                    value={review.rating ?? 5}
+                  />
+                </div>
+              </CardFooter>
             </Card>
           ))}
+        </Marquee>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-center justify-center gap-11">
+          <div>
+            <div className="flex items-center gap-1.5">
+              <p className="text-2xl font-semibold">{avgRating.toFixed(1)}</p>
+              <Rating readOnly variant="yellow" size={24} value={Math.round(avgRating)} />
+            </div>
+            <p className="text-sm font-medium text-muted-foreground">
+              průměrné hodnocení
+            </p>
+          </div>
+          <div>
+            <p className="text-2xl font-semibold">{testimonials?.length ?? 0}+</p>
+            <p className="text-sm font-medium text-muted-foreground">
+              spokojených zákazníků
+            </p>
+          </div>
+          {reviewsUrl && (
+            <Button size="lg" asChild className="rounded-full">
+              <a href={reviewsUrl} target="_blank" rel="noopener noreferrer">
+                {reviewsButtonLabel || 'Všechny recenze'}
+                <ExternalLinkIcon className="ml-1.5 size-4" />
+              </a>
+            </Button>
+          )}
         </div>
       </div>
     </section>

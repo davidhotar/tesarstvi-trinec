@@ -2,6 +2,8 @@ import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from '
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
+import { about } from './about'
+import { kontakt } from './kontakt'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -196,6 +198,16 @@ export const seed = async ({
       collection: 'pages',
       depth: 0,
       data: contactPageData({ contactForm: contactForm }),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: about(),
+    }),
+    payload.create({
+      collection: 'pages',
+      depth: 0,
+      data: kontakt(),
     }),
   ])
 

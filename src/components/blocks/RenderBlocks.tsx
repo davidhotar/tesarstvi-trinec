@@ -12,6 +12,12 @@ import { ServicesSectionBlock } from '@/components/blocks/ServicesSection/Compon
 import { NumberedCardGridBlock } from '@/components/blocks/NumberedCardGrid/Component'
 import { TestimonialsSectionBlock } from '@/components/blocks/TestimonialsSection/Component'
 import { FAQSectionBlock } from '@/components/blocks/FAQSection/Component'
+import { PortfolioSectionBlock } from '@/components/blocks/PortfolioSection/Component'
+import { ProfileHeroSectionBlock } from '@/components/blocks/ProfileHeroSection/Component'
+import { TimelineSectionBlock } from '@/components/blocks/TimelineSection/Component'
+import { RegionSectionBlock } from '@/components/blocks/RegionSection/Component'
+import { CtaBannerBlock } from '@/components/blocks/CtaBanner/Component'
+import { ContactHeroSectionBlock } from '@/components/blocks/ContactHeroSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,6 +30,12 @@ const blockComponents = {
   numberedCardGrid: NumberedCardGridBlock,
   testimonialsSection: TestimonialsSectionBlock,
   faqSection: FAQSectionBlock,
+  portfolioSection: PortfolioSectionBlock,
+  profileHeroSection: ProfileHeroSectionBlock,
+  timelineSection: TimelineSectionBlock,
+  regionSection: RegionSectionBlock,
+  ctaBanner: CtaBannerBlock,
+  contactHeroSection: ContactHeroSectionBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -43,7 +55,7 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection'].includes(blockType)
+              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection', 'portfolioSection', 'profileHeroSection', 'timelineSection', 'regionSection', 'ctaBanner', 'contactHeroSection'].includes(blockType)
 
               if (isFullBleed) {
                 return (

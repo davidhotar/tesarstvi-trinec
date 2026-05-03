@@ -1,9 +1,7 @@
-import { Suspense } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
-import { PortfolioSection } from '@/components/homepage'
 
 export default async function HomePage() {
   const { isEnabled: draft } = await draftMode()
@@ -24,12 +22,5 @@ export default async function HomePage() {
 
   const page = result.docs?.[0] || null
 
-  return (
-    <>
-      {page?.layout && <RenderBlocks blocks={page.layout} />}
-      <Suspense>
-        <PortfolioSection />
-      </Suspense>
-    </>
-  )
+  return <>{page?.layout && <RenderBlocks blocks={page.layout} />}</>
 }

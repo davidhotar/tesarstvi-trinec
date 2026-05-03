@@ -18,6 +18,21 @@ export const TestimonialsSection: Block = {
       type: 'text',
     },
     {
+      name: 'reviewsUrl',
+      type: 'text',
+      admin: {
+        description: 'URL to external reviews page (e.g. Google Reviews)',
+      },
+    },
+    {
+      name: 'reviewsButtonLabel',
+      type: 'text',
+      defaultValue: 'Všechny recenze',
+      admin: {
+        condition: (_, siblingData) => Boolean(siblingData?.reviewsUrl),
+      },
+    },
+    {
       name: 'testimonials',
       type: 'array',
       minRows: 1,

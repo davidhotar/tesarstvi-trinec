@@ -1,8 +1,13 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
+import type { PortfolioSectionBlock as PortfolioSectionBlockType } from '@/payload-types'
 
-export async function PortfolioSection() {
+export const PortfolioSectionBlock: React.FC<PortfolioSectionBlockType> = async ({
+  title,
+  buttonLabel,
+  limit,
+}) => {
   const payload = await getPayload({ config: configPromise })
 
   const [postsResult, categoriesResult] = await Promise.all([
@@ -44,8 +49,9 @@ export async function PortfolioSection() {
       <PortfolioGrid
         posts={postsResult.docs}
         categories={categories}
-        limit={5}
-        heading="Každý projekt je jiný."
+        limit={limit ?? undefined}
+        heading={title}
+        buttonLabel={buttonLabel ?? undefined}
         showAllTab
       />
     </section>

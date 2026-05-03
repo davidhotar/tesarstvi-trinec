@@ -12,6 +12,12 @@ import { ServicesSection } from '@/payload/blocks/ServicesSection/config'
 import { NumberedCardGrid } from '@/payload/blocks/NumberedCardGrid/config'
 import { TestimonialsSection } from '@/payload/blocks/TestimonialsSection/config'
 import { FAQSection } from '@/payload/blocks/FAQSection/config'
+import { PortfolioSection } from '@/payload/blocks/PortfolioSection/config'
+import { ProfileHeroSection } from '@/payload/blocks/ProfileHeroSection/config'
+import { TimelineSection } from '@/payload/blocks/TimelineSection/config'
+import { RegionSection } from '@/payload/blocks/RegionSection/config'
+import { CtaBanner } from '@/payload/blocks/CtaBanner/config'
+import { ContactHeroSection } from '@/payload/blocks/ContactHeroSection/config'
 
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -73,7 +79,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection, ServicesSection, NumberedCardGrid, TestimonialsSection, FAQSection],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, HeroSection, ServicesSection, NumberedCardGrid, TestimonialsSection, FAQSection, PortfolioSection, ProfileHeroSection, TimelineSection, RegionSection, CtaBanner, ContactHeroSection],
               required: true,
               admin: {
                 initCollapsed: true,

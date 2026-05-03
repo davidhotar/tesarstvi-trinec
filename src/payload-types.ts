@@ -188,6 +188,12 @@ export interface Page {
     | NumberedCardGridBlock
     | TestimonialsSectionBlock
     | FAQSectionBlock
+    | PortfolioSectionBlock
+    | ProfileHeroSectionBlock
+    | TimelineSectionBlock
+    | RegionSectionBlock
+    | CtaBannerBlock
+    | ContactHeroSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -932,6 +938,11 @@ export interface NumberedCardGridBlock {
 export interface TestimonialsSectionBlock {
   title: string;
   sourceLabel?: string | null;
+  /**
+   * URL to external reviews page (e.g. Google Reviews)
+   */
+  reviewsUrl?: string | null;
+  reviewsButtonLabel?: string | null;
   testimonials: {
     name: string;
     location?: string | null;
@@ -960,6 +971,163 @@ export interface FAQSectionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'faqSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PortfolioSectionBlock".
+ */
+export interface PortfolioSectionBlock {
+  title: string;
+  /**
+   * Fallback: "Zobrazit portfolio →"
+   */
+  buttonLabel?: string | null;
+  /**
+   * Max number of portfolio items to show. Leave empty to show all.
+   */
+  limit?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'portfolioSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileHeroSectionBlock".
+ */
+export interface ProfileHeroSectionBlock {
+  tagline: string;
+  heading: string;
+  /**
+   * Word or phrase highlighted in primary color at the end of the heading.
+   */
+  headingHighlight?: string | null;
+  description: string;
+  personName: string;
+  personTitle: string;
+  personImage?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  /**
+   * Short quote displayed over the hero image.
+   */
+  quote?: string | null;
+  ctaLabel?: string | null;
+  ctaLink?: string | null;
+  badges?:
+    | {
+        label: string;
+        position?: ('top-left' | 'top-right' | 'bottom-left' | 'bottom-right') | null;
+        id?: string | null;
+      }[]
+    | null;
+  stats?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'profileHeroSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineSectionBlock".
+ */
+export interface TimelineSectionBlock {
+  title: string;
+  milestones?:
+    | {
+        year: string;
+        title: string;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'timelineSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RegionSectionBlock".
+ */
+export interface RegionSectionBlock {
+  subtitle?: string | null;
+  title: string;
+  description?: string | null;
+  mapImage?: (number | null) | Media;
+  locations?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'regionSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerBlock".
+ */
+export interface CtaBannerBlock {
+  title: string;
+  description?: string | null;
+  ctaLabel: string;
+  ctaLink: string;
+  /**
+   * E.g. "4.9 · 87 hodnocení na Google"
+   */
+  ratingText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ctaBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactHeroSectionBlock".
+ */
+export interface ContactHeroSectionBlock {
+  tagline: string;
+  heading: string;
+  description: string;
+  highlights?:
+    | {
+        icon?: ('clock' | 'check' | 'star' | 'shield') | null;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  heroImage?: (number | null) | Media;
+  personName: string;
+  personTitle: string;
+  /**
+   * Phone number for the person CTA (e.g. tel:+420737136848)
+   */
+  personPhone?: string | null;
+  contactCards?:
+    | {
+        icon: 'phone' | 'mail' | 'whatsapp' | 'mapPin';
+        /**
+         * Optional badge text (e.g. "nejrychlejší")
+         */
+        badge?: string | null;
+        label: string;
+        /**
+         * Main value/heading displayed prominently (e.g. phone number, email)
+         */
+        value: string;
+        description?: string | null;
+        ctaLabel: string;
+        ctaLink: string;
+        ctaVariant?: ('default' | 'outline' | 'secondary') | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactHeroSection';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1330,6 +1498,12 @@ export interface PagesSelect<T extends boolean = true> {
         numberedCardGrid?: T | NumberedCardGridBlockSelect<T>;
         testimonialsSection?: T | TestimonialsSectionBlockSelect<T>;
         faqSection?: T | FAQSectionBlockSelect<T>;
+        portfolioSection?: T | PortfolioSectionBlockSelect<T>;
+        profileHeroSection?: T | ProfileHeroSectionBlockSelect<T>;
+        timelineSection?: T | TimelineSectionBlockSelect<T>;
+        regionSection?: T | RegionSectionBlockSelect<T>;
+        ctaBanner?: T | CtaBannerBlockSelect<T>;
+        contactHeroSection?: T | ContactHeroSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1512,6 +1686,8 @@ export interface NumberedCardGridBlockSelect<T extends boolean = true> {
 export interface TestimonialsSectionBlockSelect<T extends boolean = true> {
   title?: T;
   sourceLabel?: T;
+  reviewsUrl?: T;
+  reviewsButtonLabel?: T;
   testimonials?:
     | T
     | {
@@ -1538,6 +1714,133 @@ export interface FAQSectionBlockSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PortfolioSectionBlock_select".
+ */
+export interface PortfolioSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  buttonLabel?: T;
+  limit?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProfileHeroSectionBlock_select".
+ */
+export interface ProfileHeroSectionBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  heading?: T;
+  headingHighlight?: T;
+  description?: T;
+  personName?: T;
+  personTitle?: T;
+  personImage?: T;
+  heroImage?: T;
+  quote?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  badges?:
+    | T
+    | {
+        label?: T;
+        position?: T;
+        id?: T;
+      };
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TimelineSectionBlock_select".
+ */
+export interface TimelineSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  milestones?:
+    | T
+    | {
+        year?: T;
+        title?: T;
+        text?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RegionSectionBlock_select".
+ */
+export interface RegionSectionBlockSelect<T extends boolean = true> {
+  subtitle?: T;
+  title?: T;
+  description?: T;
+  mapImage?: T;
+  locations?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerBlock_select".
+ */
+export interface CtaBannerBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  ratingText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactHeroSectionBlock_select".
+ */
+export interface ContactHeroSectionBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  heading?: T;
+  description?: T;
+  highlights?:
+    | T
+    | {
+        icon?: T;
+        label?: T;
+        id?: T;
+      };
+  heroImage?: T;
+  personName?: T;
+  personTitle?: T;
+  personPhone?: T;
+  contactCards?:
+    | T
+    | {
+        icon?: T;
+        badge?: T;
+        label?: T;
+        value?: T;
+        description?: T;
+        ctaLabel?: T;
+        ctaLink?: T;
+        ctaVariant?: T;
         id?: T;
       };
   id?: T;

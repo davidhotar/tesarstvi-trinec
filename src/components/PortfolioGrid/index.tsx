@@ -12,6 +12,7 @@ export type PortfolioGridProps = {
   categories: Pick<Category, 'id' | 'title' | 'slug'>[]
   limit?: number
   heading?: string
+  buttonLabel?: string
   showAllTab?: boolean
   initialCategorySlug?: string
 }
@@ -21,6 +22,7 @@ export function PortfolioGrid({
   categories,
   limit,
   heading,
+  buttonLabel,
   showAllTab = false,
   initialCategorySlug,
 }: PortfolioGridProps) {
@@ -158,9 +160,11 @@ export function PortfolioGrid({
         <div className="container mt-6 flex justify-center">
           <Button variant="ghost" className="rounded-lg" asChild>
             <Link href={showMoreHref}>
-              {totalForActive > limit
-                ? `Zobrazit všech ${totalForActive} realizací →`
-                : `Zobrazit portfolio →`}
+              {buttonLabel
+                ? buttonLabel
+                : totalForActive > limit
+                  ? `Zobrazit všech ${totalForActive} realizací →`
+                  : `Zobrazit portfolio →`}
             </Link>
           </Button>
         </div>
