@@ -70,6 +70,7 @@ const ShowcaseContent: React.FC<Pick<ServiceDeepDiveBlockProps, 'subServices' | 
               <Media
                 resource={images[0].image}
                 imgClassName="w-full object-cover"
+                preferredSize="medium"
               />
               {images[0].caption && (
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -102,6 +103,7 @@ const GalleryContent: React.FC<Pick<ServiceDeepDiveBlockProps, 'images' | 'check
                   <Media
                     resource={img.image}
                     imgClassName="w-full object-cover"
+                    preferredSize="medium"
                   />
                   {img.caption && (
                     <p className="mt-1 text-xs text-muted-foreground">

@@ -36,6 +36,7 @@ export const ContactFormSectionBlock: React.FC<ContactFormSectionBlockProps> = (
               <Media
                 resource={mapImage}
                 imgClassName="h-[280px] w-full rounded-xl object-cover lg:h-[320px]"
+                preferredSize="medium"
               />
             ) : (
               <div className="flex h-[280px] items-center justify-center rounded-xl border border-dashed bg-muted text-xs text-muted-foreground lg:h-[320px]">

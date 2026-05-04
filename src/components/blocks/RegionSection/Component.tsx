@@ -43,6 +43,7 @@ export const RegionSectionBlock: React.FC<RegionSectionBlockProps> = ({
             <Media
               resource={mapImage}
               imgClassName="h-[320px] w-full rounded-xl object-cover lg:h-[380px]"
+              preferredSize="medium"
             />
           ) : (
             <div className="flex h-[320px] items-center justify-center rounded-xl border border-dashed bg-muted text-xs text-muted-foreground lg:h-[380px]">

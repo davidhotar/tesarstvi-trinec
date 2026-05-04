@@ -52,6 +52,7 @@ export const Card: React.FC<{
           <Media
             fill
             imgClassName="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+            preferredSize="medium"
             resource={cardImage}
           />
         )}
