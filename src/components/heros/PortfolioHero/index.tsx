@@ -21,7 +21,7 @@ export const PortfolioHero: React.FC<{
       {/* Background image */}
       <div className="absolute inset-0">
         {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="object-cover" resource={heroImage} />
+          <Media fill priority imgClassName="object-cover" preferredSize="xlarge" resource={heroImage} />
         )}
         {/* Layered gradient for depth */}
         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-white/20 dark:from-black dark:via-black/40 dark:to-black/20" />

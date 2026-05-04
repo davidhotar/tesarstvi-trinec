@@ -111,6 +111,9 @@ importers:
         specifier: ^3.4.0
         version: 3.5.0
     devDependencies:
+      '@aws-sdk/client-s3':
+        specifier: ^3.1041.0
+        version: 3.1041.0
       '@eslint/eslintrc':
         specifier: ^3.2.0
         version: 3.3.5

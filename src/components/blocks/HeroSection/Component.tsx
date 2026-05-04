@@ -15,7 +15,7 @@ export const HeroSectionBlock: React.FC<HeroSectionBlockProps> = ({
   return (
     <section className="relative flex min-h-[100svh] flex-col overflow-hidden pt-[88px]">
       {backgroundImage && typeof backgroundImage === 'object' && (
-        <Media fill imgClassName="object-cover object-center" priority resource={backgroundImage} />
+        <Media fill imgClassName="object-cover object-center" preferredSize="xlarge" priority resource={backgroundImage} />
       )}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />

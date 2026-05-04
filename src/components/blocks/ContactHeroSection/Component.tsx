@@ -93,6 +93,7 @@ export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = (
               <Media
                 resource={heroImage}
                 imgClassName="h-[360px] w-full rounded-xl object-cover lg:h-[440px]"
+                preferredSize="large"
               />
             ) : (
               <div className="flex h-[360px] items-center justify-center rounded-xl border border-dashed bg-muted text-xs text-muted-foreground lg:h-[440px]">

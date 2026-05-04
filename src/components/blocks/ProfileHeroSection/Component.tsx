@@ -61,6 +61,7 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
                 <Media
                   resource={personImage}
                   imgClassName="size-14 shrink-0 rounded-full object-cover"
+                  preferredSize="thumbnail"
                 />
               ) : (
                 <div className="size-14 shrink-0 rounded-full border border-dashed bg-muted" />
@@ -85,6 +86,7 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
               <Media
                 resource={heroImage}
                 imgClassName="h-[420px] w-full rounded-xl object-cover lg:h-[520px]"
+                preferredSize="xlarge"
               />
             ) : (
               <div className="flex h-[420px] items-center justify-center rounded-xl border border-dashed bg-muted text-xs text-muted-foreground lg:h-[520px]">
