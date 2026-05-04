@@ -1,6 +1,6 @@
 import { resendAdapter } from '@payloadcms/email-resend'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -64,14 +64,25 @@ export default buildConfig({
   globals: [Header, Footer],
   plugins: [
     ...plugins,
-    vercelBlobStorage({
-      enabled: true,
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      addRandomSuffix: true,
-      collections: {
-        media: true,
-      },
-    }),
+    ...(process.env.S3_BUCKET
+      ? [
+          s3Storage({
+            collections: {
+              media: true,
+            },
+            bucket: process.env.S3_BUCKET,
+            config: {
+              credentials: {
+                accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+              },
+              endpoint: process.env.S3_ENDPOINT,
+              region: process.env.S3_REGION || 'auto',
+              forcePathStyle: true,
+            },
+          }),
+        ]
+      : []),
     mcpPlugin({
       collections: {
         portfolio: {

@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
     ],
     remotePatterns: [
       {
+        hostname: '*.r2.cloudflarestorage.com',
+        protocol: 'https',
+      },
+      {
         hostname: '*.public.blob.vercel-storage.com',
         protocol: 'https',
       },
