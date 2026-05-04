@@ -1,28 +1,23 @@
-import clsx from 'clsx'
+import { cn } from '@/utilities/ui'
+import NextImage from 'next/image'
 import React from 'react'
 
 interface Props {
   className?: string
-  loading?: 'lazy' | 'eager'
-  priority?: 'auto' | 'high' | 'low'
+  priority?: boolean
 }
 
 export const Logo = (props: Props) => {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
-
-  const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
+  const { priority, className } = props
 
   return (
-    /* eslint-disable @next/next/no-img-element */
-    <img
+    <NextImage
       alt="TESARSTVI TRINEC"
       width={867}
       height={216}
-      loading={loading}
-      fetchPriority={priority}
-      decoding="async"
-      className={clsx('max-w-[12rem] w-full h-auto', className)}
+      priority={priority}
+      quality={80}
+      className={cn('max-w-[12rem] w-full h-auto', className)}
       src="/images/logo.png"
     />
   )

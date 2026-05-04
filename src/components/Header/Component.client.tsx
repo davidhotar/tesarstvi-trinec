@@ -51,7 +51,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     >
       <div className="container flex items-center justify-between py-4">
         <Link href="/" className="shrink-0">
-          <Logo loading="eager" priority="high" />
+          <Logo priority={true} />
         </Link>
 
         <div className="hidden lg:flex flex-1 justify-center">
