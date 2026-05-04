@@ -55,6 +55,11 @@
 }
 
 @layer utilities {
+  .content-deferred {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
   .container {
     width: 100%;
     margin-inline: auto;

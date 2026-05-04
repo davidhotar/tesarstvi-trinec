@@ -77,15 +77,15 @@ export const RenderBlocks: React.FC<{
 
               if (isFullBleed) {
                 return (
-                  <Fragment key={index}>
+                  <div key={index} className={index >= 2 ? 'content-deferred' : undefined}>
                     {/* @ts-expect-error there may be some mismatch between the expected types here */}
                     <Block {...block} />
-                  </Fragment>
+                  </div>
                 )
               }
 
               return (
-                <div className="my-16" key={index}>
+                <div className={index >= 2 ? 'my-16 content-deferred' : 'my-16'} key={index}>
                   {/* @ts-expect-error there may be some mismatch between the expected types here */}
                   <Block {...block} disableInnerContainer />
                 </div>
