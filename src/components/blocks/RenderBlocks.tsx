@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import dynamic from 'next/dynamic'
 
 import type { Page } from '@/payload-types'
 
@@ -10,17 +11,28 @@ import { HeroSectionBlock } from '@/components/blocks/HeroSection/Component'
 import { MediaBlock } from '@/components/blocks/MediaBlock/Component'
 import { ServicesSectionBlock } from '@/components/blocks/ServicesSection/Component'
 import { NumberedCardGridBlock } from '@/components/blocks/NumberedCardGrid/Component'
-import { TestimonialsSectionBlock } from '@/components/blocks/TestimonialsSection/Component'
-import { FAQSectionBlock } from '@/components/blocks/FAQSection/Component'
 import { PortfolioSectionBlock } from '@/components/blocks/PortfolioSection/Component'
 import { ProfileHeroSectionBlock } from '@/components/blocks/ProfileHeroSection/Component'
-import { TimelineSectionBlock } from '@/components/blocks/TimelineSection/Component'
-import { RegionSectionBlock } from '@/components/blocks/RegionSection/Component'
 import { CtaBannerBlock } from '@/components/blocks/CtaBanner/Component'
 import { ContactHeroSectionBlock } from '@/components/blocks/ContactHeroSection/Component'
 import { ServiceHeroBlock } from '@/components/blocks/ServiceHero/Component'
-import { ServiceDeepDiveBlock } from '@/components/blocks/ServiceDeepDive/Component'
 import { ContactFormSectionBlock } from '@/components/blocks/ContactFormSection/Component'
+
+const TestimonialsSectionBlock = dynamic(() =>
+  import('@/components/blocks/TestimonialsSection/Component').then((m) => m.TestimonialsSectionBlock),
+)
+const FAQSectionBlock = dynamic(() =>
+  import('@/components/blocks/FAQSection/Component').then((m) => m.FAQSectionBlock),
+)
+const TimelineSectionBlock = dynamic(() =>
+  import('@/components/blocks/TimelineSection/Component').then((m) => m.TimelineSectionBlock),
+)
+const RegionSectionBlock = dynamic(() =>
+  import('@/components/blocks/RegionSection/Component').then((m) => m.RegionSectionBlock),
+)
+const ServiceDeepDiveBlock = dynamic(() =>
+  import('@/components/blocks/ServiceDeepDive/Component').then((m) => m.ServiceDeepDiveBlock),
+)
 
 const blockComponents = {
   archive: ArchiveBlock,
