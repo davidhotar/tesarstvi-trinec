@@ -51,6 +51,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
     fill,
     pictureClassName,
     imgClassName,
+    preferredSize,
     priority,
     resource,
     size: sizeFromProps,
@@ -64,19 +65,25 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
 
   if (!src && resource && typeof resource === 'object') {
-    const { alt: altFromResource, height: fullHeight, url, width: fullWidth } = resource
+    const { alt: altFromResource, height: fullHeight, url, width: fullWidth, sizes } = resource
 
     width = fullWidth!
     height = fullHeight!
     alt = altFromResource || ''
 
-    src = getMediaUrl(url)
+    const preferred = preferredSize && sizes?.[preferredSize]
+    if (preferred?.url) {
+      src = getMediaUrl(preferred.url)
+      if (preferred.width) width = preferred.width
+      if (preferred.height) height = preferred.height
+    } else {
+      src = getMediaUrl(url)
+    }
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
 
-  // NOTE: this is used by the browser to determine which image to download at different screen sizes
-  const sizes = sizeFromProps
+  const responsiveSizes = sizeFromProps
     ? sizeFromProps
     : Object.entries(breakpoints)
         .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
@@ -92,9 +99,9 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         placeholder="blur"
         blurDataURL={placeholderBlur}
         priority={priority}
-        quality={100}
+        quality={80}
         loading={loading}
-        sizes={sizes}
+        sizes={responsiveSizes}
         src={src}
         width={!fill ? width : undefined}
       />
