@@ -13,6 +13,10 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 const nextConfig: NextConfig = {
   images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 900, 1200, 1920],
+    imageSizes: [300, 500, 600],
+    minimumCacheTTL: 31536000,
     localPatterns: [
       {
         pathname: '/api/media/file/**',
