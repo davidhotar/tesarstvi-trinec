@@ -8,10 +8,7 @@ import React from 'react'
 
 import type { Props as MediaProps } from '../types'
 
-import { cssVariables } from '@/cssVariables'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
-
-const { breakpoints } = cssVariables
 
 // A base64 encoded image to use as a placeholder while the image is loading
 const placeholderBlur =
@@ -83,11 +80,7 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
 
-  const responsiveSizes = sizeFromProps
-    ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
-        .join(', ')
+  const responsiveSizes = sizeFromProps ?? '100vw'
 
   return (
     <picture className={cn(pictureClassName)}>
