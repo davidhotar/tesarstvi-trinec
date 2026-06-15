@@ -54,6 +54,11 @@ export const Card: React.FC<{
             imgClassName="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
             preferredSize="medium"
             resource={cardImage}
+            size={
+              featured
+                ? '(max-width: 640px) 100vw, 66vw'
+                : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+            }
           />
         )}
       </div>
