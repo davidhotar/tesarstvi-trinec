@@ -56,22 +56,24 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
               />
             )}
 
-            <div className="flex items-center gap-4 border-t border-dashed pt-6">
-              {personImage && typeof personImage === 'object' ? (
-                <Media
-                  resource={personImage}
-                  imgClassName="size-14 shrink-0 rounded-full object-cover"
-                  preferredSize="thumbnail"
-                />
-              ) : (
-                <div className="size-14 shrink-0 rounded-full border border-dashed bg-muted" />
-              )}
-              <div className="flex-1">
-                <p className="text-lg font-bold">{personName}</p>
-                <p className="text-sm text-muted-foreground">{personTitle}</p>
+            <div className="flex flex-col gap-4 border-t border-dashed pt-6 sm:flex-row sm:items-center">
+              <div className="flex flex-1 items-center gap-4">
+                {personImage && typeof personImage === 'object' ? (
+                  <Media
+                    resource={personImage}
+                    imgClassName="size-14 shrink-0 rounded-full object-cover"
+                    preferredSize="thumbnail"
+                  />
+                ) : (
+                  <div className="size-14 shrink-0 rounded-full border border-dashed bg-muted" />
+                )}
+                <div className="min-w-0 flex-1">
+                  <p className="text-lg font-bold">{personName}</p>
+                  <p className="truncate text-sm text-muted-foreground">{personTitle}</p>
+                </div>
               </div>
               {ctaLabel && ctaLink && (
-                <Button className="ml-auto shrink-0 rounded-full" asChild>
+                <Button className="w-full shrink-0 rounded-full sm:ml-auto sm:w-auto" asChild>
                   <Link href={ctaLink}>
                     <IconPhone className="size-4" />
                     {ctaLabel}

@@ -36,7 +36,7 @@ export const Card: React.FC<{
     <article
       className={cn(
         'group relative overflow-hidden hover:cursor-pointer',
-        featured ? 'aspect-[4/3]' : 'aspect-[3/4]',
+        'aspect-square',
         className,
       )}
       ref={card.ref}

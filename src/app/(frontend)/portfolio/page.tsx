@@ -2,6 +2,8 @@ import type { Metadata } from 'next/types'
 
 import { CtaBanner } from '@/components/about'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import { SITE_NAME } from '@/constants/site'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React, { Suspense } from 'react'
@@ -95,7 +97,17 @@ export default async function Page({ searchParams }: Args) {
 }
 
 export function generateMetadata(): Metadata {
+  const description =
+    'Naše realizace – tesařské a střešní práce, krovy, pergoly, přístřešky a dřevostavby v Třinci a okolí.'
+
   return {
-    title: `Portfolio | Tesařství Třinec`,
+    title: 'Portfolio',
+    description,
+    alternates: { canonical: '/portfolio' },
+    openGraph: mergeOpenGraph({
+      title: `Portfolio | ${SITE_NAME}`,
+      description,
+      url: '/portfolio',
+    }),
   }
 }

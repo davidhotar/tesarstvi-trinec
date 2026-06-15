@@ -3,11 +3,17 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import { SITE_NAME } from '@/constants/site'
+
+const description =
+  'Rodinná tesařská firma z Třince s více než 25 lety zkušeností. Pergoly, přístřešky a dřevostavby na míru.'
 
 export const metadata: Metadata = {
   title: 'O nás',
-  description:
-    'Rodinná tesařská firma z Třince s více než 25 lety zkušeností. Pergoly, přístřešky a dřevostavby na míru.',
+  description,
+  alternates: { canonical: '/o-nas' },
+  openGraph: mergeOpenGraph({ title: `O nás | ${SITE_NAME}`, description, url: '/o-nas' }),
 }
 
 export default async function ONasPage() {

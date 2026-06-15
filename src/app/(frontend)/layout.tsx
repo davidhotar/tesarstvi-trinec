@@ -10,20 +10,20 @@ import React from 'react'
 import { AdminBar } from '@/components/admin/AdminBar'
 import { Footer } from '@/components/Footer/Component'
 import { Header } from '@/components/Header/Component'
+import { OrganizationStructuredData } from '@/components/StructuredData'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/site'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
+    <html className={cn(inter.variable)} lang="cs" suppressHydrationWarning>
       <head>
         <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
         {process.env.NODE_ENV === 'development' && (
@@ -33,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             strategy="beforeInteractive"
           />
         )}
+        <OrganizationStructuredData />
         <Providers>
           <div className="noise-overlay z-[1]" />
           <AdminBar />
@@ -47,14 +48,28 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
+  title: {
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    apple: [{ url: '/apple-icon.png', sizes: '180x180' }],
+  },
   openGraph: mergeOpenGraph(),
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
   },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#191919',
 }

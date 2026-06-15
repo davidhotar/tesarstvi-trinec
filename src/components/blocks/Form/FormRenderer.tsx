@@ -24,6 +24,10 @@ export const FormRenderer: React.FC<{
 
   const formMethods = useForm({
     defaultValues: formFromProps.fields,
+    // Validate a field once it's been blurred, then keep it live on every change,
+    // so users get feedback as they go instead of only after pressing submit.
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
   })
   const {
     control,
@@ -108,8 +112,17 @@ export const FormRenderer: React.FC<{
       {!isLoading && hasSubmitted && confirmationType === 'message' && (
         <RichText data={confirmationMessage} />
       )}
-      {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-      {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+      {isLoading && !hasSubmitted && (
+        <p className="text-sm text-muted-foreground">Odesílání, počkejte prosím…</p>
+      )}
+      {error && (
+        <div
+          className="mb-4 rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+          role="alert"
+        >
+          {error.message || 'Něco se pokazilo. Zkuste to prosím znovu.'}
+        </div>
+      )}
       {!hasSubmitted && (
         <form id={formID} onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-wrap gap-4">

@@ -352,6 +352,9 @@ export interface Category {
  */
 export interface Media {
   id: number;
+  /**
+   * Popis obrázku pro vyhledávače a čtečky obrazovky (SEO a přístupnost).
+   */
   alt?: string | null;
   caption?: {
     root: {
@@ -2593,6 +2596,59 @@ export interface Footer {
    * Název pro copyright (spodní lišta vpravo)
    */
   copyright?: string | null;
+  /**
+   * Jméno podnikatele / název firmy
+   */
+  legalName?: string | null;
+  /**
+   * IČO
+   */
+  ico?: string | null;
+  /**
+   * Ulice a číslo popisné
+   */
+  streetAddress?: string | null;
+  /**
+   * PSČ
+   */
+  postalCode?: string | null;
+  /**
+   * Město
+   */
+  city?: string | null;
+  /**
+   * Zeměpisná šířka (volitelné, pro Mapy Google)
+   */
+  latitude?: number | null;
+  /**
+   * Zeměpisná délka (volitelné, pro Mapy Google)
+   */
+  longitude?: number | null;
+  /**
+   * Cenová úroveň (např. $$)
+   */
+  priceRange?: string | null;
+  /**
+   * Oblast působnosti
+   */
+  areaServed?: string | null;
+  /**
+   * Otevírací doba pro strukturovaná data (JSON-LD).
+   */
+  openingHours?:
+    | {
+        days?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday')[] | null;
+        /**
+         * Otevírá (HH:MM)
+         */
+        opens?: string | null;
+        /**
+         * Zavírá (HH:MM)
+         */
+        closes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2632,6 +2688,23 @@ export interface FooterSelect<T extends boolean = true> {
   addressLink?: T;
   businessInfo?: T;
   copyright?: T;
+  legalName?: T;
+  ico?: T;
+  streetAddress?: T;
+  postalCode?: T;
+  city?: T;
+  latitude?: T;
+  longitude?: T;
+  priceRange?: T;
+  areaServed?: T;
+  openingHours?:
+    | T
+    | {
+        days?: T;
+        opens?: T;
+        closes?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

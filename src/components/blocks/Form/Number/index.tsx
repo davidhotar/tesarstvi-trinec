@@ -7,6 +7,7 @@ import React from 'react'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getNumberValidation } from '../validation'
 export const Number: React.FC<
   TextField & {
     errors: Partial<FieldErrorsImpl>
@@ -28,7 +29,8 @@ export const Number: React.FC<
         defaultValue={defaultValue}
         id={name}
         type="number"
-        {...register(name, { required })}
+        aria-invalid={!!errors[name]}
+        {...register(name, getNumberValidation(required))}
       />
       {errors[name] && <Error name={name} />}
     </Width>

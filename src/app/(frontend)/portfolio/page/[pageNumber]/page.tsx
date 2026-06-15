@@ -106,7 +106,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
   const { pageNumber } = await paramsPromise
   return {
-    title: `Portfolio – strana ${pageNumber} | Tesařství Třinec`,
+    title: `Portfolio – strana ${pageNumber}`,
+    alternates: { canonical: `/portfolio/page/${pageNumber}` },
   }
 }
 

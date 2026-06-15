@@ -9,9 +9,10 @@ import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/
 
 import { Page, Portfolio } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { SITE_NAME } from '@/constants/site'
 
 const generateTitle: GenerateTitle<Portfolio | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | ${SITE_NAME}` : SITE_NAME
 }
 
 const generateURL: GenerateURL<Portfolio | Page> = ({ doc }) => {

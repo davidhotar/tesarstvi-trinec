@@ -9,8 +9,10 @@ import RichText from '@/components/RichText'
 
 import type { Portfolio } from '@/payload-types'
 
-import { Media } from '@/components/Media'
+import { PortfolioGallery } from '@/components/PortfolioGallery'
+import { RelatedPortfolio } from '@/components/RelatedPortfolio'
 import { PortfolioHero } from '@/components/heros/PortfolioHero'
+import { BreadcrumbStructuredData } from '@/components/StructuredData'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
@@ -55,6 +57,14 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
     <article className="pt-16 pb-16">
       <PageClient />
 
+      <BreadcrumbStructuredData
+        items={[
+          { name: 'Domů', item: '/' },
+          { name: 'Portfolio', item: '/portfolio' },
+          { name: post.title, item: `/portfolio/${decodedSlug}` },
+        ]}
+      />
+
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
@@ -65,43 +75,21 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
           <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-
-          {post.gallery && post.gallery.length > 0 && (
-            <div className="max-w-[64rem] mx-auto mt-16 md:mt-24">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="inline-block w-8 h-[1px] bg-portfolio-accent" />
-                <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">
-                  Galerie
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-                {post.gallery.map((item, index) => (
-                  <figure
-                    key={item.id || index}
-                    className={`group relative overflow-hidden ${
-                      index === 0 ? 'sm:col-span-2 sm:row-span-2' : ''
-                    }`}
-                  >
-                    {item.image && typeof item.image !== 'string' && (
-                      <div className={`relative ${index === 0 ? 'aspect-[4/3]' : 'aspect-[4/3]'}`}>
-                        <Media
-                          fill
-                          imgClassName="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
-                          resource={item.image}
-                        />
-                      </div>
-                    )}
-                    {item.caption && (
-                      <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent text-white text-sm opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                        {item.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
+
+        {post.gallery && post.gallery.length > 0 && (
+          <div className="w-full max-w-screen-2xl mx-auto mt-16 md:mt-24 px-3 md:px-4">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="inline-block w-8 h-[1px] bg-portfolio-accent" />
+              <h2 className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium">
+                Galerie
+              </h2>
+            </div>
+            <PortfolioGallery items={post.gallery} />
+          </div>
+        )}
+
+        <RelatedPortfolio currentId={post.id} categories={post.categories} />
       </div>
     </article>
   )
@@ -113,7 +101,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const decodedSlug = decodeURIComponent(slug)
   const post = await queryPortfolioBySlug({ slug: decodedSlug })
 
-  return generateMeta({ doc: post })
+  return generateMeta({ doc: post, pathPrefix: '/portfolio' })
 }
 
 const queryPortfolioBySlug = cache(async ({ slug }: { slug: string }) => {

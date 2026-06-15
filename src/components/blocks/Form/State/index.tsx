@@ -14,6 +14,7 @@ import { Controller } from 'react-hook-form'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getRequiredValidation } from '../validation'
 import { stateOptions } from './options'
 
 export const State: React.FC<
@@ -56,7 +57,7 @@ export const State: React.FC<
             </Select>
           )
         }}
-        rules={{ required }}
+        rules={getRequiredValidation(required)}
       />
       {errors[name] && <Error name={name} />}
     </Width>

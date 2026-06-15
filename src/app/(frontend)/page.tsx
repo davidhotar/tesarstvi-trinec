@@ -1,9 +1,24 @@
+import type { Metadata } from 'next'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
+import { cache } from 'react'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
+import { generateMeta } from '@/utilities/generateMeta'
 
 export default async function HomePage() {
+  const page = await queryHomePage()
+
+  return <>{page?.layout && <RenderBlocks blocks={page.layout} />}</>
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await queryHomePage()
+
+  return generateMeta({ doc: page })
+}
+
+const queryHomePage = cache(async () => {
   const { isEnabled: draft } = await draftMode()
   const payload = await getPayload({ config: configPromise })
 
@@ -20,7 +35,5 @@ export default async function HomePage() {
     },
   })
 
-  const page = result.docs?.[0] || null
-
-  return <>{page?.layout && <RenderBlocks blocks={page.layout} />}</>
-}
+  return result.docs?.[0] || null
+})

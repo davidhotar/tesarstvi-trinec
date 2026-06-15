@@ -4,11 +4,17 @@ import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { ServiceAnchorNav } from '@/components/ServiceAnchorNav'
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import { SITE_NAME } from '@/constants/site'
+
+const description =
+  'Pergoly, přístřešky a dřevostavby na míru. Rodinná tesařská firma z Třince s více než 10 lety zkušeností.'
 
 export const metadata: Metadata = {
   title: 'Služby',
-  description:
-    'Pergoly, přístřešky a dřevostavby na míru. Rodinná tesařská firma z Třince s více než 10 lety zkušeností.',
+  description,
+  alternates: { canonical: '/sluzby' },
+  openGraph: mergeOpenGraph({ title: `Služby | ${SITE_NAME}`, description, url: '/sluzby' }),
 }
 
 export default async function SluzbyPage() {

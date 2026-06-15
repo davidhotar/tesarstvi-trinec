@@ -27,7 +27,13 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      //required: true,
+      // NOTE: kept optional on purpose. Making this `required: true` adds a NOT NULL
+      // constraint that fails to apply while existing media rows have a null alt
+      // (breaks `db.push` in dev and the prod migration). To enforce it: backfill
+      // alt on all existing media first, THEN set `required: true`.
+      admin: {
+        description: 'Popis obrázku pro vyhledávače a čtečky obrazovky (SEO a přístupnost).',
+      },
     },
     {
       name: 'caption',

@@ -7,6 +7,7 @@ import React from 'react'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getTextValidation } from '../validation'
 
 export const Text: React.FC<
   TextField & {
@@ -21,7 +22,13 @@ export const Text: React.FC<
           {label}
           {required && <span className="text-muted-foreground/60"> *</span>}
         </Label>
-        <Input defaultValue={defaultValue} id={name} type="text" aria-invalid={!!errors[name]} {...register(name, { required })} />
+        <Input
+          defaultValue={defaultValue}
+          id={name}
+          type="text"
+          aria-invalid={!!errors[name]}
+          {...register(name, getTextValidation({ name, label, required }))}
+        />
         {errors[name] && <Error name={name} />}
       </div>
     </Width>

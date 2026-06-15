@@ -14,6 +14,7 @@ import { Controller } from 'react-hook-form'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getRequiredValidation } from '../validation'
 
 export const Select: React.FC<
   SelectField & {
@@ -52,7 +53,7 @@ export const Select: React.FC<
             </SelectComponent>
           )
         }}
-        rules={{ required }}
+        rules={getRequiredValidation(required)}
       />
         {errors[name] && <Error name={name} />}
       </div>

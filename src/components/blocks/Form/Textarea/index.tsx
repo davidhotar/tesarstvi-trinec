@@ -7,6 +7,7 @@ import React from 'react'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getTextareaValidation } from '../validation'
 
 export const Textarea: React.FC<
   TextField & {
@@ -28,7 +29,7 @@ export const Textarea: React.FC<
           id={name}
           rows={rows}
           aria-invalid={!!errors[name]}
-          {...register(name, { required: required })}
+          {...register(name, getTextareaValidation(required))}
         />
         {errors[name] && <Error name={name} />}
       </div>

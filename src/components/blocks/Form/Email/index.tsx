@@ -7,6 +7,7 @@ import React from 'react'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getEmailValidation } from '../validation'
 
 export const Email: React.FC<
   EmailField & {
@@ -24,9 +25,11 @@ export const Email: React.FC<
         <Input
           defaultValue={defaultValue}
           id={name}
-          type="text"
+          type="email"
+          inputMode="email"
+          autoComplete="email"
           aria-invalid={!!errors[name]}
-          {...register(name, { pattern: /^\S[^\s@]*@\S+$/, required })}
+          {...register(name, getEmailValidation(required))}
         />
         {errors[name] && <Error name={name} />}
       </div>

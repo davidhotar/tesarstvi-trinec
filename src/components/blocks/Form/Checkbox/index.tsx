@@ -9,6 +9,7 @@ import React from 'react'
 
 import { Error } from '../Error'
 import { Width } from '../Width'
+import { getRequiredValidation } from '../validation'
 
 export const Checkbox: React.FC<
   CheckboxField & {
@@ -16,7 +17,7 @@ export const Checkbox: React.FC<
     register: UseFormRegister<FieldValues>
   }
 > = ({ name, defaultValue, errors, label, register, required, width }) => {
-  const props = register(name, { required: required })
+  const props = register(name, getRequiredValidation(required))
   const { setValue } = useFormContext()
 
   return (
@@ -27,7 +28,7 @@ export const Checkbox: React.FC<
           id={name}
           {...props}
           onCheckedChange={(checked) => {
-            setValue(props.name, checked)
+            setValue(props.name, checked, { shouldValidate: true })
           }}
         />
         <Label htmlFor={name}>
