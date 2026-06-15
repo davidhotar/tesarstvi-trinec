@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/utilities/ui"
 import { Button } from "@/components/ui/button"
-import { IconChevronLeft, IconChevronRight, IconDots } from "@tabler/icons-react"
+import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -73,7 +73,7 @@ function PaginationPrevious({
       className={cn("pl-2!", className)}
       {...props}
     >
-      <IconChevronLeft data-icon="inline-start" />
+      <ChevronLeft data-icon="inline-start" />
       <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   )
@@ -92,7 +92,7 @@ function PaginationNext({
       {...props}
     >
       <span className="hidden sm:block">{text}</span>
-      <IconChevronRight data-icon="inline-end" />
+      <ChevronRight data-icon="inline-end" />
     </PaginationLink>
   )
 }
@@ -111,8 +111,7 @@ function PaginationEllipsis({
       )}
       {...props}
     >
-      <IconDots
-      />
+      <Ellipsis />
       <span className="sr-only">More pages</span>
     </span>
   )

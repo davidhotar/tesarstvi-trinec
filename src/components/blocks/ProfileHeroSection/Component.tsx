@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Media } from '@/components/Media'
-import { IconPhone, IconMedal2, IconHeart } from '@tabler/icons-react'
+import { Phone, Medal, Heart } from 'lucide-react'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
 
@@ -16,8 +16,8 @@ const badgePositionClasses: Record<string, string> = {
 }
 
 const badgeIcons: Record<number, React.ComponentType<{ className?: string }>> = {
-  0: IconMedal2,
-  1: IconHeart,
+  0: Medal,
+  1: Heart,
 }
 
 export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = ({
@@ -75,7 +75,7 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
               {ctaLabel && ctaLink && (
                 <Button className="w-full shrink-0 rounded-full sm:ml-auto sm:w-auto" asChild>
                   <Link href={ctaLink}>
-                    <IconPhone className="size-4" />
+                    <Phone className="size-4" />
                     {ctaLabel}
                   </Link>
                 </Button>

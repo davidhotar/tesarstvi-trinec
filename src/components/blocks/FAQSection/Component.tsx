@@ -4,7 +4,7 @@ import React from 'react'
 import type { FAQSectionBlock as FAQSectionBlockProps } from '@/payload-types'
 import { Accordion as AccordionPrimitive } from 'radix-ui'
 import { cn } from '@/utilities/ui'
-import { IconChevronDown } from '@tabler/icons-react'
+import { ChevronDown } from 'lucide-react'
 
 export const FAQSectionBlock: React.FC<FAQSectionBlockProps> = ({
   title,
@@ -49,7 +49,7 @@ export const FAQSectionBlock: React.FC<FAQSectionBlockProps> = ({
                     <span className="flex-1 font-heading text-base font-medium sm:text-lg">
                       {faq.question}
                     </span>
-                    <IconChevronDown
+                    <ChevronDown
                       className={cn(
                         'size-5 shrink-0 text-muted-foreground transition-transform duration-300',
                         'group-data-open:rotate-180 group-data-open:text-primary',

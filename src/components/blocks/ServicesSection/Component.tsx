@@ -7,7 +7,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card'
-import { IconArrowRight, IconCheck } from '@tabler/icons-react'
+import { ArrowRight, Check } from 'lucide-react'
 import { iconMap } from '@/components/blocks/shared/iconMap'
 import Link from 'next/link'
 
@@ -51,7 +51,7 @@ export const ServicesSectionBlock: React.FC<ServicesSectionBlockProps> = ({
                     <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
                       {service.items?.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <IconCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+                          <Check className="mt-0.5 size-4 shrink-0 text-primary" />
                           {item.text}
                         </li>
                       ))}
@@ -60,7 +60,7 @@ export const ServicesSectionBlock: React.FC<ServicesSectionBlockProps> = ({
                   <div className="mt-auto px-6 pb-6">
                     <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-transform duration-200 group-hover:translate-x-1">
                       {service.linkLabel || 'Více o službě'}
-                      <IconArrowRight className="size-4" />
+                      <ArrowRight className="size-4" />
                     </span>
                   </div>
                 </Card>

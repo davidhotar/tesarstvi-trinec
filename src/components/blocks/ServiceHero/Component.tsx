@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import type { ServiceHeroBlock as ServiceHeroBlockProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
-import { IconPhone } from '@tabler/icons-react'
+import { Phone } from 'lucide-react'
 
 export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
   eyebrow,
@@ -27,7 +27,7 @@ export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
             {ctaLabel && ctaLink && (
               <Button size="lg" className="rounded-full" asChild>
                 <Link href={ctaLink}>
-                  <IconPhone data-icon="inline-start" />
+                  <Phone data-icon="inline-start" />
                   {ctaLabel}
                 </Link>
               </Button>

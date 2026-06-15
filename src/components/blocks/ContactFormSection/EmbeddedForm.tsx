@@ -4,7 +4,7 @@ import type { Form as PayloadFormType } from '@/payload-types'
 
 import React from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { IconArrowRight } from '@tabler/icons-react'
+import { ArrowRight } from 'lucide-react'
 
 import { FormRenderer } from '@/components/blocks/Form/FormRenderer'
 
@@ -17,7 +17,7 @@ export const EmbeddedForm: React.FC<{ form: PayloadFormType }> = ({ form }) => {
       <CardContent>
         <FormRenderer
           form={formFromProps}
-          submitIcon={<IconArrowRight data-icon="inline-end" />}
+          submitIcon={<ArrowRight data-icon="inline-end" />}
         />
       </CardContent>
     </Card>

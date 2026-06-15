@@ -2,7 +2,7 @@ import React from 'react'
 import type { RegionSectionBlock as RegionSectionBlockProps } from '@/payload-types'
 import { Badge } from '@/components/ui/badge'
 import { Media } from '@/components/Media'
-import { IconMapPin } from '@tabler/icons-react'
+import { MapPin } from 'lucide-react'
 
 export const RegionSectionBlock: React.FC<RegionSectionBlockProps> = ({
   subtitle,
@@ -31,7 +31,7 @@ export const RegionSectionBlock: React.FC<RegionSectionBlockProps> = ({
               <div className="mt-6 flex flex-wrap gap-2">
                 {locations.map((loc, i) => (
                   <Badge key={i} variant="outline" className="gap-1">
-                    <IconMapPin className="size-3" />
+                    <MapPin className="size-3" />
                     {loc.name}
                   </Badge>
                 ))}

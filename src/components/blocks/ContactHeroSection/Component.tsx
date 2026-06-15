@@ -4,30 +4,21 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Media } from '@/components/Media'
-import {
-  IconPhone,
-  IconMail,
-  IconBrandWhatsapp,
-  IconClock,
-  IconCheck,
-  IconStar,
-  IconShield,
-  IconMapPin,
-} from '@tabler/icons-react'
+import { Phone, Mail, MessageCircle, Clock, Check, Star, Shield, MapPin } from 'lucide-react'
 import Link from 'next/link'
 
 const highlightIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  clock: IconClock,
-  check: IconCheck,
-  star: IconStar,
-  shield: IconShield,
+  clock: Clock,
+  check: Check,
+  star: Star,
+  shield: Shield,
 }
 
 const cardIcons: Record<string, React.ComponentType<{ className?: string }>> = {
-  phone: IconPhone,
-  mail: IconMail,
-  whatsapp: IconBrandWhatsapp,
-  mapPin: IconMapPin,
+  phone: Phone,
+  mail: Mail,
+  whatsapp: MessageCircle,
+  mapPin: MapPin,
 }
 
 export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = ({
@@ -105,7 +96,7 @@ export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = (
               <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full border bg-background px-4 py-2 shadow-sm">
                 {personPhone ? (
                   <Link href={personPhone} className="flex items-center gap-2">
-                    <IconPhone className="size-4 text-primary" />
+                    <Phone className="size-4 text-primary" />
                     <span className="text-sm font-medium italic">
                       {personName}
                       {personTitle && (
@@ -118,7 +109,7 @@ export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = (
                   </Link>
                 ) : (
                   <span className="flex items-center gap-2 text-sm font-medium italic">
-                    <IconPhone className="size-4 text-primary" />
+                    <Phone className="size-4 text-primary" />
                     {personName}
                     {personTitle && (
                       <span className="font-normal text-muted-foreground"> — {personTitle}</span>

@@ -1,7 +1,6 @@
 import React from 'react'
 import type { TestimonialsSectionBlock as TestimonialsSectionBlockProps } from '@/payload-types'
-import { ExternalLinkIcon } from 'lucide-react'
-import { IconBrandGoogle } from '@tabler/icons-react'
+import { ExternalLinkIcon, Star } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -34,7 +33,7 @@ export const TestimonialsSectionBlock: React.FC<TestimonialsSectionBlockProps> =
       <div className="mx-auto max-w-7xl space-y-4 px-4 text-center sm:px-6 lg:px-8">
         {sourceLabel && (
           <Badge variant="outline" className="text-sm font-normal">
-            <IconBrandGoogle className="mr-1.5 size-3.5" />
+            <Star className="mr-1.5 size-3.5" />
             {sourceLabel}
           </Badge>
         )}

@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Media } from '@/components/Media'
 import { cn } from '@/utilities/ui'
-import { IconCheck } from '@tabler/icons-react'
+import { Check } from 'lucide-react'
 
 const Checklist: React.FC<{
   heading?: string | null
@@ -21,7 +21,7 @@ const Checklist: React.FC<{
       <ul className="mt-3 flex flex-col gap-2">
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2 text-sm">
-            <IconCheck className="mt-0.5 size-4 shrink-0 text-primary" />
+            <Check className="mt-0.5 size-4 shrink-0 text-primary" />
             {item.text}
           </li>
         ))}
@@ -119,7 +119,7 @@ const GalleryContent: React.FC<Pick<ServiceDeepDiveBlockProps, 'images' | 'check
 
       {tip?.text && (
         <div className="mt-6 flex items-center gap-3 rounded-lg border-2 border-dashed border-border p-4">
-          <IconCheck className="size-5 shrink-0 text-primary" />
+          <Check className="size-5 shrink-0 text-primary" />
           <p className="text-sm">
             <strong>Tip:</strong> {tip.text}
           </p>

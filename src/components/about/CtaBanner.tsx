@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { IconPhone, IconStarFilled } from '@tabler/icons-react'
+import { Phone, Star } from 'lucide-react'
 
 export function CtaBanner() {
   return (
@@ -15,11 +15,11 @@ export function CtaBanner() {
         </div>
         <div className="flex shrink-0 flex-col items-center gap-3 sm:flex-row">
           <Button size="lg" variant="secondary" className="rounded-full">
-            <IconPhone data-icon="inline-start" />
+            <Phone data-icon="inline-start" />
             Zavolat Petrovi
           </Button>
           <div className="flex items-center gap-1.5 text-sm text-primary-foreground/60">
-            <IconStarFilled className="size-3.5" />
+            <Star className="size-3.5 fill-current" />
             4.9 · 87 hodnocení na Google
           </div>
         </div>

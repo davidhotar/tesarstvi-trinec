@@ -1,7 +1,7 @@
 import React from 'react'
 import type { ContactFormSectionBlock as ContactFormSectionBlockProps } from '@/payload-types'
 import { Media } from '@/components/Media'
-import { IconPhone } from '@tabler/icons-react'
+import { Phone } from 'lucide-react'
 import RichText from '@/components/RichText'
 import Link from 'next/link'
 import { EmbeddedForm } from './EmbeddedForm'
@@ -53,7 +53,7 @@ export const ContactFormSectionBlock: React.FC<ContactFormSectionBlockProps> = (
                   href={`tel:${phoneNumber.replace(/\s/g, '')}`}
                   className="inline-flex items-center gap-2 text-2xl font-bold"
                 >
-                  <IconPhone className="size-5 text-primary" />
+                  <Phone className="size-5 text-primary" />
                   {phoneNumber}
                 </Link>
               </div>

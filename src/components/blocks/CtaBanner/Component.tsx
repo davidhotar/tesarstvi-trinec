@@ -1,7 +1,7 @@
 import React from 'react'
 import type { CtaBannerBlock as CtaBannerBlockProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
-import { IconPhone, IconStarFilled } from '@tabler/icons-react'
+import { Phone, Star } from 'lucide-react'
 import Link from 'next/link'
 
 export const CtaBannerBlock: React.FC<CtaBannerBlockProps> = ({
@@ -22,14 +22,14 @@ export const CtaBannerBlock: React.FC<CtaBannerBlockProps> = ({
           {ctaLabel && ctaLink && (
             <Button size="lg" variant="secondary" className="rounded-full" asChild>
               <Link href={ctaLink}>
-                <IconPhone data-icon="inline-start" />
+                <Phone data-icon="inline-start" />
                 {ctaLabel}
               </Link>
             </Button>
           )}
           {ratingText && (
             <div className="flex items-center gap-1.5 text-sm text-primary-foreground/60">
-              <IconStarFilled className="size-3.5" />
+              <Star className="size-3.5 fill-current" />
               {ratingText}
             </div>
           )}
