@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Rating } from '@/components/ui/rating'
 import { Marquee } from '@/components/ui/marquee'
+import { getGoogleReviews } from '@/utilities/getGoogleReviews'
 
 function getInitials(name: string): string {
   const parts = name.trim().split(/\s+/)
@@ -16,17 +17,25 @@ function getInitials(name: string): string {
   return (parts[0]?.[0] ?? '').toUpperCase()
 }
 
-export const TestimonialsSectionBlock: React.FC<TestimonialsSectionBlockProps> = ({
+export const TestimonialsSectionBlock = async ({
   title,
   sourceLabel,
   reviewsUrl,
   reviewsButtonLabel,
   testimonials,
-}) => {
-  const avgRating =
+}: TestimonialsSectionBlockProps) => {
+  // The testimonial cards above stay manually curated; the summary numbers below
+  // (average rating + review count) come live from Google Business Profile.
+  const google = await getGoogleReviews()
+
+  const computedAvg =
     testimonials && testimonials.length > 0
       ? testimonials.reduce((sum, t) => sum + (t.rating ?? 5), 0) / testimonials.length
       : 5
+
+  const avgRating = google.reviewCount > 0 ? google.rating : computedAvg
+  const reviewCount = google.reviewCount > 0 ? google.reviewCount : (testimonials?.length ?? 0)
+  const allReviewsUrl = reviewsUrl || google.profileUrl || undefined
 
   return (
     <section className="bg-muted/50 space-y-12 py-24 sm:space-y-16">
@@ -95,14 +104,14 @@ export const TestimonialsSectionBlock: React.FC<TestimonialsSectionBlockProps> =
             </p>
           </div>
           <div>
-            <p className="text-2xl font-semibold">{testimonials?.length ?? 0}+</p>
+            <p className="text-2xl font-semibold">{reviewCount}+</p>
             <p className="text-sm font-medium text-muted-foreground">
               spokojených zákazníků
             </p>
           </div>
-          {reviewsUrl && (
+          {allReviewsUrl && (
             <Button size="lg" asChild className="rounded-full">
-              <a href={reviewsUrl} target="_blank" rel="noopener noreferrer">
+              <a href={allReviewsUrl} target="_blank" rel="noopener noreferrer">
                 {reviewsButtonLabel || 'Všechny recenze'}
                 <ExternalLinkIcon className="ml-1.5 size-4" />
               </a>

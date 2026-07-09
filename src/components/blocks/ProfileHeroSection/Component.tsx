@@ -7,6 +7,11 @@ import { Media } from '@/components/Media'
 import { Phone, Medal, Heart } from 'lucide-react'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
+import {
+  formatGoogleStatValue,
+  getGoogleReviews,
+  statsUseGoogle,
+} from '@/utilities/getGoogleReviews'
 
 const badgePositionClasses: Record<string, string> = {
   'top-left': 'absolute top-4 left-[-12px]',
@@ -20,7 +25,7 @@ const badgeIcons: Record<number, React.ComponentType<{ className?: string }>> = 
   1: Heart,
 }
 
-export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = ({
+export const ProfileHeroSectionBlock = async ({
   tagline,
   richText,
   personName,
@@ -32,7 +37,9 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
   ctaLink,
   badges,
   stats,
-}) => {
+}: ProfileHeroSectionBlockProps) => {
+  const google = statsUseGoogle(stats) ? await getGoogleReviews() : null
+
   return (
     <section className="hero-glow flex min-h-[100svh] flex-col pt-[88px]">
       <div className="container flex flex-1 items-center py-16">
@@ -128,7 +135,9 @@ export const ProfileHeroSectionBlock: React.FC<ProfileHeroSectionBlockProps> = (
           <div className="container flex flex-wrap items-center justify-around gap-x-8 gap-y-5 py-10 lg:py-12">
             {stats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-1 text-center">
-                <span className="text-3xl font-bold">{stat.value}</span>
+                <span className="text-3xl font-bold">
+                  {formatGoogleStatValue(stat.source, stat.value, google)}
+                </span>
                 <span className="text-sm text-muted-foreground">{stat.label}</span>
               </div>
             ))}
