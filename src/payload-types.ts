@@ -837,7 +837,14 @@ export interface HeroSectionBlock {
   backgroundImage: number | Media;
   stats?:
     | {
-        value: string;
+        /**
+         * Auto options pull the live value from Google Business Profile. The label stays whatever you set below.
+         */
+        source?: ('manual' | 'googleRating' | 'googleReviewCount') | null;
+        /**
+         * Shown only when Source is "Manual value". Ignored for auto sources.
+         */
+        value?: string | null;
         label: string;
         id?: string | null;
       }[]
@@ -1044,7 +1051,14 @@ export interface ProfileHeroSectionBlock {
     | null;
   stats?:
     | {
-        value: string;
+        /**
+         * Auto options pull the live value from Google Business Profile. The label stays whatever you set below.
+         */
+        source?: ('manual' | 'googleRating' | 'googleReviewCount') | null;
+        /**
+         * Shown only when Source is "Manual value". Ignored for auto sources.
+         */
+        value?: string | null;
         label: string;
         id?: string | null;
       }[]
@@ -1765,6 +1779,7 @@ export interface HeroSectionBlockSelect<T extends boolean = true> {
   stats?:
     | T
     | {
+        source?: T;
         value?: T;
         label?: T;
         id?: T;
@@ -1891,6 +1906,7 @@ export interface ProfileHeroSectionBlockSelect<T extends boolean = true> {
   stats?:
     | T
     | {
+        source?: T;
         value?: T;
         label?: T;
         id?: T;

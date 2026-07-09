@@ -109,9 +109,26 @@ export const ProfileHeroSection: Block = {
       maxRows: 8,
       fields: [
         {
+          name: 'source',
+          type: 'select',
+          defaultValue: 'manual',
+          options: [
+            { label: 'Manual value', value: 'manual' },
+            { label: 'Google rating (auto)', value: 'googleRating' },
+            { label: 'Google review count (auto)', value: 'googleReviewCount' },
+          ],
+          admin: {
+            description:
+              'Auto options pull the live value from Google Business Profile. The label stays whatever you set below.',
+          },
+        },
+        {
           name: 'value',
           type: 'text',
-          required: true,
+          admin: {
+            description: 'Shown only when Source is "Manual value". Ignored for auto sources.',
+            condition: (_, siblingData) => (siblingData?.source ?? 'manual') === 'manual',
+          },
         },
         {
           name: 'label',
