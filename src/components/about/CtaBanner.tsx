@@ -5,7 +5,7 @@ import { Phone, Star } from 'lucide-react'
 import Link from 'next/link'
 
 export async function CtaBanner() {
-  const data: PortfolioPage = await getCachedGlobal('portfolio-page', 1)()
+  const data: PortfolioPage = await getCachedGlobal('portfolio-page', 1)
 
   const title = data?.ctaTitle || 'Máte představu, ale nevíte, kde začít?'
   const description = data?.ctaDescription || 'Zavolejte — rádi vám poradíme.'

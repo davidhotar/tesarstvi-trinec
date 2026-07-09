@@ -21,7 +21,7 @@ function JsonLd({ data }: { data: Record<string, unknown> }) {
  * site. Pulls business details from the Footer global. Rendered once in the root layout.
  */
 export async function OrganizationStructuredData() {
-  const footer: FooterType = await getCachedGlobal('footer', 1)()
+  const footer: FooterType = await getCachedGlobal('footer', 1)
   const url = getServerSideURL()
 
   const openingHoursSpecification = (footer?.openingHours || [])

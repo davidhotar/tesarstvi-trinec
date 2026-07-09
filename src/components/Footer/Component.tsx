@@ -16,7 +16,7 @@ async function getCopyrightYear() {
 }
 
 export async function Footer() {
-  const footer: FooterType = await getCachedGlobal('footer', 1)()
+  const footer: FooterType = await getCachedGlobal('footer', 1)
   const year = await getCopyrightYear()
 
   const phone = footer?.phone || '+420 737 136 848'
