@@ -82,6 +82,12 @@
       "skillPath": "skills/portless/SKILL.md",
       "computedHash": "47c88e1e39eda1c18f31ca40b6e175483d8d36dbcf0672e240dcb1bd3ad554a4"
     },
+    "seo-audit": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/seo-audit/SKILL.md",
+      "computedHash": "f2dc52130189068981f21e1c0bdc4471ac7cd9b08d8a1320604411aa0f950385"
+    },
     "shadcn": {
       "source": "shadcn/ui",
       "sourceType": "github",
