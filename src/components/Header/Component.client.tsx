@@ -76,13 +76,15 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           onClick={() => setMobileOpen(!mobileOpen)}
           className="lg:hidden p-2 text-foreground"
           aria-label={mobileOpen ? 'Zavřít menu' : 'Otevřít menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
           {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-lg">
+        <div id="mobile-menu" className="lg:hidden border-t border-border/50 bg-background/95 backdrop-blur-lg">
           <div className="container flex flex-col gap-4 py-6">
             <HeaderNav data={data} />
             <div className="flex flex-col gap-3 pt-2 border-t border-border/30">

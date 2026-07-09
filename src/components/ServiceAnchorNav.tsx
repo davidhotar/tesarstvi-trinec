@@ -17,7 +17,10 @@ export const ServiceAnchorNav: React.FC<ServiceAnchorNavProps> = ({ services }) 
   }
 
   return (
-    <nav className="sticky top-[5rem] z-10 border-b border-border bg-background/95 backdrop-blur-sm">
+    <nav
+      aria-label="Přejít na službu"
+      className="sticky top-[5rem] z-10 border-b border-border bg-background/95 backdrop-blur-sm"
+    >
       <div className="container flex items-center gap-6 overflow-x-auto py-3 text-sm">
         <span className="shrink-0 text-xs text-muted-foreground">Skok na:</span>
         {services.map((service) => (
