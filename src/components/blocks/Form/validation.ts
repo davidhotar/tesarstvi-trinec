@@ -16,8 +16,8 @@ export const validationMessages = {
 /** Requires a local part, an "@", a domain and a TLD of at least two characters. */
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
-/** Optional leading "+", then 9–15 digits with optional spaces, dashes or parentheses. */
-export const PHONE_REGEX = /^\+?(?:[\d\s()-]){9,18}\d$/
+/** At least 9 digits, with an optional leading "+" and optional spaces or dashes. */
+export const PHONE_REGEX = /^\+?[\d\s-]{9,20}$/
 
 const matches = (value: string, ...patterns: RegExp[]) => patterns.some((p) => p.test(value))
 
