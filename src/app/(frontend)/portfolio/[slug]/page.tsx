@@ -53,6 +53,21 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  // Automatically include the hero image as the first gallery item so it doesn't
+  // have to be added manually. Skip it if it's already present in the gallery.
+  const heroImage = post.heroImage
+  const heroId = heroImage && typeof heroImage === 'object' ? heroImage.id : heroImage
+  const existingGallery = post.gallery ?? []
+  const heroAlreadyInGallery = existingGallery.some((item) => {
+    const image = item.image
+    const imageId = image && typeof image === 'object' ? image.id : image
+    return imageId === heroId
+  })
+  const galleryItems: NonNullable<Portfolio['gallery']> =
+    heroImage && !heroAlreadyInGallery
+      ? [{ id: 'hero-image', image: heroImage, caption: null }, ...existingGallery]
+      : existingGallery
+
   return (
     <article className="pt-16 pb-16">
       <PageClient />
@@ -77,7 +92,7 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
           <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
         </div>
 
-        {post.gallery && post.gallery.length > 0 && (
+        {galleryItems.length > 0 && (
           <div className="w-full max-w-screen-2xl mx-auto mt-16 md:mt-24 px-3 md:px-4">
             <div className="flex items-center gap-4 mb-8">
               <span className="inline-block w-8 h-[1px] bg-portfolio-accent" />
@@ -85,7 +100,7 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
                 Galerie
               </h2>
             </div>
-            <PortfolioGallery items={post.gallery} />
+            <PortfolioGallery items={galleryItems} />
           </div>
         )}
 
