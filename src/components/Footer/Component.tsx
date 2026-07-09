@@ -5,6 +5,8 @@ import type { Footer as FooterType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Logo } from '@/components/Logo/Logo'
 import { Separator } from '@/components/ui/separator'
+import { FeaturableWidget } from '@/components/FeaturableWidget/FeaturableWidget'
+import { getFeaturableWidgetId } from '@/utilities/getGoogleReviews'
 
 export async function Footer() {
   const footer: FooterType = await getCachedGlobal('footer', 1)()
@@ -73,6 +75,12 @@ export async function Footer() {
             </a>
           </div>
         </div>
+
+        {footer?.showGoogleReviews && (
+          <div className="mt-12">
+            <FeaturableWidget widgetId={getFeaturableWidgetId()} />
+          </div>
+        )}
 
         <div className="my-8 border-t border-dashed border-border" />
 
