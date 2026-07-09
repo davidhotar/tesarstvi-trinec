@@ -2,10 +2,36 @@ import type { Portfolio, ArchiveBlock as ArchiveBlockProps } from '@/payload-typ
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { cacheLife, cacheTag } from 'next/cache'
 import React from 'react'
 import RichText from '@/components/RichText'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
+
+async function getArchivePosts(categoryIds: number[], limit: number) {
+  'use cache'
+  cacheLife('max')
+  cacheTag('portfolio')
+
+  const payload = await getPayload({ config: configPromise })
+
+  const fetchedPosts = await payload.find({
+    collection: 'portfolio',
+    depth: 1,
+    limit,
+    ...(categoryIds.length > 0
+      ? {
+          where: {
+            categories: {
+              in: categoryIds,
+            },
+          },
+        }
+      : {}),
+  })
+
+  return fetchedPosts.docs
+}
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
@@ -19,29 +45,11 @@ export const ArchiveBlock: React.FC<
   let posts: Portfolio[] = []
 
   if (populateBy === 'collection') {
-    const payload = await getPayload({ config: configPromise })
+    const categoryIds = (categories || [])
+      .map((category) => (typeof category === 'object' ? category.id : category))
+      .filter((id): id is number => typeof id === 'number')
 
-    const flattenedCategories = categories?.map((category) => {
-      if (typeof category === 'object') return category.id
-      else return category
-    })
-
-    const fetchedPosts = await payload.find({
-      collection: 'portfolio',
-      depth: 1,
-      limit,
-      ...(flattenedCategories && flattenedCategories.length > 0
-        ? {
-            where: {
-              categories: {
-                in: flattenedCategories,
-              },
-            },
-          }
-        : {}),
-    })
-
-    posts = fetchedPosts.docs
+    posts = await getArchivePosts(categoryIds, limit)
   } else {
     if (selectedDocs?.length) {
       const filteredSelectedPosts = selectedDocs.map((post) => {
