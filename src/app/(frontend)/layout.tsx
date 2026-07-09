@@ -9,6 +9,7 @@ import React from 'react'
 
 import { AdminBar } from '@/components/admin/AdminBar'
 import { Footer } from '@/components/Footer/Component'
+import { GoogleTagManager, GoogleTagManagerNoScript } from '@/components/GoogleTagManager'
 import { Header } from '@/components/Header/Component'
 import { OrganizationStructuredData } from '@/components/StructuredData'
 import { Providers } from '@/providers'
@@ -26,6 +27,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InitTheme />
       </head>
       <body>
+        <GoogleTagManagerNoScript />
+        <GoogleTagManager />
         {process.env.NODE_ENV === 'development' && (
           <Script
             src="//unpkg.com/react-grab/dist/index.global.js"
