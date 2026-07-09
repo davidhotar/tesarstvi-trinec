@@ -1,13 +1,15 @@
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { cacheLife, cacheTag } from 'next/cache'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
 import type { PortfolioSectionBlock as PortfolioSectionBlockType } from '@/payload-types'
 
-export const PortfolioSectionBlock: React.FC<PortfolioSectionBlockType> = async ({
-  title,
-  buttonLabel,
-  limit,
-}) => {
+async function getPortfolioSectionData() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('portfolio')
+  cacheTag('categories')
+
   const payload = await getPayload({ config: configPromise })
 
   const [postsResult, categoriesResult] = await Promise.all([
@@ -38,16 +40,27 @@ export const PortfolioSectionBlock: React.FC<PortfolioSectionBlockType> = async 
     }),
   ])
 
-  const categories = categoriesResult.docs.map((cat) => ({
-    id: cat.id,
-    title: cat.title,
-    slug: cat.slug,
-  }))
+  return {
+    posts: postsResult.docs,
+    categories: categoriesResult.docs.map((cat) => ({
+      id: cat.id,
+      title: cat.title,
+      slug: cat.slug,
+    })),
+  }
+}
+
+export const PortfolioSectionBlock: React.FC<PortfolioSectionBlockType> = async ({
+  title,
+  buttonLabel,
+  limit,
+}) => {
+  const { posts, categories } = await getPortfolioSectionData()
 
   return (
     <section className="py-24">
       <PortfolioGrid
-        posts={postsResult.docs}
+        posts={posts}
         categories={categories}
         limit={limit ?? undefined}
         heading={title}

@@ -4,7 +4,7 @@ import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
+import React from 'react'
 import RichText from '@/components/RichText'
 
 import type { Portfolio } from '@/payload-types'
@@ -14,6 +14,7 @@ import { RelatedPortfolio } from '@/components/RelatedPortfolio'
 import { PortfolioHero } from '@/components/heros/PortfolioHero'
 import { BreadcrumbStructuredData } from '@/components/StructuredData'
 import { generateMeta } from '@/utilities/generateMeta'
+import { queryDraftPortfolio, queryPublishedPortfolio } from '@/utilities/queryDocBySlug'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 
@@ -49,7 +50,9 @@ export default async function PortfolioItem({ params: paramsPromise }: Args) {
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)
   const url = '/portfolio/' + decodedSlug
-  const post = await queryPortfolioBySlug({ slug: decodedSlug })
+  const post = draft
+    ? await queryDraftPortfolio(decodedSlug)
+    : await queryPublishedPortfolio(decodedSlug)
 
   if (!post) return <PayloadRedirects url={url} />
 
@@ -114,28 +117,7 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
   const { slug = '' } = await paramsPromise
   // Decode to support slugs with special characters
   const decodedSlug = decodeURIComponent(slug)
-  const post = await queryPortfolioBySlug({ slug: decodedSlug })
+  const post = await queryPublishedPortfolio(decodedSlug)
 
   return generateMeta({ doc: post, pathPrefix: '/portfolio' })
 }
-
-const queryPortfolioBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
-
-  const payload = await getPayload({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'portfolio',
-    draft,
-    limit: 1,
-    overrideAccess: draft,
-    pagination: false,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-  })
-
-  return result.docs?.[0] || null
-})

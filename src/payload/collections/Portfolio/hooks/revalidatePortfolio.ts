@@ -16,6 +16,8 @@ export const revalidatePortfolio: CollectionAfterChangeHook<Portfolio> = ({
       payload.logger.info(`Revalidating portfolio item at path: ${path}`)
 
       revalidatePath(path)
+      revalidateTag(`portfolio_${doc.slug}`, 'max')
+      revalidateTag('portfolio', 'max')
       revalidateTag('portfolio-sitemap', 'max')
     }
 
@@ -26,6 +28,8 @@ export const revalidatePortfolio: CollectionAfterChangeHook<Portfolio> = ({
       payload.logger.info(`Revalidating old portfolio item at path: ${oldPath}`)
 
       revalidatePath(oldPath)
+      revalidateTag(`portfolio_${previousDoc.slug}`, 'max')
+      revalidateTag('portfolio', 'max')
       revalidateTag('portfolio-sitemap', 'max')
     }
   }
@@ -40,6 +44,8 @@ export const revalidateDelete: CollectionAfterDeleteHook<Portfolio> = ({
     const path = `/portfolio/${doc?.slug}`
 
     revalidatePath(path)
+    revalidateTag(`portfolio_${doc?.slug}`, 'max')
+    revalidateTag('portfolio', 'max')
     revalidateTag('portfolio-sitemap', 'max')
   }
 

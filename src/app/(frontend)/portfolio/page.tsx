@@ -6,18 +6,22 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { SITE_NAME } from '@/constants/site'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { cacheLife, cacheTag } from 'next/cache'
 import React, { Suspense } from 'react'
 import PageClient from './page.client'
-
-export const dynamic = 'force-static'
-export const revalidate = 600
 
 type Args = {
   searchParams: Promise<{ category?: string }>
 }
 
-export default async function Page({ searchParams }: Args) {
-  const { category } = await searchParams
+// Cached list data — the same for every visitor; the category filter is applied
+// client-side in <PortfolioGrid>. Tagged so portfolio/category edits bust it.
+async function getPortfolioListData() {
+  'use cache'
+  cacheLife('max')
+  cacheTag('portfolio')
+  cacheTag('categories')
+
   const payload = await getPayload({ config: configPromise })
 
   const [posts, categoriesResult] = await Promise.all([
@@ -48,11 +52,35 @@ export default async function Page({ searchParams }: Args) {
     }),
   ])
 
-  const categories = categoriesResult.docs.map((cat) => ({
-    id: cat.id,
-    title: cat.title,
-    slug: cat.slug,
-  }))
+  return {
+    posts: posts.docs,
+    totalDocs: posts.totalDocs,
+    categories: categoriesResult.docs.map((cat) => ({
+      id: cat.id,
+      title: cat.title,
+      slug: cat.slug,
+    })),
+  }
+}
+
+// Reads the request-time category filter; wrapped in <Suspense> so the page
+// shell (hero) still prerenders statically.
+async function PortfolioGridSection({ searchParams }: Args) {
+  const { category } = await searchParams
+  const { posts, categories } = await getPortfolioListData()
+
+  return (
+    <PortfolioGrid
+      posts={posts}
+      categories={categories}
+      initialCategorySlug={category}
+      showAllTab
+    />
+  )
+}
+
+export default async function Page({ searchParams }: Args) {
+  const { totalDocs } = await getPortfolioListData()
 
   return (
     <div className="relative bg-black text-white dark:bg-background dark:text-foreground">
@@ -75,7 +103,7 @@ export default async function Page({ searchParams }: Args) {
 
           <div className="portfolio-fade-up mt-8" style={{ animationDelay: '200ms' }}>
             <p className="text-sm text-white/50 dark:text-foreground/50">
-              Celkem {posts.totalDocs} realizací
+              Celkem {totalDocs} realizací
             </p>
           </div>
         </div>
@@ -83,12 +111,7 @@ export default async function Page({ searchParams }: Args) {
 
       <div className="pb-24">
         <Suspense>
-          <PortfolioGrid
-            posts={posts.docs}
-            categories={categories}
-            initialCategorySlug={category}
-            showAllTab
-          />
+          <PortfolioGridSection searchParams={searchParams} />
         </Suspense>
       </div>
 

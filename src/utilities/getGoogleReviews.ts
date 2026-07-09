@@ -1,3 +1,5 @@
+import { cacheLife, cacheTag } from 'next/cache'
+
 export interface GoogleReviews {
   /** Average star rating from Google Business Profile (0–5). */
   rating: number
@@ -31,12 +33,14 @@ const FALLBACK: GoogleReviews = { rating: 5, reviewCount: 0, profileUrl: null }
  * used — testimonials remain manually curated in Payload.
  */
 export async function getGoogleReviews(): Promise<GoogleReviews> {
+  'use cache'
+  cacheLife('days')
+  cacheTag('google-reviews')
+
   if (!WIDGET_ID) return FALLBACK
 
   try {
-    const res = await fetch(`https://api.featurable.com/v1/widgets/${WIDGET_ID}`, {
-      next: { revalidate: 86400, tags: ['google-reviews'] },
-    })
+    const res = await fetch(`https://api.featurable.com/v1/widgets/${WIDGET_ID}`)
 
     if (!res.ok) return FALLBACK
 

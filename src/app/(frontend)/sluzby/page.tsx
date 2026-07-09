@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { ServiceAnchorNav } from '@/components/ServiceAnchorNav'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { SITE_NAME } from '@/constants/site'
+import { queryDraftPage, queryPublishedPage } from '@/utilities/queryDocBySlug'
 
 const description =
   'Pergoly, přístřešky a dřevostavby na míru. Rodinná tesařská firma z Třince s více než 10 lety zkušeností.'
@@ -19,22 +18,7 @@ export const metadata: Metadata = {
 
 export default async function SluzbyPage() {
   const { isEnabled: draft } = await draftMode()
-  const payload = await getPayload({ config: configPromise })
-
-  const result = await payload.find({
-    collection: 'pages',
-    draft,
-    limit: 1,
-    pagination: false,
-    overrideAccess: draft,
-    where: {
-      slug: {
-        equals: 'sluzby',
-      },
-    },
-  })
-
-  const page = result.docs?.[0] || null
+  const page = draft ? await queryDraftPage('sluzby') : await queryPublishedPage('sluzby')
   const blocks = page?.layout || []
 
   const firstServiceIndex = blocks.findIndex(

@@ -2,6 +2,7 @@ import type { Portfolio } from '@/payload-types'
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import { cacheLife, cacheTag } from 'next/cache'
 import React from 'react'
 
 import { RelatedPortfolioCarousel } from './Carousel'
@@ -13,17 +14,12 @@ type Props = {
   categories: Portfolio['categories']
 }
 
-/**
- * Renders a carousel of other portfolio references at the bottom of a detail page.
- * Items sharing a category with the current one come first; if there aren't enough,
- * the most recent published items fill the rest. The current item is always excluded.
- */
-export const RelatedPortfolio: React.FC<Props> = async ({ currentId, categories }) => {
-  const payload = await getPayload({ config: configPromise })
+async function getRelatedPosts(currentId: number, categoryIds: number[]) {
+  'use cache'
+  cacheLife('max')
+  cacheTag('portfolio')
 
-  const categoryIds = (categories || [])
-    .map((category) => (typeof category === 'object' ? category.id : category))
-    .filter((id): id is number => typeof id === 'number')
+  const payload = await getPayload({ config: configPromise })
 
   // Preserve insertion order (related first, then fill) while de-duplicating.
   const collected = new Map<number, Portfolio>()
@@ -63,7 +59,20 @@ export const RelatedPortfolio: React.FC<Props> = async ({ currentId, categories 
     }
   }
 
-  const posts = Array.from(collected.values())
+  return Array.from(collected.values())
+}
+
+/**
+ * Renders a carousel of other portfolio references at the bottom of a detail page.
+ * Items sharing a category with the current one come first; if there aren't enough,
+ * the most recent published items fill the rest. The current item is always excluded.
+ */
+export const RelatedPortfolio: React.FC<Props> = async ({ currentId, categories }) => {
+  const categoryIds = (categories || [])
+    .map((category) => (typeof category === 'object' ? category.id : category))
+    .filter((id): id is number => typeof id === 'number')
+
+  const posts = await getRelatedPosts(currentId, categoryIds)
 
   if (posts.length === 0) return null
 
