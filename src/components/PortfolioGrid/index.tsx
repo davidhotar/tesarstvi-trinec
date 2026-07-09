@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { cn } from '@/utilities/ui'
 import { Button } from '@/components/ui/button'
 import { Card, CardPortfolioData } from '@/components/Card'
@@ -15,6 +15,13 @@ type PortfolioGridProps = {
   buttonLabel?: string
   showAllTab?: boolean
   initialCategorySlug?: string
+  /**
+   * Read the active category from the `?category=` URL param after mount. Lets
+   * <PortfolioGrid> render fully static (all cards in the prerendered shell)
+   * while still honoring deep-links. Opt-in so embedded previews (e.g. the
+   * homepage PortfolioSection) aren't affected by a stray URL param.
+   */
+  syncCategoryFromUrl?: boolean
 }
 
 export function PortfolioGrid({
@@ -25,6 +32,7 @@ export function PortfolioGrid({
   buttonLabel,
   showAllTab = false,
   initialCategorySlug,
+  syncCategoryFromUrl = false,
 }: PortfolioGridProps) {
   const categoriesWithCounts = useMemo(() => {
     return categories
@@ -48,6 +56,20 @@ export function PortfolioGrid({
   }, [showAllTab, initialCategorySlug, categoriesWithCounts])
 
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(initialCategoryId)
+
+  // Apply a `?category=` deep-link after mount. Kept out of the initial render so
+  // the grid prerenders fully static (all cards in the shell); the filter is
+  // reconciled on the client for the (rare) deep-link case.
+  useEffect(() => {
+    if (!syncCategoryFromUrl) return
+    const slug = new URLSearchParams(window.location.search).get('category')
+    if (!slug) return
+    const match = categoriesWithCounts.find((c) => c.slug === slug)
+    // Deliberate post-mount reconcile: reading the URL during render would cause
+    // an SSR/client hydration mismatch and force the route dynamic.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (match) setActiveCategoryId(match.id)
+  }, [syncCategoryFromUrl, categoriesWithCounts])
 
   const filteredPosts = useMemo(() => {
     let filtered = posts

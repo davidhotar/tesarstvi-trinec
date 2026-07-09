@@ -7,12 +7,8 @@ import { SITE_NAME } from '@/constants/site'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { cacheLife, cacheTag } from 'next/cache'
-import React, { Suspense } from 'react'
+import React from 'react'
 import PageClient from './page.client'
-
-type Args = {
-  searchParams: Promise<{ category?: string }>
-}
 
 // Cached list data — the same for every visitor; the category filter is applied
 // client-side in <PortfolioGrid>. Tagged so portfolio/category edits bust it.
@@ -63,24 +59,8 @@ async function getPortfolioListData() {
   }
 }
 
-// Reads the request-time category filter; wrapped in <Suspense> so the page
-// shell (hero) still prerenders statically.
-async function PortfolioGridSection({ searchParams }: Args) {
-  const { category } = await searchParams
-  const { posts, categories } = await getPortfolioListData()
-
-  return (
-    <PortfolioGrid
-      posts={posts}
-      categories={categories}
-      initialCategorySlug={category}
-      showAllTab
-    />
-  )
-}
-
-export default async function Page({ searchParams }: Args) {
-  const { totalDocs } = await getPortfolioListData()
+export default async function Page() {
+  const { posts, totalDocs, categories } = await getPortfolioListData()
 
   return (
     <div className="relative bg-black text-white dark:bg-background dark:text-foreground">
@@ -110,9 +90,12 @@ export default async function Page({ searchParams }: Args) {
       </div>
 
       <div className="pb-24">
-        <Suspense>
-          <PortfolioGridSection searchParams={searchParams} />
-        </Suspense>
+        <PortfolioGrid
+          posts={posts}
+          categories={categories}
+          showAllTab
+          syncCategoryFromUrl
+        />
       </div>
 
       <CtaBanner />
