@@ -6,6 +6,10 @@ import { cache } from 'react'
 import { RenderBlocks } from '@/components/blocks/RenderBlocks'
 import { generateMeta } from '@/utilities/generateMeta'
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false
+
 export default async function HomePage() {
   const page = await queryHomePage()
 

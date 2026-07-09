@@ -7,6 +7,10 @@ import { ServiceAnchorNav } from '@/components/ServiceAnchorNav'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { SITE_NAME } from '@/constants/site'
 
+// TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false
+
 const description =
   'Pergoly, přístřešky a dřevostavby na míru. Rodinná tesařská firma z Třince s více než 10 lety zkušeností.'
 

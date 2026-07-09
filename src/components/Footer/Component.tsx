@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cacheLife } from 'next/cache'
 import React from 'react'
 
 import type { Footer as FooterType } from '@/payload-types'
@@ -8,8 +9,15 @@ import { Separator } from '@/components/ui/separator'
 import { FeaturableWidget } from '@/components/FeaturableWidget/FeaturableWidget'
 import { getFeaturableWidgetId } from '@/utilities/getGoogleReviews'
 
+async function getCopyrightYear() {
+  'use cache'
+  cacheLife('days')
+  return new Date().getFullYear()
+}
+
 export async function Footer() {
   const footer: FooterType = await getCachedGlobal('footer', 1)()
+  const year = await getCopyrightYear()
 
   const phone = footer?.phone || '+420 737 136 848'
   const email = footer?.email || 'info@tesarstvi-trinec.cz'
@@ -87,7 +95,7 @@ export async function Footer() {
         <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:justify-between">
           <p>{businessInfo}</p>
           <p>
-            © {new Date().getFullYear()} · {copyright}
+            © {year} · {copyright}
           </p>
         </div>
       </div>

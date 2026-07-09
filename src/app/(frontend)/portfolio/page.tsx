@@ -9,8 +9,11 @@ import { getPayload } from 'payload'
 import React, { Suspense } from 'react'
 import PageClient from './page.client'
 
-export const dynamic = 'force-static'
-export const revalidate = 600
+// TODO: Cache Components adoption — restore static + ISR behavior (was
+// `dynamic = 'force-static'` + `revalidate = 600`). Push `searchParams` into a
+// <Suspense> child and wrap the Payload reads in `'use cache'` + cacheLife.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false
 
 type Args = {
   searchParams: Promise<{ category?: string }>
