@@ -14,6 +14,7 @@ import { Portfolio } from './payload/collections/Portfolio'
 import { Users } from './payload/collections/Users'
 import { Footer } from './payload/globals/Footer/config'
 import { Header } from './payload/globals/Header/config'
+import { PortfolioPage } from './payload/globals/PortfolioPage/config'
 import { plugins } from './payload/plugins'
 import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -61,7 +62,7 @@ export default buildConfig({
   }),
   collections: [Pages, Portfolio, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, PortfolioPage],
   plugins: [
     ...plugins,
     ...(process.env.S3_BUCKET

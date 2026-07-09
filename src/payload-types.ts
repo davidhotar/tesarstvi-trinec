@@ -113,10 +113,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    'portfolio-page': PortfolioPage;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    'portfolio-page': PortfolioPageSelect<false> | PortfolioPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -2653,6 +2655,37 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * Nastavení stránky Portfolio.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-page".
+ */
+export interface PortfolioPage {
+  id: number;
+  /**
+   * Hlavní nadpis
+   */
+  ctaTitle: string;
+  /**
+   * Text pod nadpisem
+   */
+  ctaDescription?: string | null;
+  /**
+   * Text tlačítka
+   */
+  ctaLabel: string;
+  /**
+   * Odkaz tlačítka (např. tel:+420737136848)
+   */
+  ctaLink: string;
+  /**
+   * Volitelné hodnocení vedle tlačítka (např. "4.9 · 87 hodnocení na Google"). Nechte prázdné pro skrytí.
+   */
+  ctaRatingText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -2705,6 +2738,20 @@ export interface FooterSelect<T extends boolean = true> {
         closes?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-page_select".
+ */
+export interface PortfolioPageSelect<T extends boolean = true> {
+  ctaTitle?: T;
+  ctaDescription?: T;
+  ctaLabel?: T;
+  ctaLink?: T;
+  ctaRatingText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
