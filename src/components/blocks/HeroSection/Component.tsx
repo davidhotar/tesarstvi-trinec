@@ -71,10 +71,10 @@ export const HeroSectionBlock = async ({
           <div className="container flex flex-wrap items-center justify-around gap-x-8 gap-y-5 py-10 lg:py-12">
             {stats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-1 text-center">
-                {(stat.source === 'googleRating' || stat.source === 'googleReviewCount') && (
-                  <Star className="size-5 fill-primary text-primary" />
-                )}
-                <span className="text-3xl font-bold text-white sm:text-4xl">
+                <span className="flex items-center gap-2 text-3xl font-bold text-white sm:text-4xl">
+                  {(stat.source === 'googleRating' || stat.source === 'googleReviewCount') && (
+                    <Star className="size-6 fill-primary text-primary sm:size-7" />
+                  )}
                   {formatGoogleStatValue(stat.source, stat.value, google)}
                 </span>
                 <span className="text-sm text-white/60">{stat.label}</span>
