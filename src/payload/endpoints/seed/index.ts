@@ -55,7 +55,6 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
-        tagline: '',
         phone: '',
         email: '',
         address: '',
@@ -241,7 +240,6 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
-        tagline: 'Rádi se ozveme.',
         phone: '+420 737 136 848',
         email: 'info@tesarstvi-trinec.cz',
         address: 'Přátelství 959\n739 61 Třinec',

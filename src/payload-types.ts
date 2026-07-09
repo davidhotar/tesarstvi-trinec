@@ -2569,10 +2569,6 @@ export interface Header {
 export interface Footer {
   id: number;
   /**
-   * Krátký slogan pod logem (např. "Rádi se ozveme.")
-   */
-  tagline?: string | null;
-  /**
    * Telefonní číslo
    */
   phone?: string | null;
@@ -2681,7 +2677,6 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  tagline?: T;
   phone?: T;
   email?: T;
   address?: T;

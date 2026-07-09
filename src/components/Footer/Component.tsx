@@ -13,7 +13,6 @@ export async function Footer() {
   const email = footer?.email || 'info@tesarstvi-trinec.cz'
   const address = footer?.address || 'Přátelství 959\n739 61 Třinec'
   const addressLink = footer?.addressLink || 'https://maps.app.goo.gl/XGrhpUEEtSBhm175A'
-  const tagline = footer?.tagline || 'Rádi se ozveme.'
   const businessInfo = footer?.businessInfo || 'Petr Czempka · IČO 06977138 · Po-Pá 7:00-17:00'
   const copyright = footer?.copyright || 'Tesařství Třinec'
 
@@ -30,9 +29,6 @@ export async function Footer() {
             <Link href="/">
               <Logo className="max-w-[11rem]" />
             </Link>
-            <p className="text-lg italic text-primary underline decoration-primary decoration-wavy underline-offset-4">
-              {tagline}
-            </p>
           </div>
 
           <div className="flex flex-col gap-2">
