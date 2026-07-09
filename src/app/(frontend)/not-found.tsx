@@ -13,7 +13,7 @@ const suggestions = [
 
 export default function NotFound() {
   return (
-    <div className="container flex min-h-[70vh] flex-col items-center justify-center py-28 text-center">
+    <div className="container flex min-h-[70vh] flex-col items-center justify-center pt-44 pb-28 text-center">
       <div className="flex flex-col items-center">
         <div className="mb-6 flex size-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <Hammer className="size-8" aria-hidden />
