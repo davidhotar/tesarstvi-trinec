@@ -3,6 +3,7 @@ import React from 'react'
 import type { HeroSectionBlock as HeroSectionBlockProps } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
+import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import {
@@ -58,6 +59,8 @@ export const HeroSectionBlock = async ({
               })}
             </div>
           )}
+
+          <GoogleRatingBadge className="mt-2 self-start" variant="onDark" />
         </div>
       </div>
 
