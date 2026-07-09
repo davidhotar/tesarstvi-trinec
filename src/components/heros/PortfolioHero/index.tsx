@@ -1,4 +1,3 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
 import React from 'react'
 
 import type { Portfolio } from '@/payload-types'
@@ -9,7 +8,7 @@ import { formatAuthors } from '@/utilities/formatAuthors'
 export const PortfolioHero: React.FC<{
   post: Portfolio
 }> = ({ post }) => {
-  const { categories, heroImage, location, populatedAuthors, publishedAt, title, year } = post
+  const { categories, heroImage, location, populatedAuthors, title, year } = post
 
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
@@ -86,14 +85,6 @@ export const PortfolioHero: React.FC<{
               <div>
                 <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Rok</p>
                 <p className="text-foreground/90 dark:text-white/90">{year}</p>
-              </div>
-            )}
-            {publishedAt && (
-              <div>
-                <p className="text-foreground/40 dark:text-white/40 text-xs uppercase tracking-wider mb-1">Publikováno</p>
-                <time className="text-foreground/90 dark:text-white/90" dateTime={publishedAt}>
-                  {formatDateTime(publishedAt)}
-                </time>
               </div>
             )}
           </div>
