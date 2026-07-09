@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import { Media } from '@/components/Media'
+import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { Phone, Mail, MessageCircle, Clock, Check, Star, Shield, MapPin } from 'lucide-react'
 import Link from 'next/link'
 
@@ -76,6 +77,8 @@ export const ContactHeroSectionBlock: React.FC<ContactHeroSectionBlockProps> = (
                 })}
               </div>
             )}
+
+            <GoogleRatingBadge className="mt-2 self-start" />
           </div>
 
           {/* Right column – hero image */}

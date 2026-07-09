@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import type { ServiceHeroBlock as ServiceHeroBlockProps } from '@/payload-types'
 import { Button } from '@/components/ui/button'
+import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { Phone } from 'lucide-react'
 
 export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
@@ -32,6 +33,7 @@ export const ServiceHeroBlock: React.FC<ServiceHeroBlockProps> = ({
                 </Link>
               </Button>
             )}
+            <GoogleRatingBadge />
           </div>
         </div>
       </div>

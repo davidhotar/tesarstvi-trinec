@@ -7,6 +7,7 @@ import { Media } from '@/components/Media'
 import { Phone, Medal, Heart } from 'lucide-react'
 import Link from 'next/link'
 import RichText from '@/components/RichText'
+import { GoogleRatingBadge, GoogleGLogo } from '@/components/GoogleRatingBadge'
 import {
   formatGoogleStatValue,
   getGoogleReviews,
@@ -88,6 +89,8 @@ export const ProfileHeroSectionBlock = async ({
                 </Button>
               )}
             </div>
+
+            <GoogleRatingBadge className="self-start" />
           </div>
 
           <div className="relative">
@@ -133,14 +136,19 @@ export const ProfileHeroSectionBlock = async ({
         <>
           <Separator />
           <div className="container flex flex-wrap items-center justify-around gap-x-8 gap-y-5 py-10 lg:py-12">
-            {stats.map((stat, i) => (
-              <div key={i} className="flex flex-col items-center gap-1 text-center">
-                <span className="text-3xl font-bold">
-                  {formatGoogleStatValue(stat.source, stat.value, google)}
-                </span>
-                <span className="text-sm text-muted-foreground">{stat.label}</span>
-              </div>
-            ))}
+            {stats.map((stat, i) => {
+              const isGoogle =
+                stat.source === 'googleRating' || stat.source === 'googleReviewCount'
+              return (
+                <div key={i} className="flex flex-col items-center gap-1 text-center">
+                  {isGoogle && <GoogleGLogo className="size-5" />}
+                  <span className="text-3xl font-bold">
+                    {formatGoogleStatValue(stat.source, stat.value, google)}
+                  </span>
+                  <span className="text-sm text-muted-foreground">{stat.label}</span>
+                </div>
+              )
+            })}
           </div>
           <Separator />
         </>

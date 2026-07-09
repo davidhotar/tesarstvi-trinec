@@ -1,6 +1,7 @@
 import type { Metadata } from 'next/types'
 
 import { CtaBanner } from '@/components/about'
+import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { PortfolioGrid } from '@/components/PortfolioGrid'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { SITE_NAME } from '@/constants/site'
@@ -81,10 +82,11 @@ export default async function Page() {
             <div className="portfolio-line-reveal h-[2px] bg-portfolio-accent w-24 mt-8" style={{ animationDelay: '300ms' }} />
           </div>
 
-          <div className="portfolio-fade-up mt-8" style={{ animationDelay: '200ms' }}>
+          <div className="portfolio-fade-up mt-8 flex flex-col gap-5" style={{ animationDelay: '200ms' }}>
             <p className="text-sm text-white/50 dark:text-foreground/50">
               Celkem {totalDocs} realizací
             </p>
+            <GoogleRatingBadge className="self-start" variant="onDark" />
           </div>
         </div>
       </div>
