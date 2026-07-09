@@ -1,12 +1,15 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  return (
+  const url =
     process.env.NEXT_PUBLIC_SERVER_URL ||
     (process.env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
       : 'http://localhost:3000')
-  )
+
+  // Strip trailing slash(es) so callers that concatenate `${url}/${path}`
+  // don't produce `//` (which 308-redirects and breaks sitemap/OG/JSON-LD URLs).
+  return url.replace(/\/+$/, '')
 }
 
 export const getClientSideURL = () => {
@@ -22,5 +25,5 @@ export const getClientSideURL = () => {
     return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
   }
 
-  return process.env.NEXT_PUBLIC_SERVER_URL || ''
+  return (process.env.NEXT_PUBLIC_SERVER_URL || '').replace(/\/+$/, '')
 }
