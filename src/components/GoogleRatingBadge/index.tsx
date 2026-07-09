@@ -5,7 +5,7 @@ import { getGoogleReviews } from '@/utilities/getGoogleReviews'
 import { cn } from '@/utilities/ui'
 
 /** Multi-colour Google "G" mark. */
-function GoogleGLogo({ className }: { className?: string }) {
+export function GoogleGLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
       <path
