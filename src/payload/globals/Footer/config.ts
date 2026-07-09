@@ -9,14 +9,6 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'tagline',
-      type: 'text',
-      defaultValue: 'Rádi se ozveme.',
-      admin: {
-        description: 'Krátký slogan pod logem (např. "Rádi se ozveme.")',
-      },
-    },
-    {
       type: 'row',
       fields: [
         {
