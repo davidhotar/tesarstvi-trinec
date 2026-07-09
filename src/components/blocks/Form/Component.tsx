@@ -28,7 +28,7 @@ export const FormBlock: React.FC<
   } = props
 
   return (
-    <section className="hero-glow-bottom bg-muted/40 py-16 lg:py-24">
+    <section id="poptavka" className="hero-glow-bottom scroll-mt-28 bg-muted/40 py-16 lg:py-24">
       <div className="mx-auto w-full max-w-3xl px-4">
         {enableIntro && introContent && (
           <RichText

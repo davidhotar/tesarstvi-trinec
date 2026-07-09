@@ -67,8 +67,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               </a>
             </Button>
           )}
-          <Button size="lg" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
-            Poptávka
+          <Button size="lg" asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium">
+            <Link href="/kontakt#poptavka">Poptávka</Link>
           </Button>
         </div>
 
@@ -94,8 +94,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
                   </a>
                 </Button>
               )}
-              <Button size="lg" className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium w-full">
-                Poptávka
+              <Button size="lg" asChild className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium w-full">
+                <Link href="/kontakt#poptavka" onClick={() => setMobileOpen(false)}>
+                  Poptávka
+                </Link>
               </Button>
             </div>
           </div>
