@@ -2,6 +2,8 @@ import React from 'react'
 
 import type { HeroSectionBlock as HeroSectionBlockProps } from '@/payload-types'
 
+import { Star } from 'lucide-react'
+
 import { CMSLink } from '@/components/Link'
 import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { Media } from '@/components/Media'
@@ -69,6 +71,9 @@ export const HeroSectionBlock = async ({
           <div className="container flex flex-wrap items-center justify-around gap-x-8 gap-y-5 py-10 lg:py-12">
             {stats.map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-1 text-center">
+                {stat.source === 'googleReviewCount' && (
+                  <Star className="size-5 fill-primary text-primary" />
+                )}
                 <span className="text-3xl font-bold text-white sm:text-4xl">
                   {formatGoogleStatValue(stat.source, stat.value, google)}
                 </span>
