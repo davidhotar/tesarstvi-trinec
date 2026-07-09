@@ -87,6 +87,7 @@ export default async function Page({ searchParams }: Args) {
             posts={posts.docs}
             categories={categories}
             initialCategorySlug={category}
+            showAllTab
           />
         </Suspense>
       </div>

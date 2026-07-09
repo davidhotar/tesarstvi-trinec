@@ -14,5 +14,11 @@ export const redirects: NextConfig['redirects'] = async () => {
     source: '/:path((?!ie-incompatible.html$).*)', // all pages except the incompatibility page
   }
 
-  return [internetExplorerRedirect]
+  const portfolioPaginationRedirect = {
+    destination: '/portfolio',
+    permanent: true,
+    source: '/portfolio/page/:pageNumber',
+  }
+
+  return [internetExplorerRedirect, portfolioPaginationRedirect]
 }

@@ -39,11 +39,11 @@ export function PortfolioGrid({
   }, [categories, posts])
 
   const initialCategoryId = useMemo(() => {
-    if (showAllTab) return null
     if (initialCategorySlug) {
       const match = categoriesWithCounts.find((c) => c.slug === initialCategorySlug)
       if (match) return match.id
     }
+    if (showAllTab) return null
     return categoriesWithCounts[0]?.id ?? null
   }, [showAllTab, initialCategorySlug, categoriesWithCounts])
 
