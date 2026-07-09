@@ -30,7 +30,7 @@ export const ContactHeroSection: Block = {
     {
       name: 'highlights',
       type: 'array',
-      maxRows: 4,
+      maxRows: 8,
       fields: [
         {
           name: 'icon',
