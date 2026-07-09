@@ -17,6 +17,7 @@ import { CtaBannerBlock } from '@/components/blocks/CtaBanner/Component'
 import { ContactHeroSectionBlock } from '@/components/blocks/ContactHeroSection/Component'
 import { ServiceHeroBlock } from '@/components/blocks/ServiceHero/Component'
 import { ContactFormSectionBlock } from '@/components/blocks/ContactFormSection/Component'
+import { GoogleReviewsBadgeBlock } from '@/components/blocks/GoogleReviewsBadge/Component'
 
 const TestimonialsSectionBlock = dynamic(() =>
   import('@/components/blocks/TestimonialsSection/Component').then((m) => m.TestimonialsSectionBlock),
@@ -54,6 +55,7 @@ const blockComponents = {
   serviceHero: ServiceHeroBlock,
   serviceDeepDive: ServiceDeepDiveBlock,
   contactFormSection: ContactFormSectionBlock,
+  googleReviewsBadge: GoogleReviewsBadgeBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -73,7 +75,7 @@ export const RenderBlocks: React.FC<{
             const Block = blockComponents[blockType]
 
             if (Block) {
-              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection', 'portfolioSection', 'profileHeroSection', 'timelineSection', 'regionSection', 'ctaBanner', 'contactHeroSection', 'serviceHero', 'serviceDeepDive', 'contactFormSection', 'formBlock'].includes(blockType)
+              const isFullBleed = ['heroSection', 'servicesSection', 'numberedCardGrid', 'testimonialsSection', 'faqSection', 'portfolioSection', 'profileHeroSection', 'timelineSection', 'regionSection', 'ctaBanner', 'contactHeroSection', 'serviceHero', 'serviceDeepDive', 'contactFormSection', 'googleReviewsBadge', 'formBlock'].includes(blockType)
 
               if (isFullBleed) {
                 return (

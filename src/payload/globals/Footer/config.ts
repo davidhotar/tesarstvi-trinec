@@ -65,6 +65,15 @@ export const Footer: GlobalConfig = {
       },
     },
     {
+      name: 'showGoogleReviews',
+      type: 'checkbox',
+      label: 'Zobrazit odznak Google recenzí',
+      defaultValue: false,
+      admin: {
+        description: 'Zobrazí widget Google recenzí (Featurable) v patičce.',
+      },
+    },
+    {
       type: 'collapsible',
       label: 'Strukturovaná data (SEO / Google)',
       admin: {

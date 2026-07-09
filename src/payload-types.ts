@@ -199,6 +199,7 @@ export interface Page {
     | ServiceHeroBlock
     | ServiceDeepDiveBlock
     | ContactFormSectionBlock
+    | GoogleReviewsBadgeBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1279,6 +1280,23 @@ export interface ContactFormSectionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GoogleReviewsBadgeBlock".
+ */
+export interface GoogleReviewsBadgeBlock {
+  /**
+   * Volitelný nadpis nad odznakem recenzí (nepovinné).
+   */
+  heading?: string | null;
+  /**
+   * Přepíše výchozí Featurable widget ID. Ponechte prázdné pro použití výchozího (env FEATURABLE_WIDGET_ID).
+   */
+  widgetId?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'googleReviewsBadge';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1655,6 +1673,7 @@ export interface PagesSelect<T extends boolean = true> {
         serviceHero?: T | ServiceHeroBlockSelect<T>;
         serviceDeepDive?: T | ServiceDeepDiveBlockSelect<T>;
         contactFormSection?: T | ContactFormSectionBlockSelect<T>;
+        googleReviewsBadge?: T | GoogleReviewsBadgeBlockSelect<T>;
       };
   meta?:
     | T
@@ -2074,6 +2093,16 @@ export interface ContactFormSectionBlockSelect<T extends boolean = true> {
   phoneLabel?: T;
   phoneNumber?: T;
   form?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GoogleReviewsBadgeBlock_select".
+ */
+export interface GoogleReviewsBadgeBlockSelect<T extends boolean = true> {
+  heading?: T;
+  widgetId?: T;
   id?: T;
   blockName?: T;
 }
@@ -2611,6 +2640,10 @@ export interface Footer {
    */
   copyright?: string | null;
   /**
+   * Zobrazí widget Google recenzí (Featurable) v patičce.
+   */
+  showGoogleReviews?: boolean | null;
+  /**
    * Jméno podnikatele / název firmy
    */
   legalName?: string | null;
@@ -2732,6 +2765,7 @@ export interface FooterSelect<T extends boolean = true> {
   addressLink?: T;
   businessInfo?: T;
   copyright?: T;
+  showGoogleReviews?: T;
   legalName?: T;
   ico?: T;
   streetAddress?: T;

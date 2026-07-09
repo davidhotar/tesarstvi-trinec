@@ -13,6 +13,14 @@ export interface GoogleReviews {
  */
 const WIDGET_ID = process.env.FEATURABLE_WIDGET_ID || 'bb5fc7bf-6031-408d-ad1a-dc1098349672'
 
+/**
+ * Returns the resolved public Featurable widget ID. Safe to pass to the client
+ * (it is embedded on the page anyway) — used by the Google reviews badge widget.
+ */
+export function getFeaturableWidgetId(): string {
+  return WIDGET_ID
+}
+
 /** Used when Featurable is unreachable so the UI never breaks. */
 const FALLBACK: GoogleReviews = { rating: 5, reviewCount: 0, profileUrl: null }
 
