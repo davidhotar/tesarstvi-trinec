@@ -5,6 +5,7 @@ import React from 'react'
 import type { Footer as FooterType } from '@/payload-types'
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import { Logo } from '@/components/Logo/Logo'
+import { GoogleRatingBadge } from '@/components/GoogleRatingBadge'
 import { Separator } from '@/components/ui/separator'
 import { FeaturableWidget } from '@/components/FeaturableWidget/FeaturableWidget'
 import { getFeaturableWidgetId } from '@/utilities/getGoogleReviews'
@@ -39,6 +40,7 @@ export async function Footer() {
             <Link href="/">
               <Logo className="max-w-[11rem]" />
             </Link>
+            <GoogleRatingBadge className="self-start" />
           </div>
 
           <div className="flex flex-col gap-2">

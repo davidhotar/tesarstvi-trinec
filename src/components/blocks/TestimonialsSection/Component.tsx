@@ -106,7 +106,7 @@ export const TestimonialsSectionBlock = async ({
           <div>
             <p className="text-2xl font-semibold">{reviewCount}+</p>
             <p className="text-sm font-medium text-muted-foreground">
-              spokojených zákazníků
+              spokojených zákazníků podle Google recenzí
             </p>
           </div>
           {allReviewsUrl && (
