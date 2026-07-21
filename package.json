@@ -1,7 +1,7 @@
 {
   "name": "tesarstvi-trinec",
   "version": "1.0.0",
-  "description": "Website template for Payload",
+  "description": "Website for Tesařství Třinec — Payload CMS + Next.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
