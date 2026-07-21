@@ -1,4 +1,5 @@
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
+import type { BeforeEmail } from '@payloadcms/plugin-form-builder/types'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
@@ -19,6 +20,65 @@ const generateURL: GenerateURL<Portfolio | Page> = ({ doc }) => {
   const url = getServerSideURL()
 
   return doc?.slug ? `${url}/${doc.slug}` : url
+}
+
+/**
+ * Form-builder serializes a missing email message via Slate, which returns
+ * `undefined`. Template literals then produce the literal body "undefined".
+ * Fall back to a submission-data table so notification emails always have content.
+ */
+const isEmptyEmailHtml = (html?: string) => {
+  if (!html) return true
+  const normalized = html.replace(/\s/g, '').toLowerCase()
+  return (
+    normalized === '' ||
+    normalized === '<div></div>' ||
+    normalized === '<div>undefined</div>' ||
+    normalized === 'undefined'
+  )
+}
+
+const escapeHtml = (value: unknown) =>
+  String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+
+const buildSubmissionTableHtml = (
+  submissionData: { field: string; value: string }[] | null | undefined,
+) => {
+  const rows = (submissionData ?? [])
+    .filter((row) => row.field && row.field !== 'formSubmissionID')
+    .map(
+      ({ field, value }) =>
+        `<tr>
+          <td style="padding:6px 12px 6px 0;vertical-align:top;font-weight:600;">${escapeHtml(field)}</td>
+          <td style="padding:6px 0;vertical-align:top;">${escapeHtml(value)}</td>
+        </tr>`,
+    )
+    .join('')
+
+  return `<div>
+    <p style="margin:0 0 12px;">Nová poptávka z webu:</p>
+    <table style="border-collapse:collapse;">${rows || '<tr><td>(žádná data)</td></tr>'}</table>
+  </div>`
+}
+
+const beforeEmail: BeforeEmail = (emails, { data }) => {
+  const submissionData = data?.submissionData as
+    | { field: string; value: string }[]
+    | null
+    | undefined
+
+  return emails.map((email) => {
+    if (!isEmptyEmailHtml(email.html)) return email
+
+    return {
+      ...email,
+      html: buildSubmissionTableHtml(submissionData),
+    }
+  })
 }
 
 export const plugins: Plugin[] = [
@@ -56,6 +116,7 @@ export const plugins: Plugin[] = [
     fields: {
       payment: false,
     },
+    beforeEmail,
     formOverrides: {
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
