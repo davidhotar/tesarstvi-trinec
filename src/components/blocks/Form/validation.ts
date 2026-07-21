@@ -22,6 +22,17 @@ export const PHONE_REGEX = /^\+?[\d\s-]{9,20}$/
 const matches = (value: string, ...patterns: RegExp[]) => patterns.some((p) => p.test(value))
 
 /**
+ * Pattern that skips empty values so optional fields can be left blank.
+ * Required empty values are still caught by a separate `required` rule.
+ */
+const optionalPattern =
+  (regex: RegExp, message: string): NonNullable<RegisterOptions['validate']> =>
+  (value) => {
+    if (value == null || String(value).trim() === '') return true
+    return regex.test(String(value)) || message
+  }
+
+/**
  * Detect what a free-text field is meant to hold based on its name/label so we can
  * apply the right format validation. Fields are CMS-defined, so we infer intent.
  */
@@ -52,11 +63,11 @@ export const getTextValidation = ({
 
   switch (fieldKind(name, label)) {
     case 'email':
-      rules.pattern = { value: EMAIL_REGEX, message: validationMessages.email }
+      rules.validate = optionalPattern(EMAIL_REGEX, validationMessages.email)
       rules.maxLength = { value: 254, message: validationMessages.maxLength(254) }
       break
     case 'phone':
-      rules.pattern = { value: PHONE_REGEX, message: validationMessages.phone }
+      rules.validate = optionalPattern(PHONE_REGEX, validationMessages.phone)
       rules.maxLength = { value: 20, message: validationMessages.maxLength(20) }
       break
     default:
@@ -66,10 +77,10 @@ export const getTextValidation = ({
   return rules
 }
 
-/** Rules for a dedicated email field (always validated as an email). */
+/** Rules for a dedicated email field (always validated as an email when filled). */
 export const getEmailValidation = (required?: boolean | null): RegisterOptions => ({
   ...(required ? { required: validationMessages.required } : {}),
-  pattern: { value: EMAIL_REGEX, message: validationMessages.email },
+  validate: optionalPattern(EMAIL_REGEX, validationMessages.email),
   maxLength: { value: 254, message: validationMessages.maxLength(254) },
 })
 

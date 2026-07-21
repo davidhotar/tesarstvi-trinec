@@ -30,31 +30,35 @@ export const Select: React.FC<
           {required && <span className="text-muted-foreground/60"> *</span>}
         </Label>
         <Controller
-        control={control}
-        defaultValue={defaultValue}
-        name={name}
-        render={({ field: { onChange, value } }) => {
-          const controlledValue = options.find((t) => t.value === value)
+          control={control}
+          defaultValue={defaultValue ?? ''}
+          name={name}
+          render={({ field: { onChange, value } }) => {
+            const controlledValue = options.find((t) => t.value === value)
 
-          return (
-            <SelectComponent onValueChange={(val) => onChange(val)} value={controlledValue?.value}>
-              <SelectTrigger className="w-full" id={name} aria-invalid={!!errors[name]}>
-                <SelectValue placeholder={label} />
-              </SelectTrigger>
-              <SelectContent>
-                {options.map(({ label, value }) => {
-                  return (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  )
-                })}
-              </SelectContent>
-            </SelectComponent>
-          )
-        }}
-        rules={getRequiredValidation(required)}
-      />
+            return (
+              <SelectComponent
+                onValueChange={(val) => onChange(val)}
+                // undefined (not '') keeps Radix in placeholder mode when nothing is selected
+                value={controlledValue?.value || undefined}
+              >
+                <SelectTrigger className="w-full" id={name} aria-invalid={!!errors[name]}>
+                  <SelectValue placeholder={label} />
+                </SelectTrigger>
+                <SelectContent>
+                  {options.map(({ label, value: optionValue }) => {
+                    return (
+                      <SelectItem key={optionValue} value={optionValue}>
+                        {label}
+                      </SelectItem>
+                    )
+                  })}
+                </SelectContent>
+              </SelectComponent>
+            )
+          }}
+          rules={getRequiredValidation(required)}
+        />
         {errors[name] && <Error name={name} />}
       </div>
     </Width>
