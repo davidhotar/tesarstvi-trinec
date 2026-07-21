@@ -102,7 +102,7 @@ export default buildConfig({
     }),
   ],
   email: resendAdapter({
-    defaultFromAddress: 'noreply@gramino.dev',
+    defaultFromAddress: 'info@tesarstvi-trinec.cz',
     defaultFromName: 'Tesařství Třinec',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
